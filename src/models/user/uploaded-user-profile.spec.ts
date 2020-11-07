@@ -1,4 +1,4 @@
-import makeBuildNewUserProfile from './new-user-profile';
+import makeBuildNewUserProfile from './uploaded-user-profile';
 
 describe('new-user-profile-model', () => {
     test('should return correct result when user alias is not given', () => {
