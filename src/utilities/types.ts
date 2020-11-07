@@ -15,7 +15,18 @@ export type NewAccount = {
     getHashedPassword: () => string;
 };
 
+export type NewUserProfileInfo = {
+    id: string,
+    userName: string,
+    alias?: string,
+    description?: string,
+    imageByteArray?: Int8Array
+};
+
+export type BuildNewUserProfile = (newUserProfileInfo: NewUserProfileInfo) => NewUserProfile;
+
 export type NewUserProfile = {
+    getId: () => string;
     getUserName: () => string;
     getAlias: () => string;
     getDescription: () => string | undefined;
@@ -44,3 +55,7 @@ export type HashHandler = {
 export type AccountRepository = {
     insertNewAccount: (newAccount: NewAccount) => Promise<string>;
 };
+
+export type UserRepository = {
+    insertNewUserProfile: (newUserProfile: NewUserProfile) => Promise<string>;
+}
