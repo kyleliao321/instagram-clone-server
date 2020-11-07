@@ -1,13 +1,10 @@
-import { IdHandler, HashHandler, NewAccount } from '../../utilities/types';
+import { IdHandler, HashHandler, NewAccount, BuildNewAccount, NewAccountInfo } from '../../utilities/types';
 
 export default function makeBuildNewAccount(dependency: { 
     idHandler: IdHandler,
     hashHandler: HashHandler
- }) {
-    return function buildNewAccount(newAccountInfo: {
-        userName: string,
-        password: string
-    }): NewAccount {
+ }): BuildNewAccount {
+    return function buildNewAccount(newAccountInfo: NewAccountInfo): NewAccount {
 
         const id = dependency.idHandler.getId();
 
