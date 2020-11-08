@@ -11,9 +11,4 @@ const idHandler = makeIdHandler();
 
 const hashHandler = makeHashHandler();
 
-export {
-    accountRepository,
-    userRepository,
-    idHandler,
-    hashHandler
-}
+export { accountRepository, userRepository, idHandler, hashHandler };

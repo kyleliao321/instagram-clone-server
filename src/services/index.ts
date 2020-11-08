@@ -5,9 +5,9 @@ import { buildNewAccount, buildNewUserProfile } from '../models';
 
 const addNewAccount = makeAddNewAccount({ buildNewAccount, accountRepository });
 
-const addNewUserProfile = makeAddNewUserProfile({ buildNewUserProfile, userRepository });
+const addNewUserProfile = makeAddNewUserProfile({
+  buildNewUserProfile,
+  userRepository
+});
 
-export {
-    addNewAccount,
-    addNewUserProfile
-}
+export { addNewAccount, addNewUserProfile };

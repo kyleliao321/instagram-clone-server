@@ -1,74 +1,73 @@
 import { RegisterRequestSchema } from './schemas';
 
 describe('schemas', () => {
-    
-    describe('register request schema', () => {
-        test('validation should failed when user name is not provided', () => {
-            // given
-            const data = {
-                password: 'mockPassword'
-            };
+  describe('register request schema', () => {
+    test('validation should failed when user name is not provided', () => {
+      // given
+      const data = {
+        password: 'mockPassword'
+      };
 
-            // when
-            const { error } = RegisterRequestSchema.validate(data);
+      // when
+      const { error } = RegisterRequestSchema.validate(data);
 
-            //expect
-            expect(error === undefined).toBe(false);
-        });
+      //expect
+      expect(error === undefined).toBe(false);
+    });
 
-        test('validation should failed when password is not provided', () => {
-            // given
-            const data = {
-                userName: 'mockUserName'
-            };
+    test('validation should failed when password is not provided', () => {
+      // given
+      const data = {
+        userName: 'mockUserName'
+      };
 
-            // when
-            const { error } = RegisterRequestSchema.validate(data);
+      // when
+      const { error } = RegisterRequestSchema.validate(data);
 
-            //expect
-            expect(error === undefined).toBe(false);
-        });
+      //expect
+      expect(error === undefined).toBe(false);
+    });
 
-        test('validation should failed when user name is blank', () => {
-            // given
-            const data = {
-                userName: '',
-                password: 'mockPassword'
-            };
+    test('validation should failed when user name is blank', () => {
+      // given
+      const data = {
+        userName: '',
+        password: 'mockPassword'
+      };
 
-            // when
-            const { error } = RegisterRequestSchema.validate(data);
+      // when
+      const { error } = RegisterRequestSchema.validate(data);
 
-            //expect
-            expect(error === undefined).toBe(false);
-        });
+      //expect
+      expect(error === undefined).toBe(false);
+    });
 
-        test('validation should failed when password is blank', () => {
-            // given
-            const data = {
-                userName: 'mockUserName',
-                password: ''
-            };
+    test('validation should failed when password is blank', () => {
+      // given
+      const data = {
+        userName: 'mockUserName',
+        password: ''
+      };
 
-            // when
-            const { error } = RegisterRequestSchema.validate(data);
+      // when
+      const { error } = RegisterRequestSchema.validate(data);
 
-            //expect
-            expect(error === undefined).toBe(false);
-        });
+      //expect
+      expect(error === undefined).toBe(false);
+    });
 
-        test('validation should succeed when user name and password are given and not blank', () => {
-            // given
-            const data = {
-                userName: 'mockUserName',
-                password: 'mockPassword'
-            };
+    test('validation should succeed when user name and password are given and not blank', () => {
+      // given
+      const data = {
+        userName: 'mockUserName',
+        password: 'mockPassword'
+      };
 
-            // when
-            const { error } = RegisterRequestSchema.validate(data);
+      // when
+      const { error } = RegisterRequestSchema.validate(data);
 
-            //expect
-            expect(error === undefined).toBe(true);
-        });
-    })
-})
+      //expect
+      expect(error === undefined).toBe(true);
+    });
+  });
+});

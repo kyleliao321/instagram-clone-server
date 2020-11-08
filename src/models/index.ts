@@ -6,7 +6,4 @@ const buildNewAccount = makeBuildNewAccount({ idHandler, hashHandler });
 
 const buildNewUserProfile = makeBuildNewUserProfile({ idHandler });
 
-export {
-    buildNewAccount,
-    buildNewUserProfile
-}
+export { buildNewAccount, buildNewUserProfile };

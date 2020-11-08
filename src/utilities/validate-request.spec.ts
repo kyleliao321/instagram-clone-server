@@ -1,60 +1,60 @@
 import * as Joi from 'joi';
 import makeValidateRequest from './validate-request';
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 describe('validate request', () => {
-    test('should trigger next function when schema validation succeed', () => {
-        // given
-        const mockRequest = {} as Request;
+  test('should trigger next function when schema validation succeed', () => {
+    // given
+    const mockRequest = {} as Request;
 
-        const mockResponse = {} as Response;
+    const mockResponse = {} as Response;
 
-        const mockNextFunction = jest.fn();
+    const mockNextFunction = jest.fn();
 
-        const mockValidateResult = {
-            error: undefined
-        } as Joi.ValidationResult;
+    const mockValidateResult = {
+      error: undefined
+    } as Joi.ValidationResult;
 
-        const mockSchema = {
-            validate: (value: any) => mockValidateResult
-        } as Joi.Schema;
+    const mockSchema = {
+      validate: (value: any) => mockValidateResult
+    } as Joi.Schema;
 
-        const validateRequest = makeValidateRequest({ schema: mockSchema });
-        
-        // when
-        validateRequest(mockRequest, mockResponse, mockNextFunction);
+    const validateRequest = makeValidateRequest({ schema: mockSchema });
 
-        // expect
-        expect(mockNextFunction).toHaveBeenCalled();
-    })
+    // when
+    validateRequest(mockRequest, mockResponse, mockNextFunction);
 
-    test('should not trigger next function when schema validation failed', () => {
-        // given
-        const mockRequest = {} as Request;
+    // expect
+    expect(mockNextFunction).toHaveBeenCalled();
+  });
 
-        const mockResponse = {
-            sendStatus: (code: number) => {},
-            send: (body?: any) => {}
-        } as Response;
+  test('should not trigger next function when schema validation failed', () => {
+    // given
+    const mockRequest = {} as Request;
 
-        const mockNextFunction = jest.fn();
+    const mockResponse = {
+      sendStatus: (code: number) => {},
+      send: (body?: any) => {}
+    } as Response;
 
-        const mockValidationError = {} as Joi.ValidationError;
+    const mockNextFunction = jest.fn();
 
-        const mockValidateResult = {
-            error: mockValidationError
-        } as Joi.ValidationResult;
+    const mockValidationError = {} as Joi.ValidationError;
 
-        const mockSchema = {
-            validate: (value: any) => mockValidateResult
-        } as Joi.Schema;
+    const mockValidateResult = {
+      error: mockValidationError
+    } as Joi.ValidationResult;
 
-        const validateRequest = makeValidateRequest({ schema: mockSchema });
-        
-        // when
-        validateRequest(mockRequest, mockResponse, mockNextFunction);
+    const mockSchema = {
+      validate: (value: any) => mockValidateResult
+    } as Joi.Schema;
 
-        // expect
-        expect(mockNextFunction).toHaveBeenCalledTimes(0);
-    })
-})
+    const validateRequest = makeValidateRequest({ schema: mockSchema });
+
+    // when
+    validateRequest(mockRequest, mockResponse, mockNextFunction);
+
+    // expect
+    expect(mockNextFunction).toHaveBeenCalledTimes(0);
+  });
+});

@@ -3,6 +3,4 @@ import makeRegister from './register';
 
 const register = makeRegister({ addNewAccount, addNewUserProfile });
 
-export {
-    register
-}
+export { register };
