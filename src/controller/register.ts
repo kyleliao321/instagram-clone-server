@@ -5,14 +5,17 @@ import {
   HttpResponse,
   NewAccountInfo,
   NewUserProfileInfo,
-  Controller
+  Controller,
+  RegisterResponseBody
 } from '../utilities/types';
 
 export default function makeRegister(dependency: {
   addNewAccount: AddNewAccount;
   addNewUserProfile: AddNewUserProfile;
 }): Controller {
-  return async function register(httpRequest: Request): Promise<HttpResponse> {
+  return async function register(
+    httpRequest: Request
+  ): Promise<HttpResponse<RegisterResponseBody>> {
     try {
       const data: NewAccountInfo = httpRequest.body;
 

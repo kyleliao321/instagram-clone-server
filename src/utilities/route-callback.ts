@@ -10,7 +10,7 @@ export default function makeRouteCallback(controller: Controller) {
           res.set(httpResponse.headers);
         }
         res.type('json');
-        res.status(httpResponse.status).send();
+        res.status(httpResponse.status).send(httpResponse.body);
       })
       .catch((e) => {
         console.log(e);

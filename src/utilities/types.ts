@@ -78,9 +78,12 @@ export type UserRepository = {
 ////////////////////////////////  HTTP Response /////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-export type HttpResponse = {
+export type RegisterResponseBody = null;
+
+export type HttpResponse<T> = {
   headers: {
     'Content-Type': string;
   };
   status: number;
+  body?: T;
 };
