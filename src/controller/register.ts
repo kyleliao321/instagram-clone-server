@@ -1,10 +1,10 @@
 import { Request } from 'express';
-import { AddNewAccount, AddNewUserProfile, HttpResponse, NewAccountInfo, NewUserProfileInfo, RegisterController } from '../utilities/types';
+import { AddNewAccount, AddNewUserProfile, HttpResponse, NewAccountInfo, NewUserProfileInfo, Controller } from '../utilities/types';
 
 export default function makeRegister(dependency: {
     addNewAccount: AddNewAccount,
     addNewUserProfile: AddNewUserProfile
-}): RegisterController {
+}): Controller {
     return async function register(httpRequest: Request): Promise<HttpResponse> {
         try {
             const data: NewAccountInfo = httpRequest.body;
@@ -25,6 +25,7 @@ export default function makeRegister(dependency: {
                 status: 200
             };
         } catch (e) {
+            console.log(e);
             return {
                 headers: {
                     'Content-Type': 'application/json'

@@ -9,9 +9,11 @@ export default function makeValidateRequest(dependency: {
         const { error } = dependency.schema.validate(req.body);
 
         if (error) {
+            console.log(`schema ${dependency.schema} validation failed: ${error}`);
             res.sendStatus(500);
             res.send('Invalid request');
         } else {
+            console.log(`schema ${dependency.schema} validation succeed`);
             next();
         }   
     }
