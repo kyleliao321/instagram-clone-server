@@ -15,6 +15,4 @@ app.post(
   makeRouteCallback(register)
 );
 
-app.listen(8080, () => {
-  console.log('server started at http://localhost:8080');
-});
+app.listen(8080);

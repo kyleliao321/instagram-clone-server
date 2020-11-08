@@ -1,11 +1,12 @@
 import { Controller } from './types';
 import { Request, Response } from 'express';
+import { logger } from '../infrastructure';
 
 export default function makeRouteCallback(controller: Controller) {
   return function routeCallback(req: Request, res: Response): void {
     controller(req)
       .then((httpResponse) => {
-        console.log(httpResponse);
+        logger.info(httpResponse);
         if (httpResponse.headers) {
           res.set(httpResponse.headers);
         }
@@ -13,7 +14,7 @@ export default function makeRouteCallback(controller: Controller) {
         res.status(httpResponse.status).send(httpResponse.body);
       })
       .catch((e) => {
-        console.log(e);
+        logger.error(e);
         res.status(500).send('Unknow error occurred.');
       });
   };

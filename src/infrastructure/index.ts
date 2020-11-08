@@ -2,6 +2,7 @@ import makeAccountRepository from './account-repository';
 import makeUserRepository from './user-repository';
 import makeHashHandler from './hash-handler';
 import makeIdHandler from './id-handler';
+import makeLogger from './logger';
 
 const accountRepository = makeAccountRepository();
 
@@ -11,4 +12,6 @@ const idHandler = makeIdHandler();
 
 const hashHandler = makeHashHandler();
 
-export { accountRepository, userRepository, idHandler, hashHandler };
+const logger = makeLogger();
+
+export { accountRepository, userRepository, idHandler, hashHandler, logger };
