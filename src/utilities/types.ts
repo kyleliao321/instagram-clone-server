@@ -37,6 +37,20 @@ export type NewUserProfile = {
   getImageByteArray: () => Int8Array | undefined;
 };
 
+export type LoginAccountInfo = {
+  userName: string;
+  password: string;
+};
+
+export type LoginAccount = {
+  getUserName: () => string;
+  getHashedPassword: () => string;
+};
+
+export type BuildLoginAccount = (
+  loginAccountInfo: LoginAccountInfo
+) => LoginAccount;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  Data Model  ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////

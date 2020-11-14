@@ -1,9 +1,9 @@
 import { AccountRepository, NewAccount, Account } from '../utilities/types';
 
-export default function buildMakeAccountRepository() {
+export default function makeBuildAccountRepository() {
   const accountTable = new Map<string, Account>();
 
-  return function makeAccountRepository(): AccountRepository {
+  return function buildAccountRepository(): AccountRepository {
     return Object.freeze({
       insertNewAccount
     });

@@ -4,10 +4,10 @@ import {
   UserRepository
 } from '../utilities/types';
 
-export default function buildMakeUserRepository() {
+export default function makeBuildUserRepository() {
   const userProfileTable = new Map<string, UserProfile>();
 
-  return function makeUserRepository(): UserRepository {
+  return function buildUserRepository(): UserRepository {
     return Object.freeze({
       insertNewUserProfile
     });
