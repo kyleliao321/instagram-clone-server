@@ -1,5 +1,4 @@
 import { AccountRepository, NewAccount, Account } from '../utilities/types';
-import { logger } from '../infrastructure';
 
 export default function buildMakeAccountRepository() {
   const accountTable = new Map<string, Account>();
