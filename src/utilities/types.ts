@@ -79,6 +79,10 @@ export type AddNewUserProfile = (
   NewUserProfileInfo: NewUserProfileInfo
 ) => Promise<string>;
 
+export type VerifyAccount = (
+  loginAccountInfo: LoginAccountInfo
+) => Promise<string>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Controller //////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -100,6 +104,7 @@ export type HashHandler = {
 
 export type AccountRepository = {
   insertNewAccount: (newAccount: NewAccount) => Promise<string>;
+  verifyLoginAccount: (loginAccount: LoginAccount) => Promise<string>;
 };
 
 export type UserRepository = {

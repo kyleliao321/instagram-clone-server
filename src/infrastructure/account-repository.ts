@@ -1,11 +1,17 @@
-import { AccountRepository, NewAccount, Account } from '../utilities/types';
+import {
+  AccountRepository,
+  NewAccount,
+  LoginAccount,
+  Account
+} from '../utilities/types';
 
 export default function makeBuildAccountRepository() {
   const accountTable = new Map<string, Account>();
 
   return function buildAccountRepository(): AccountRepository {
     return Object.freeze({
-      insertNewAccount
+      insertNewAccount,
+      verifyLoginAccount
     });
 
     async function insertNewAccount(newAccount: NewAccount): Promise<string> {
@@ -22,6 +28,12 @@ export default function makeBuildAccountRepository() {
       });
 
       return id;
+    }
+
+    async function verifyLoginAccount(
+      loginAccount: LoginAccount
+    ): Promise<string> {
+      return loginAccount.getUserName();
     }
   };
 }
