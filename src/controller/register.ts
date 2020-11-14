@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { logger } from '../infrastructure';
 import {
   AddNewAccount,
   AddNewUserProfile,
@@ -12,7 +13,7 @@ import {
 export default function makeRegister(dependency: {
   addNewAccount: AddNewAccount;
   addNewUserProfile: AddNewUserProfile;
-}): Controller {
+}): Controller<RegisterResponseBody> {
   return async function register(
     httpRequest: Request
   ): Promise<HttpResponse<RegisterResponseBody>> {
@@ -35,6 +36,7 @@ export default function makeRegister(dependency: {
         status: 200
       };
     } catch (e) {
+      logger.info(e);
       return {
         headers: {
           'Content-Type': 'application/json'

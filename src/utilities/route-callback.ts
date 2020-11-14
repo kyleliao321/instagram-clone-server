@@ -6,7 +6,7 @@ export default function makeRouteCallback(controller: Controller) {
   return function routeCallback(req: Request, res: Response): void {
     controller(req)
       .then((httpResponse) => {
-        logger.info(httpResponse);
+        logger.info(JSON.stringify(httpResponse));
         if (httpResponse.headers) {
           res.set(httpResponse.headers);
         }
