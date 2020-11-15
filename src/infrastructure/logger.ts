@@ -10,8 +10,19 @@ export default function makeLogger(): Logger {
     )
   });
 
-  if (process.env.NODE_EVN !== 'production') {
+  if (
+    process.env.NODE_ENV !== 'production' &&
+    process.env.NODE_ENV !== 'test'
+  ) {
     logger.add(new transports.Console());
+  }
+
+  if (process.env.NODE_ENV === 'test') {
+    logger.add(
+      new transports.File({
+        filename: './logs/test-logs.log'
+      })
+    );
   }
 
   return logger;

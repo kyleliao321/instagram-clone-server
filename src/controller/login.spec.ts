@@ -17,7 +17,7 @@ describe('login', () => {
     } as Request;
 
     const mockGenerateToken: GenerateToken = jest.fn(() => {
-      throw new Error();
+      throw new Error('Unknown error from GenerateToken');
     });
 
     const mockVerifyAccount: VerifyAccount = jest.fn();
@@ -55,7 +55,7 @@ describe('login', () => {
     const mockGenerateToken: GenerateToken = jest.fn(() => mockToken);
 
     const mockVerifyAccount: VerifyAccount = jest.fn(() => {
-      throw new Error();
+      throw new Error('Unknown error from VerifyAccount');
     });
 
     const login = makeLogin({

@@ -34,7 +34,7 @@ export default function makeLogin(dependency: {
         }
       };
     } catch (e) {
-      logger.error(e);
+      logger.error(JSON.stringify(e));
 
       if (e instanceof HttpError) {
         return {

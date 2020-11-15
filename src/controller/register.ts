@@ -36,7 +36,8 @@ export default function makeRegister(dependency: {
         status: 201
       };
     } catch (e) {
-      logger.info(e);
+      logger.error(JSON.stringify(e));
+
       return {
         headers: {
           'Content-Type': 'application/json'
