@@ -1,3 +1,5 @@
+import { string } from 'joi';
+import { AuthenticationError } from '../utilities/http-errors';
 import {
   AccountRepository,
   NewAccount,
@@ -33,7 +35,21 @@ export default function makeBuildAccountRepository() {
     async function verifyLoginAccount(
       loginAccount: LoginAccount
     ): Promise<string> {
-      return loginAccount.getUserName();
+      let result: string | null = null;
+
+      accountTable.forEach((v, k, m) => {
+        if (v.userName === loginAccount.getUserName()) {
+          if (v.hashedPassword === loginAccount.getHashedPassword()) {
+            result = v.id;
+          }
+        }
+      });
+
+      if (result === null) {
+        throw new AuthenticationError();
+      }
+
+      return result;
     }
   };
 }
