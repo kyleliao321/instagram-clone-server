@@ -119,6 +119,10 @@ export type UserRepository = {
 
 export type RegisterResponseBody = null;
 
+export type LoginResponseBody = {
+  jwt: string;
+};
+
 export type HttpResponse<T> = {
   headers: {
     'Content-Type': string;

@@ -10,7 +10,7 @@ export default function makeValidateRequest(dependency: { schema: Schema }) {
     const { error } = dependency.schema.validate(req.body);
 
     if (error) {
-      res.sendStatus(500);
+      res.sendStatus(401);
       res.send('Invalid request');
     } else {
       next();

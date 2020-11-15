@@ -1,6 +1,14 @@
-import { addNewAccount, addNewUserProfile } from '../services';
+import {
+  addNewAccount,
+  addNewUserProfile,
+  verifyAccount,
+  generateToken
+} from '../services';
 import makeRegister from './register';
+import makeLogin from './login';
 
 const register = makeRegister({ addNewAccount, addNewUserProfile });
 
-export { register };
+const login = makeLogin({ generateToken, verifyAccount });
+
+export { register, login };

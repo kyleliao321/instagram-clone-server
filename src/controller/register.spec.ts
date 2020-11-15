@@ -76,7 +76,7 @@ describe('register', () => {
     });
   });
 
-  test('should return response with 200 status code when controller invoke successfully', async () => {
+  test('should return response with 201 status code when controller invoke successfully', async () => {
     // given
     const mockId = 'mockId';
     const mockUserName = 'mockUserName';
@@ -108,7 +108,7 @@ describe('register', () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      status: 200
+      status: 201
     });
   });
 });
