@@ -79,6 +79,10 @@ export type AddNewUserProfile = (
   NewUserProfileInfo: NewUserProfileInfo
 ) => Promise<string>;
 
+export type UpdateUserProfile = (
+  updatedUserProfileInfo: NewUserProfileInfo
+) => Promise<string>;
+
 export type VerifyAccount = (
   loginAccountInfo: LoginAccountInfo
 ) => Promise<string>;
@@ -111,6 +115,7 @@ export type AccountRepository = {
 
 export type UserRepository = {
   insertNewUserProfile: (newUserProfile: NewUserProfile) => Promise<string>;
+  updateUserProfile: (updatedUserProfile: NewUserProfile) => Promise<string>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
