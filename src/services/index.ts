@@ -1,5 +1,6 @@
 import makeAddNewAccount from './account/add-new-account';
 import makeAddNewUserProfile from './user/add-new-user-profile';
+import makeUpdateUserProfile from './user/update-user-profile';
 import makeVerifyAccount from './account/verify-account';
 import makeGenerateToken from './account/generate-token';
 import { accountRepository, userRepository } from '../infrastructure';
@@ -21,8 +22,19 @@ const addNewUserProfile = makeAddNewUserProfile({
   userRepository
 });
 
+const updateUserProfile = makeUpdateUserProfile({
+  buildNewUserProfile,
+  userRepository
+});
+
 const generateToken = makeGenerateToken({
   key: 'privateKey'
 });
 
-export { addNewAccount, verifyAccount, addNewUserProfile, generateToken };
+export {
+  addNewAccount,
+  verifyAccount,
+  addNewUserProfile,
+  updateUserProfile,
+  generateToken
+};
