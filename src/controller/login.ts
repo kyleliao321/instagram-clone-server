@@ -3,16 +3,16 @@ import { logger } from '../infrastructure';
 import { HttpError } from '../utilities/http-errors';
 import {
   Controller,
-  GenerateToken,
+  GenerateTokenService,
   HttpResponse,
   LoginAccountInfo,
   LoginResponseBody,
-  VerifyAccount
+  VerifyAccountService
 } from '../utilities/types';
 
 export default function makeLogin(dependency: {
-  generateToken: GenerateToken;
-  verifyAccount: VerifyAccount;
+  generateToken: GenerateTokenService;
+  verifyAccount: VerifyAccountService;
 }): Controller<LoginResponseBody> {
   return async function login(
     httpRequest: Request

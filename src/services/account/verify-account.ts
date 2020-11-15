@@ -1,6 +1,6 @@
 import {
   BuildLoginAccount,
-  VerifyAccount,
+  VerifyAccountService,
   LoginAccountInfo,
   AccountRepository
 } from '../../utilities/types';
@@ -8,7 +8,7 @@ import {
 export default function makeVerifyAccount(dependency: {
   buildLoginAccount: BuildLoginAccount;
   accountRepository: AccountRepository;
-}): VerifyAccount {
+}): VerifyAccountService {
   return async function verifyAccount(
     loginAccountInfo: LoginAccountInfo
   ): Promise<string> {

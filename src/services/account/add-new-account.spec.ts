@@ -1,6 +1,6 @@
 import {
   AccountRepository,
-  AddNewAccount,
+  AddNewAccountService,
   BuildNewAccount,
   NewAccount
 } from '../../utilities/types';
@@ -26,7 +26,7 @@ describe('add-new-account', () => {
       verifyLoginAccount: jest.fn()
     };
 
-    const addNewAccount: AddNewAccount = makeAddNewAccount({
+    const addNewAccount: AddNewAccountService = makeAddNewAccount({
       buildNewAccount,
       accountRepository
     });

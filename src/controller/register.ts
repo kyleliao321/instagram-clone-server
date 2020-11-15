@@ -1,8 +1,8 @@
 import { Request } from 'express';
 import { logger } from '../infrastructure';
 import {
-  AddNewAccount,
-  AddNewUserProfile,
+  AddNewAccountService,
+  AddNewUserProfileService,
   HttpResponse,
   NewAccountInfo,
   NewUserProfileInfo,
@@ -11,8 +11,8 @@ import {
 } from '../utilities/types';
 
 export default function makeRegister(dependency: {
-  addNewAccount: AddNewAccount;
-  addNewUserProfile: AddNewUserProfile;
+  addNewAccount: AddNewAccountService;
+  addNewUserProfile: AddNewUserProfileService;
 }): Controller<RegisterResponseBody> {
   return async function register(
     httpRequest: Request

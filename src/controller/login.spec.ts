@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { AuthenticationError } from '../utilities/http-errors';
-import { GenerateToken, VerifyAccount } from '../utilities/types';
+import { GenerateTokenService, VerifyAccountService } from '../utilities/types';
 import makeLogin from './login';
 
 describe('login', () => {
@@ -16,11 +16,11 @@ describe('login', () => {
       }
     } as Request;
 
-    const mockGenerateToken: GenerateToken = jest.fn(() => {
+    const mockGenerateToken: GenerateTokenService = jest.fn(() => {
       throw new Error('Unknown error from GenerateToken');
     });
 
-    const mockVerifyAccount: VerifyAccount = jest.fn();
+    const mockVerifyAccount: VerifyAccountService = jest.fn();
 
     const login = makeLogin({
       generateToken: mockGenerateToken,
@@ -52,9 +52,9 @@ describe('login', () => {
       }
     } as Request;
 
-    const mockGenerateToken: GenerateToken = jest.fn(() => mockToken);
+    const mockGenerateToken: GenerateTokenService = jest.fn(() => mockToken);
 
-    const mockVerifyAccount: VerifyAccount = jest.fn(() => {
+    const mockVerifyAccount: VerifyAccountService = jest.fn(() => {
       throw new Error('Unknown error from VerifyAccount');
     });
 
@@ -88,9 +88,9 @@ describe('login', () => {
       }
     } as Request;
 
-    const mockGenerateToken: GenerateToken = jest.fn(() => mockToken);
+    const mockGenerateToken: GenerateTokenService = jest.fn(() => mockToken);
 
-    const mockVerifyAccount: VerifyAccount = jest.fn(() => {
+    const mockVerifyAccount: VerifyAccountService = jest.fn(() => {
       throw new AuthenticationError();
     });
 

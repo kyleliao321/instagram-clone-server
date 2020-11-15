@@ -73,21 +73,23 @@ export type UserProfile = {
 /////////////////////////////////// Services ////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-export type AddNewAccount = (newAccountInfo: NewAccountInfo) => Promise<string>;
+export type AddNewAccountService = (
+  newAccountInfo: NewAccountInfo
+) => Promise<string>;
 
-export type AddNewUserProfile = (
+export type AddNewUserProfileService = (
   NewUserProfileInfo: NewUserProfileInfo
 ) => Promise<string>;
 
-export type UpdateUserProfile = (
+export type UpdateUserProfileService = (
   updatedUserProfileInfo: NewUserProfileInfo
 ) => Promise<string>;
 
-export type VerifyAccount = (
+export type VerifyAccountService = (
   loginAccountInfo: LoginAccountInfo
 ) => Promise<string>;
 
-export type GenerateToken = (id: string) => string;
+export type GenerateTokenService = (id: string) => string;
 
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Controller //////////////////////////////////////

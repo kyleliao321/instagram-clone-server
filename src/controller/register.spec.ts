@@ -1,5 +1,8 @@
 import { Request } from 'express';
-import { AddNewAccount, AddNewUserProfile } from '../utilities/types';
+import {
+  AddNewAccountService,
+  AddNewUserProfileService
+} from '../utilities/types';
 import makeRegister from './register';
 
 describe('register', () => {
@@ -15,11 +18,11 @@ describe('register', () => {
       }
     } as Request;
 
-    const mockAddNewAccount: AddNewAccount = jest.fn(() => {
+    const mockAddNewAccount: AddNewAccountService = jest.fn(() => {
       throw new Error();
     });
 
-    const mockAddUserProfile: AddNewUserProfile = jest.fn();
+    const mockAddUserProfile: AddNewUserProfileService = jest.fn();
 
     const register = makeRegister({
       addNewAccount: mockAddNewAccount,
@@ -51,11 +54,11 @@ describe('register', () => {
       }
     } as Request;
 
-    const mockAddNewAccount: AddNewAccount = jest.fn(() =>
+    const mockAddNewAccount: AddNewAccountService = jest.fn(() =>
       Promise.resolve(mockId)
     );
 
-    const mockAddUserProfile: AddNewUserProfile = jest.fn(() => {
+    const mockAddUserProfile: AddNewUserProfileService = jest.fn(() => {
       throw new Error();
     });
 
@@ -89,11 +92,11 @@ describe('register', () => {
       }
     } as Request;
 
-    const mockAddNewAccount: AddNewAccount = jest.fn(() =>
+    const mockAddNewAccount: AddNewAccountService = jest.fn(() =>
       Promise.resolve(mockId)
     );
 
-    const mockAddUserProfile: AddNewUserProfile = jest.fn();
+    const mockAddUserProfile: AddNewUserProfileService = jest.fn();
 
     const register = makeRegister({
       addNewAccount: mockAddNewAccount,

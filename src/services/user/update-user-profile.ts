@@ -1,14 +1,14 @@
 import {
   BuildNewUserProfile,
   NewUserProfileInfo,
-  UpdateUserProfile,
+  UpdateUserProfileService,
   UserRepository
 } from '../../utilities/types';
 
 export default function makeUpdateUserProfile(dependency: {
   buildNewUserProfile: BuildNewUserProfile;
   userRepository: UserRepository;
-}): UpdateUserProfile {
+}): UpdateUserProfileService {
   return async function updateUserProfile(
     userProfileInfo: NewUserProfileInfo
   ): Promise<string> {

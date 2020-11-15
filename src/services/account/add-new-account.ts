@@ -1,6 +1,6 @@
 import {
   AccountRepository,
-  AddNewAccount,
+  AddNewAccountService,
   BuildNewAccount,
   NewAccountInfo
 } from '../../utilities/types';
@@ -8,7 +8,7 @@ import {
 export default function makeAddNewAccount(dependency: {
   buildNewAccount: BuildNewAccount;
   accountRepository: AccountRepository;
-}): AddNewAccount {
+}): AddNewAccountService {
   return async function addNewAccount(
     newAccountInfo: NewAccountInfo
   ): Promise<string> {

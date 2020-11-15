@@ -1,5 +1,5 @@
 import {
-  AddNewUserProfile,
+  AddNewUserProfileService,
   BuildNewUserProfile,
   NewUserProfileInfo,
   UserRepository
@@ -8,7 +8,7 @@ import {
 export default function buildAddNewUserProfile(dependency: {
   buildNewUserProfile: BuildNewUserProfile;
   userRepository: UserRepository;
-}): AddNewUserProfile {
+}): AddNewUserProfileService {
   return async function addNewUserProfile(
     newUserProfileInfo: NewUserProfileInfo
   ): Promise<string> {
