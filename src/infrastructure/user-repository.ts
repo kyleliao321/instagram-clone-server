@@ -9,7 +9,8 @@ export default function makeBuildUserRepository() {
 
   return function buildUserRepository(): UserRepository {
     return Object.freeze({
-      insertNewUserProfile
+      insertNewUserProfile,
+      updateUserProfile
     });
 
     async function insertNewUserProfile(
@@ -27,6 +28,24 @@ export default function makeBuildUserRepository() {
         alias: newUserProfile.getAlias(),
         description: newUserProfile.getDescription()
       });
+
+      return id;
+    }
+
+    async function updateUserProfile(
+      updatedUserProfile: NewUserProfile
+    ): Promise<string> {
+      const id = updatedUserProfile.getId();
+
+      if (!userProfileTable.has(id)) {
+        throw new Error('Updated User Profile ID does not exist in database.');
+      }
+
+      const targetUserProfile = userProfileTable.get(id);
+
+      targetUserProfile.userName = updatedUserProfile.getUserName();
+      targetUserProfile.alias = updatedUserProfile.getAlias();
+      targetUserProfile.description = updatedUserProfile.getDescription();
 
       return id;
     }
