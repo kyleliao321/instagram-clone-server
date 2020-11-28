@@ -23,10 +23,9 @@ describe('add-new-user-profile', () => {
       () => mockNewUserProfile
     );
 
-    const mockUserRepository: UserRepository = {
-      insertNewUserProfile: jest.fn(() => Promise.resolve(mockId)),
-      updateUserProfile: jest.fn()
-    };
+    const mockUserRepository = ({
+      insertNewUserProfile: jest.fn(() => Promise.resolve(mockId))
+    } as unknown) as UserRepository;
 
     const addNewUserProfile = makeAddNewUserProfile({
       buildNewUserProfile: mockBuildNewUserProfile,

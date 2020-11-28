@@ -22,10 +22,9 @@ describe('verify-account', () => {
       () => mockLoginAccount
     );
 
-    const accountRepository: AccountRepository = {
-      insertNewAccount: jest.fn(),
+    const accountRepository = ({
       verifyLoginAccount: jest.fn(() => Promise.resolve(mockId))
-    };
+    } as unknown) as AccountRepository;
 
     const verifyAccount = buildVerifyAccount({
       buildLoginAccount,

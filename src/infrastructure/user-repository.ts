@@ -10,7 +10,8 @@ export default function makeBuildUserRepository() {
   return function buildUserRepository(): UserRepository {
     return Object.freeze({
       insertNewUserProfile,
-      updateUserProfile
+      updateUserProfile,
+      getUserProfile
     });
 
     async function insertNewUserProfile(
@@ -26,7 +27,10 @@ export default function makeBuildUserRepository() {
         id: newUserProfile.getId(),
         userName: newUserProfile.getUserName(),
         alias: newUserProfile.getAlias(),
-        description: newUserProfile.getDescription()
+        description: newUserProfile.getDescription(),
+        postNum: 0,
+        followerNum: 0,
+        followingNum: 0
       });
 
       return id;
@@ -50,4 +54,12 @@ export default function makeBuildUserRepository() {
       return id;
     }
   };
+
+  async function getUserProfile(userId: string): Promise<UserProfile> {
+    if (!userProfileTable.has(userId)) {
+      throw new Error('Query User Profile ID doest not exist in database.');
+    }
+
+    return userProfileTable.get(userId);
+  }
 }

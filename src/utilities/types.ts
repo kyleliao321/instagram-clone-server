@@ -93,6 +93,9 @@ export type UserProfile = {
   alias: string;
   description: string;
   imageSrc?: string;
+  postNum: number;
+  followerNum: number;
+  followingNum: number;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -110,6 +113,10 @@ export type AddNewUserProfileService = (
 export type UpdateUserProfileService = (
   updatedUserProfileInfo: NewUserProfileInfo
 ) => Promise<string>;
+
+export type GetUserProfileService = (
+  userId: string
+) => Promise<QueryUserProfile>;
 
 export type VerifyAccountService = (
   loginAccountInfo: LoginAccountInfo
@@ -148,6 +155,7 @@ export type AccountRepository = {
 export type UserRepository = {
   insertNewUserProfile: (newUserProfile: NewUserProfile) => Promise<string>;
   updateUserProfile: (updatedUserProfile: NewUserProfile) => Promise<string>;
+  getUserProfile: (userId: string) => Promise<UserProfile>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

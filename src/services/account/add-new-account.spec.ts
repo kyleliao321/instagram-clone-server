@@ -21,10 +21,9 @@ describe('add-new-account', () => {
 
     const buildNewAccount: BuildNewAccount = jest.fn(() => mockNewAccount);
 
-    const accountRepository: AccountRepository = {
-      insertNewAccount: jest.fn(() => Promise.resolve(mockId)),
-      verifyLoginAccount: jest.fn()
-    };
+    const accountRepository = ({
+      insertNewAccount: jest.fn(() => Promise.resolve(mockId))
+    } as unknown) as AccountRepository;
 
     const addNewAccount: AddNewAccountService = makeAddNewAccount({
       buildNewAccount,
