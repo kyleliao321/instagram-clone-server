@@ -18,8 +18,18 @@ class AuthenticationError extends HttpError {
   constructor(message?: string) {
     super(message);
 
-    this.status = 401;
+    this.status = AuthenticationError.STATUS_CODE;
   }
 }
 
-export { HttpError, AuthenticationError };
+class NoContentError extends HttpError {
+  static STATUS_CODE = 204;
+
+  constructor(message?: string) {
+    super(message);
+
+    this.status = NoContentError.STATUS_CODE;
+  }
+}
+
+export { HttpError, AuthenticationError, NoContentError };

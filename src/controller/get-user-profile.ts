@@ -2,6 +2,7 @@ import { Request } from 'express';
 import {
   Controller,
   GetUserProfileReponseBody,
+  GetUserProfileRequestBody,
   GetUserProfileService,
   HttpResponse
 } from '../utilities/types';
@@ -15,13 +16,15 @@ export default function makeGetUserProfile(dependency: {
     request: Request
   ): Promise<HttpResponse<GetUserProfileReponseBody>> {
     try {
-      const data: string = request.body;
+      const data: GetUserProfileRequestBody = request.body;
 
-      const userProfile = await dependency.getUserProfileById(data);
+      const userId = data.userId;
+
+      const userProfile = await dependency.getUserProfileById(userId);
 
       return Object.freeze({
         headers: {
-          'Content-Type': 'application-json'
+          'Content-Type': 'application/json'
         },
         status: 200,
         body: {
@@ -39,19 +42,19 @@ export default function makeGetUserProfile(dependency: {
       logger.info(JSON.stringify(e));
 
       if (e instanceof HttpError) {
-        return {
+        return Object.freeze({
           headers: {
-            'Content-Type': 'application-json'
+            'Content-Type': 'application/json'
           },
           status: e.getStatus()
-        };
+        });
       } else {
-        return {
+        return Object.freeze({
           headers: {
-            'Content-Type': 'application-json'
+            'Content-Type': 'application/json'
           },
           status: 500
-        };
+        });
       }
     }
   };

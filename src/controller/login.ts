@@ -5,7 +5,7 @@ import {
   Controller,
   GenerateTokenService,
   HttpResponse,
-  LoginAccountInfo,
+  LoginRequestBody,
   LoginResponseBody,
   VerifyAccountService
 } from '../utilities/types';
@@ -18,13 +18,13 @@ export default function makeLogin(dependency: {
     httpRequest: Request
   ): Promise<HttpResponse<LoginResponseBody>> {
     try {
-      const data: LoginAccountInfo = httpRequest.body;
+      const data: LoginRequestBody = httpRequest.body;
 
       const userId = await dependency.verifyAccount(data);
 
       const token = dependency.generateToken(userId);
 
-      return {
+      return Object.freeze({
         headers: {
           'Content-Type': 'application/json'
         },
@@ -32,24 +32,24 @@ export default function makeLogin(dependency: {
         body: {
           jwt: token
         }
-      };
+      });
     } catch (e) {
       logger.error(JSON.stringify(e));
 
       if (e instanceof HttpError) {
-        return {
+        return Object.freeze({
           headers: {
             'Content-Type': 'application/json'
           },
           status: e.getStatus()
-        };
+        });
       } else {
-        return {
+        return Object.freeze({
           headers: {
             'Content-Type': 'application/json'
           },
           status: 500
-        };
+        });
       }
     }
   };

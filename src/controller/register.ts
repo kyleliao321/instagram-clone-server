@@ -5,10 +5,10 @@ import {
   AddNewAccountService,
   AddNewUserProfileService,
   HttpResponse,
-  NewAccountInfo,
   NewUserProfileInfo,
   Controller,
-  RegisterResponseBody
+  RegisterResponseBody,
+  RegisterRequestBody
 } from '../utilities/types';
 
 export default function makeRegister(dependency: {
@@ -19,7 +19,7 @@ export default function makeRegister(dependency: {
     httpRequest: Request
   ): Promise<HttpResponse<RegisterResponseBody>> {
     try {
-      const data: NewAccountInfo = httpRequest.body;
+      const data: RegisterRequestBody = httpRequest.body;
 
       const generatedId = await dependency.addNewAccount(data);
 
@@ -30,29 +30,29 @@ export default function makeRegister(dependency: {
 
       await dependency.addNewUserProfile(newUserProfileInfo);
 
-      return {
+      return Object.freeze({
         headers: {
           'Content-Type': 'application/json'
         },
         status: 201
-      };
+      });
     } catch (e) {
       logger.error(JSON.stringify(e));
 
       if (e instanceof HttpError) {
-        return {
+        return Object.freeze({
           headers: {
             'Content-Type': 'application/json'
           },
           status: e.getStatus()
-        };
+        });
       }
-      return {
+      return Object.freeze({
         headers: {
           'Content-Type': 'application/json'
         },
         status: 500
-      };
+      });
     }
   };
 }
