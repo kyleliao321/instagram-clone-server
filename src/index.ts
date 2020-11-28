@@ -7,7 +7,7 @@ import {
   LoginRequestSchema,
   RegisterRequestSchema,
   GetUserProfileRequestSchema
-} from './utilities/schemas';
+} from './utilities/schema';
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.post(
 );
 
 app.get(
-  '/user',
+  '/users/:id',
   makeValidateRequest({ schema: GetUserProfileRequestSchema }),
   makeRouteCallback(getUserProfile)
 );

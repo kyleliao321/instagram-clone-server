@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { logger } from '../infrastructure';
-import { HttpError } from '../utilities/http-errors';
+import { HttpError } from '../utilities/http-error';
 import {
   AddNewAccountService,
   AddNewUserProfileService,

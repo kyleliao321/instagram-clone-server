@@ -1,11 +1,10 @@
-import { string } from 'joi';
-import { AuthenticationError } from '../utilities/http-errors';
+import { AuthenticationError } from '../../utilities/http-error';
 import {
   AccountRepository,
   NewAccount,
   LoginAccount,
   Account
-} from '../utilities/types';
+} from '../../utilities/types';
 
 export default function makeBuildAccountRepository() {
   const accountTable = new Map<string, Account>();

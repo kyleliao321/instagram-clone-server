@@ -1,4 +1,4 @@
-import { IdHandler } from '../utilities/types';
+import { IdHandler } from '../../utilities/types';
 
 export default function makeIdHandler(): IdHandler {
   return Object.freeze({

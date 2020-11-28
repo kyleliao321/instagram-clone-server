@@ -1,4 +1,4 @@
-import { HashHandler } from '../utilities/types';
+import { HashHandler } from '../../utilities/types';
 
 export default function makeHashHandler(): HashHandler {
   return Object.freeze({

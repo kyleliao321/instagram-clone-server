@@ -1,9 +1,9 @@
-import { NoContentError } from '../utilities/http-errors';
+import { NoContentError } from '../../utilities/http-error';
 import {
   NewUserProfile,
   UserProfile,
   UserRepository
-} from '../utilities/types';
+} from '../../utilities/types';
 
 export default function makeBuildUserRepository() {
   const userProfileTable = new Map<string, UserProfile>();

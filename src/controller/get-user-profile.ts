@@ -7,7 +7,7 @@ import {
   HttpResponse
 } from '../utilities/types';
 import { logger } from '../infrastructure';
-import { HttpError } from '../utilities/http-errors';
+import { HttpError } from '../utilities/http-error';
 
 export default function makeGetUserProfile(dependency: {
   getUserProfileById: GetUserProfileService;

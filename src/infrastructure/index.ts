@@ -1,9 +1,9 @@
-import makeBuildAccountRepository from './account-repository';
-import makeBuildUserRepository from './user-repository';
-import makeHashHandler from './hash-handler';
-import makeIdHandler from './id-handler';
-import makeImageHandler from './image-handler';
-import makeLogger from './logger';
+import makeBuildAccountRepository from './repository/account-repository';
+import makeBuildUserRepository from './repository/user-repository';
+import makeHashHandler from './hash-handler/hash-handler';
+import makeIdHandler from './id-handler/id-handler';
+import makeImageHandler from './image-handler/image-handler';
+import makeLogger from './logger/logger';
 
 const buildAccountRepository = makeBuildAccountRepository();
 

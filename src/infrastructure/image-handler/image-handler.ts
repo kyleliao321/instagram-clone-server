@@ -1,4 +1,4 @@
-import { ImageHandler } from '../utilities/types';
+import { ImageHandler } from '../../utilities/types';
 
 export default function makeImageHandler(): ImageHandler {
   return Object.freeze({

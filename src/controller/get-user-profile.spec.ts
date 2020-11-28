@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { NoContentError } from '../utilities/http-errors';
+import { NoContentError } from '../utilities/http-error';
 import { GetUserProfileService, QueryUserProfile } from '../utilities/types';
 import makeGetUserProfile from './get-user-profile';
 

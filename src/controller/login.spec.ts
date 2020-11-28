@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { AuthenticationError } from '../utilities/http-errors';
+import { AuthenticationError } from '../utilities/http-error';
 import { GenerateTokenService, VerifyAccountService } from '../utilities/types';
 import makeLogin from './login';
 

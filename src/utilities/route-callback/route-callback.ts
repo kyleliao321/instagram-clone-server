@@ -1,6 +1,6 @@
-import { GenericController, GenericHttpResponse } from './types';
+import { GenericController, GenericHttpResponse } from '../types';
 import { Request, Response } from 'express';
-import { logger } from '../infrastructure';
+import { logger } from '../../infrastructure';
 
 export default function makeRouteCallback(controller: GenericController) {
   return function routeCallback(req: Request, res: Response): void {
