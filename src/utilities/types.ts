@@ -51,6 +51,32 @@ export type BuildLoginAccount = (
   loginAccountInfo: LoginAccountInfo
 ) => LoginAccount;
 
+export type QueryUserProfileInfo = {
+  id: string;
+  userName: string;
+  alias: string;
+  description: string;
+  imageSrc: string | null;
+  postNum: number;
+  followerNum: number;
+  followingNum: number;
+};
+
+export type QueryUserProfile = {
+  getId: () => string;
+  getUserName: () => string;
+  getAlias: () => string;
+  getDescription: () => string;
+  getImageSrc: () => string | null;
+  getPostNum: () => number;
+  getFollowerNum: () => number;
+  getFollowingNum: () => number;
+};
+
+export type BuildQueryUserProfile = (
+  fetchedUserProfileInfo: QueryUserProfileInfo
+) => QueryUserProfile;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  Data Model  ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -108,6 +134,10 @@ export type IdHandler = {
 
 export type HashHandler = {
   hash: (input: string) => string;
+};
+
+export type ImageHandler = {
+  isValid: (filePath: string | null) => boolean;
 };
 
 export type AccountRepository = {
