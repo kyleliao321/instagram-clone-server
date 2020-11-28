@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import { logger } from '../infrastructure';
-import { HttpError } from '../utilities/http-error';
+import { logger } from '../../infrastructure';
+import { HttpError } from '../../utilities/http-error';
 import {
   Controller,
   GenerateTokenService,
@@ -8,7 +8,7 @@ import {
   LoginRequestBody,
   LoginResponseBody,
   VerifyAccountService
-} from '../utilities/types';
+} from '../../utilities/types';
 
 export default function makeLogin(dependency: {
   generateTokenService: GenerateTokenService;

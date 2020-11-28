@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import { NoContentError } from '../utilities/http-error';
-import { GetUserProfileService, QueryUserProfile } from '../utilities/types';
+import { NoContentError } from '../../utilities/http-error';
+import { GetUserProfileService, QueryUserProfile } from '../../utilities/types';
 import makeGetUserProfile from './get-user-profile';
 
 describe('get user profile controller', () => {

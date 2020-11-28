@@ -1,9 +1,9 @@
 import { Request } from 'express';
-import { NoContentError } from '../utilities/http-error';
+import { NoContentError } from '../../utilities/http-error';
 import {
   UpdateUserProfileRequestBody,
   UpdateUserProfileService
-} from '../utilities/types';
+} from '../../utilities/types';
 import makeUpdateUserProfile from './update-user-profile';
 
 describe('update user profile controller', () => {

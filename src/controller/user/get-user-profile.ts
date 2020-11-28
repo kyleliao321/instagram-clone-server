@@ -5,9 +5,9 @@ import {
   GetUserProfileRequestBody,
   GetUserProfileService,
   HttpResponse
-} from '../utilities/types';
-import { logger } from '../infrastructure';
-import { HttpError } from '../utilities/http-error';
+} from '../../utilities/types';
+import { logger } from '../../infrastructure';
+import { HttpError } from '../../utilities/http-error';
 
 export default function makeGetUserProfile(dependency: {
   getUserProfileByIdService: GetUserProfileService;

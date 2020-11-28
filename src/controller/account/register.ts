@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import { logger } from '../infrastructure';
-import { HttpError } from '../utilities/http-error';
+import { logger } from '../../infrastructure';
+import { HttpError } from '../../utilities/http-error';
 import {
   AddNewAccountService,
   AddNewUserProfileService,
@@ -9,7 +9,7 @@ import {
   Controller,
   RegisterResponseBody,
   RegisterRequestBody
-} from '../utilities/types';
+} from '../../utilities/types';
 
 export default function makeRegister(dependency: {
   addNewAccountService: AddNewAccountService;

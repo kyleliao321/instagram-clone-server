@@ -2,7 +2,7 @@ import { Request } from 'express';
 import {
   AddNewAccountService,
   AddNewUserProfileService
-} from '../utilities/types';
+} from '../../utilities/types';
 import makeRegister from './register';
 
 describe('register', () => {

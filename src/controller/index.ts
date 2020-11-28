@@ -6,10 +6,10 @@ import {
   verifyAccountService,
   generateTokenService
 } from '../services';
-import makeRegister from './register';
-import makeLogin from './login';
-import makeGetUserProfile from './get-user-profile';
-import makeUpdateUserProfile from './update-user-profile';
+import makeRegister from './account/register';
+import makeLogin from './account/login';
+import makeGetUserProfile from './user/get-user-profile';
+import makeUpdateUserProfile from './user/update-user-profile';
 
 const register = makeRegister({
   addNewAccountService,

@@ -1,13 +1,13 @@
 import { Request } from 'express';
-import { logger } from '../infrastructure';
-import { HttpError } from '../utilities/http-error';
+import { logger } from '../../infrastructure';
+import { HttpError } from '../../utilities/http-error';
 import {
   Controller,
   HttpResponse,
   UpdateUserProfileRequestBody,
   UpdateUserProfileResponseBody,
   UpdateUserProfileService
-} from '../utilities/types';
+} from '../../utilities/types';
 
 export default function makeUpdateUserProfile(dependency: {
   updateUserProfileService: UpdateUserProfileService;
