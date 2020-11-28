@@ -24,7 +24,7 @@ describe('fetched user profile', () => {
 
     const buildQueryUserProfile = makeBuildQueryUserProfile({
       idHandler: mockIdHandler,
-      ImageHandler: mockImageHandler
+      imageHandler: mockImageHandler
     });
 
     // when
@@ -64,7 +64,7 @@ describe('fetched user profile', () => {
 
     const buildQueryUserProfile = makeBuildQueryUserProfile({
       idHandler: mockIdHandler,
-      ImageHandler: mockImageHandler
+      imageHandler: mockImageHandler
     });
 
     // when
@@ -104,7 +104,7 @@ describe('fetched user profile', () => {
 
     const buildQueryUserProfile = makeBuildQueryUserProfile({
       idHandler: mockIdHandler,
-      ImageHandler: mockImageHandler
+      imageHandler: mockImageHandler
     });
 
     // when
@@ -146,7 +146,7 @@ describe('fetched user profile', () => {
 
     const buildQueryUserProfile = makeBuildQueryUserProfile({
       idHandler: mockIdHandler,
-      ImageHandler: mockImageHandler
+      imageHandler: mockImageHandler
     });
 
     // when
@@ -188,7 +188,7 @@ describe('fetched user profile', () => {
 
     const buildQueryUserProfile = makeBuildQueryUserProfile({
       idHandler: mockIdHandler,
-      ImageHandler: mockImageHandler
+      imageHandler: mockImageHandler
     });
 
     // when

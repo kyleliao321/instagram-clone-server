@@ -9,3 +9,7 @@ export const LoginRequestSchema = Joi.object().keys({
   userName: Joi.string().min(1).required(),
   password: Joi.string().min(1).required()
 });
+
+export const GetUserProfileRequestSchema = Joi.object().keys({
+  userId: Joi.string().min(1).required()
+});

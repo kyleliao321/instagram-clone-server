@@ -1,3 +1,4 @@
+import { NoContentError } from '../utilities/http-errors';
 import {
   NewUserProfile,
   UserProfile,
@@ -57,7 +58,9 @@ export default function makeBuildUserRepository() {
 
   async function getUserProfile(userId: string): Promise<UserProfile> {
     if (!userProfileTable.has(userId)) {
-      throw new Error('Query User Profile ID doest not exist in database.');
+      throw new NoContentError(
+        'Query User Profile ID doest not exist in database.'
+      );
     }
 
     return userProfileTable.get(userId);

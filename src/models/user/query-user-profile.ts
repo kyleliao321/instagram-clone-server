@@ -8,7 +8,7 @@ import {
 
 export default function makeBuildQueryUserProfile(dependency: {
   idHandler: IdHandler;
-  ImageHandler: ImageHandler;
+  imageHandler: ImageHandler;
 }): BuildQueryUserProfile {
   return function buildQueryUserProfile(
     fetchedUserProfileInfo: QueryUserProfileInfo
@@ -17,7 +17,7 @@ export default function makeBuildQueryUserProfile(dependency: {
       throw new Error('Fetched User Profile must have a valid user id.');
     }
 
-    if (!dependency.ImageHandler.isValid(fetchedUserProfileInfo.imageSrc)) {
+    if (!dependency.imageHandler.isValid(fetchedUserProfileInfo.imageSrc)) {
       throw new Error('Fetched User Profile must have a valid file path.');
     }
 
