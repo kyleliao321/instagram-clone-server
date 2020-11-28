@@ -1,11 +1,13 @@
 import {
-  LoginRequestSchema,
-  RegisterRequestSchema,
-  GetUserProfileRequestSchema
+  LoginRequestBodySchema,
+  RegisterRequestBodySchema,
+  GetUserProfileRequestBodySchema,
+  UpdateUserProfileRequestBodySchema
 } from './schemas';
 
 export {
-  LoginRequestSchema,
-  RegisterRequestSchema,
-  GetUserProfileRequestSchema
+  LoginRequestBodySchema,
+  RegisterRequestBodySchema,
+  GetUserProfileRequestBodySchema,
+  UpdateUserProfileRequestBodySchema
 };

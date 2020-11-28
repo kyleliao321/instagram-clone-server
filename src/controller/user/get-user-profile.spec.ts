@@ -1,18 +1,53 @@
 import { Request } from 'express';
 import { NoContentError } from '../../utilities/http-error';
+import { BadRequestError } from '../../utilities/http-error/http-errors';
 import { GetUserProfileService, QueryUserProfile } from '../../utilities/types';
 import makeGetUserProfile from './get-user-profile';
 
 describe('get user profile controller', () => {
+  test('should response with status code 400 when id params are not compatible between path and body', async () => {
+    // given
+    const mockUserId = 'mockUserId';
+
+    const mockRequest = ({
+      params: {
+        userId: 'mockUserId2'
+      },
+      body: {
+        userId: mockUserId
+      }
+    } as unknown) as Request;
+
+    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn();
+
+    const getUserProfile = makeGetUserProfile({
+      getUserProfileByIdService: mockGetUserProfileByIdService
+    });
+
+    // when
+    const rep = getUserProfile(mockRequest);
+
+    // expect
+    expect(rep).resolves.toStrictEqual({
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      status: BadRequestError.STATUS_CODE
+    });
+  });
+
   test('should response with status code 500 when getUserProfileById throw a non-http-error', async () => {
     // given
     const mockUserId = 'mockUserId';
 
-    const mockRequest = {
+    const mockRequest = ({
+      params: {
+        userId: 'mockUserId'
+      },
       body: {
         userId: mockUserId
       }
-    } as Request;
+    } as unknown) as Request;
 
     const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() => {
       throw new Error();
@@ -38,11 +73,14 @@ describe('get user profile controller', () => {
     // given
     const mockUserId = 'mockUserId';
 
-    const mockRequest = {
+    const mockRequest = ({
+      params: {
+        userId: 'mockUserId'
+      },
       body: {
         userId: mockUserId
       }
-    } as Request;
+    } as unknown) as Request;
 
     const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() => {
       throw new NoContentError();
@@ -75,11 +113,14 @@ describe('get user profile controller', () => {
     const mockFollowerNum = 0;
     const mockFolloingNum = 0;
 
-    const mockRequest = {
+    const mockRequest = ({
+      params: {
+        userId: 'mockUserId'
+      },
       body: {
         userId: mockUserId
       }
-    } as Request;
+    } as unknown) as Request;
 
     const queryUserProfile: QueryUserProfile = {
       getId: () => mockUserId,

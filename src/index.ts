@@ -9,11 +9,16 @@ import {
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
 import {
-  LoginRequestSchema,
-  RegisterRequestSchema,
-  GetUserProfileRequestSchema
+  LoginRequestBodySchema,
+  RegisterRequestBodySchema,
+  GetUserProfileRequestBodySchema,
+  UpdateUserProfileRequestBodySchema
 } from './utilities/schema';
-import { UpdateUserProfileRequestSchema } from './utilities/schema/schemas';
+import { RequestKeys } from './utilities/constants';
+import {
+  GetUserProfileRequestParamsSchema,
+  UpdateUserProfileRequestParamsSchema
+} from './utilities/schema/schemas';
 
 const app = express();
 
@@ -21,25 +26,49 @@ app.use(bodyParser.json());
 
 app.post(
   '/register',
-  makeValidateRequest({ schema: RegisterRequestSchema }),
+  makeValidateRequest({
+    schema: RegisterRequestBodySchema,
+    key: RequestKeys.BODY
+  }),
   makeRouteCallback(register)
 );
 
 app.post(
   '/login',
-  makeValidateRequest({ schema: LoginRequestSchema }),
+  makeValidateRequest({
+    schema: LoginRequestBodySchema,
+    key: RequestKeys.BODY
+  }),
   makeRouteCallback(login)
 );
 
 app.get(
   '/users/:userId',
-  makeValidateRequest({ schema: GetUserProfileRequestSchema }),
+  [
+    makeValidateRequest({
+      schema: GetUserProfileRequestBodySchema,
+      key: RequestKeys.BODY
+    }),
+    makeValidateRequest({
+      schema: GetUserProfileRequestParamsSchema,
+      key: RequestKeys.PARAMS
+    })
+  ],
   makeRouteCallback(getUserProfile)
 );
 
 app.put(
   '/users/:userId',
-  makeValidateRequest({ schema: UpdateUserProfileRequestSchema }),
+  [
+    makeValidateRequest({
+      schema: UpdateUserProfileRequestBodySchema,
+      key: RequestKeys.BODY
+    }),
+    makeValidateRequest({
+      schema: UpdateUserProfileRequestParamsSchema,
+      key: RequestKeys.PARAMS
+    })
+  ],
   makeRouteCallback(updateUserProfile)
 );
 

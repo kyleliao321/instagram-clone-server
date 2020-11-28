@@ -32,4 +32,14 @@ class NoContentError extends HttpError {
   }
 }
 
-export { HttpError, AuthenticationError, NoContentError };
+class BadRequestError extends HttpError {
+  static STATUS_CODE = 400;
+
+  constructor(message?: string) {
+    super(message);
+
+    this.status = BadRequestError.STATUS_CODE;
+  }
+}
+
+export { HttpError, AuthenticationError, NoContentError, BadRequestError };

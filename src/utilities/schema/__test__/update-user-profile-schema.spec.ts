@@ -1,5 +1,5 @@
 import { UpdatedUserProfileInfo } from '../../types';
-import { UpdateUserProfileRequestSchema } from '../schemas';
+import { UpdateUserProfileRequestBodySchema } from '../schemas';
 
 describe('update user profile request schema', () => {
   test('validation should fail when postNum is negtive', () => {
@@ -25,7 +25,7 @@ describe('update user profile request schema', () => {
     };
 
     // when
-    const { error } = UpdateUserProfileRequestSchema.validate(data);
+    const { error } = UpdateUserProfileRequestBodySchema.validate(data);
 
     // expect
     expect(error === undefined).toBe(false);
@@ -54,7 +54,7 @@ describe('update user profile request schema', () => {
     };
 
     // when
-    const { error } = UpdateUserProfileRequestSchema.validate(data);
+    const { error } = UpdateUserProfileRequestBodySchema.validate(data);
 
     // expect
     expect(error === undefined).toBe(false);
@@ -83,7 +83,7 @@ describe('update user profile request schema', () => {
     };
 
     // when
-    const { error } = UpdateUserProfileRequestSchema.validate(data);
+    const { error } = UpdateUserProfileRequestBodySchema.validate(data);
 
     // expect
     expect(error === undefined).toBe(false);
@@ -112,7 +112,7 @@ describe('update user profile request schema', () => {
     };
 
     // when
-    const { error } = UpdateUserProfileRequestSchema.validate(data);
+    const { error } = UpdateUserProfileRequestBodySchema.validate(data);
 
     // expect
     expect(error === undefined).toBe(false);
@@ -139,7 +139,7 @@ describe('update user profile request schema', () => {
     };
 
     // when
-    const { error } = UpdateUserProfileRequestSchema.validate(data);
+    const { error } = UpdateUserProfileRequestBodySchema.validate(data);
 
     // expect
     expect(error === undefined).toBe(true);

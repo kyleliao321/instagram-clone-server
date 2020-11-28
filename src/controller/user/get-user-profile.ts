@@ -8,6 +8,7 @@ import {
 } from '../../utilities/types';
 import { logger } from '../../infrastructure';
 import { HttpError } from '../../utilities/http-error';
+import { BadRequestError } from '../../utilities/http-error/http-errors';
 
 export default function makeGetUserProfile(dependency: {
   getUserProfileByIdService: GetUserProfileService;
@@ -18,9 +19,19 @@ export default function makeGetUserProfile(dependency: {
     try {
       const data: GetUserProfileRequestBody = request.body;
 
-      const userId = data.userId;
+      const pathUserId = request.params.userId;
 
-      const userProfile = await dependency.getUserProfileByIdService(userId);
+      const bodyUserId = data.userId;
+
+      if (pathUserId !== bodyUserId) {
+        throw new BadRequestError(
+          `HttpError.BadRequest: path id - ${pathUserId} is not compatible with body id - ${bodyUserId}`
+        );
+      }
+
+      const userProfile = await dependency.getUserProfileByIdService(
+        bodyUserId
+      );
 
       return Object.freeze({
         headers: {

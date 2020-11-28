@@ -1,6 +1,7 @@
 import * as Joi from 'joi';
 import makeValidateRequest from './validate-request';
 import { NextFunction, Request, Response } from 'express';
+import { RequestKeys } from '../constants';
 
 describe('validate request', () => {
   test('should trigger next function when schema validation succeed', () => {
@@ -8,6 +9,8 @@ describe('validate request', () => {
     const mockRequest = {} as Request;
 
     const mockResponse = {} as Response;
+
+    const mockRequestKey = RequestKeys.BODY;
 
     const mockNextFunction = jest.fn();
 
@@ -19,7 +22,10 @@ describe('validate request', () => {
       validate: (value: any) => mockValidateResult
     } as Joi.Schema;
 
-    const validateRequest = makeValidateRequest({ schema: mockSchema });
+    const validateRequest = makeValidateRequest({
+      schema: mockSchema,
+      key: mockRequestKey
+    });
 
     // when
     validateRequest(mockRequest, mockResponse, mockNextFunction);
@@ -37,6 +43,8 @@ describe('validate request', () => {
       send: (body?: any) => {}
     } as Response;
 
+    const mockRequestKey = RequestKeys.BODY;
+
     const mockNextFunction = jest.fn();
 
     const mockValidationError = {} as Joi.ValidationError;
@@ -49,7 +57,10 @@ describe('validate request', () => {
       validate: (value: any) => mockValidateResult
     } as Joi.Schema;
 
-    const validateRequest = makeValidateRequest({ schema: mockSchema });
+    const validateRequest = makeValidateRequest({
+      schema: mockSchema,
+      key: mockRequestKey
+    });
 
     // when
     validateRequest(mockRequest, mockResponse, mockNextFunction);

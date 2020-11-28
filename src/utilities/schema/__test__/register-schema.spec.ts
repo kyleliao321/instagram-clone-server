@@ -1,4 +1,4 @@
-import { RegisterRequestSchema } from '../schemas';
+import { RegisterRequestBodySchema } from '../schemas';
 
 describe('register request schema', () => {
   test('validation should failed when user name is not provided', () => {
@@ -8,7 +8,7 @@ describe('register request schema', () => {
     };
 
     // when
-    const { error } = RegisterRequestSchema.validate(data);
+    const { error } = RegisterRequestBodySchema.validate(data);
 
     //expect
     expect(error === undefined).toBe(false);
@@ -21,7 +21,7 @@ describe('register request schema', () => {
     };
 
     // when
-    const { error } = RegisterRequestSchema.validate(data);
+    const { error } = RegisterRequestBodySchema.validate(data);
 
     //expect
     expect(error === undefined).toBe(false);
@@ -35,7 +35,7 @@ describe('register request schema', () => {
     };
 
     // when
-    const { error } = RegisterRequestSchema.validate(data);
+    const { error } = RegisterRequestBodySchema.validate(data);
 
     //expect
     expect(error === undefined).toBe(false);
@@ -49,7 +49,7 @@ describe('register request schema', () => {
     };
 
     // when
-    const { error } = RegisterRequestSchema.validate(data);
+    const { error } = RegisterRequestBodySchema.validate(data);
 
     //expect
     expect(error === undefined).toBe(false);
@@ -63,7 +63,7 @@ describe('register request schema', () => {
     };
 
     // when
-    const { error } = RegisterRequestSchema.validate(data);
+    const { error } = RegisterRequestBodySchema.validate(data);
 
     //expect
     expect(error === undefined).toBe(true);
