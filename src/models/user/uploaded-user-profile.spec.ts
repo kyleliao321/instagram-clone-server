@@ -48,8 +48,8 @@ describe('new-user-profile-model', () => {
     // expect
     expect(result.getUserName()).toBe(mockUserName);
     expect(result.getAlias()).toBe(mockUserName);
-    expect(result.getDescription()).toBe(undefined);
-    expect(result.getImageByteArray()).toBe(undefined);
+    expect(result.getDescription()).toBe(null);
+    expect(result.getEncodedImage()).toBe(null);
   });
 
   test('should return correct result when user alias is given', () => {
@@ -77,7 +77,7 @@ describe('new-user-profile-model', () => {
     // expect
     expect(result.getUserName()).toBe(mockUserName);
     expect(result.getAlias()).toBe(mockAlias);
-    expect(result.getDescription()).toBe(undefined);
-    expect(result.getImageByteArray()).toBe(undefined);
+    expect(result.getDescription()).toBe(null);
+    expect(result.getEncodedImage()).toBe(null);
   });
 });

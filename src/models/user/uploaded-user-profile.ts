@@ -20,12 +20,9 @@ export default function makeBuildNewUserProfile(dependency: {
     return Object.freeze({
       getId: () => newUserProfileInfo.id,
       getUserName: () => newUserProfileInfo.userName,
-      getAlias: () =>
-        newUserProfileInfo.alias === undefined
-          ? newUserProfileInfo.userName
-          : newUserProfileInfo.alias,
-      getDescription: () => newUserProfileInfo.description,
-      getImageByteArray: () => newUserProfileInfo.imageByteArray
+      getAlias: () => newUserProfileInfo.alias ?? newUserProfileInfo.userName,
+      getDescription: () => newUserProfileInfo.description ?? null,
+      getEncodedImage: () => newUserProfileInfo.encodedImage ?? null
     });
   };
 }

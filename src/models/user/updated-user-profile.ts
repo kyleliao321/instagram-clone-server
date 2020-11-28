@@ -38,7 +38,7 @@ export default function makeBuildUpdatedUserProfile(dependency: {
       getUserName: () => updatedUserProfileInfo.userName,
       getAlias: () => updatedUserProfileInfo.alias,
       getDescription: () => updatedUserProfileInfo.description,
-      getImageByteArray: () => updatedUserProfileInfo.imageByteArray ?? null,
+      getEncodedImage: () => updatedUserProfileInfo.encodedImage ?? null,
       getPostNum: () => updatedUserProfileInfo.postNum,
       getFollowerNum: () => updatedUserProfileInfo.followerNum,
       getFollowingNum: () => updatedUserProfileInfo.followingNum

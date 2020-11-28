@@ -16,7 +16,7 @@ describe('add-new-user-profile', () => {
       getUserName: jest.fn(),
       getAlias: jest.fn(),
       getDescription: jest.fn(),
-      getImageByteArray: jest.fn()
+      getEncodedImage: jest.fn()
     };
 
     const mockBuildNewUserProfile: BuildNewUserProfile = jest.fn(

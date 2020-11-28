@@ -20,8 +20,8 @@ export type NewUserProfile = {
   getId: () => string;
   getUserName: () => string;
   getAlias: () => string;
-  getDescription: () => string | undefined;
-  getImageByteArray: () => Int8Array | undefined;
+  getDescription: () => string | null;
+  getEncodedImage: () => string | null;
 };
 
 export type LoginAccount = {
@@ -53,7 +53,7 @@ export type UpdatedUserProfile = {
   getUserName: () => string;
   getAlias: () => string;
   getDescription: () => string;
-  getImageByteArray: () => Int8Array | null;
+  getEncodedImage: () => string | null;
   getPostNum: () => number;
   getFollowerNum: () => number;
   getFollowingNum: () => number;
@@ -135,7 +135,7 @@ export type NewUserProfileInfo = {
   userName: string;
   alias?: string;
   description?: string;
-  imageByteArray?: Int8Array;
+  encodedImage?: string;
 };
 
 export type NewAccountInfo = {
@@ -148,7 +148,7 @@ export type UpdatedUserProfileInfo = {
   userName: string;
   alias: string;
   description: string;
-  imageByteArray?: Int8Array;
+  encodedImage?: string;
   postNum: number;
   followerNum: number;
   followingNum: number;

@@ -170,7 +170,7 @@ describe('updated user profile', () => {
     expect(result.getUserName()).toBe(mockUserName);
     expect(result.getAlias()).toBe(mockAlias);
     expect(result.getDescription()).toBe(mockDescription);
-    expect(result.getImageByteArray()).toBe(null);
+    expect(result.getEncodedImage()).toBe(null);
     expect(result.getPostNum()).toBe(mockPostNum);
     expect(result.getFollowerNum()).toBe(mockFollowerNum);
     expect(result.getFollowingNum()).toBe(mockFollowingNum);
