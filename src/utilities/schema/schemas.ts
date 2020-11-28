@@ -13,3 +13,14 @@ export const LoginRequestSchema = Joi.object().keys({
 export const GetUserProfileRequestSchema = Joi.object().keys({
   userId: Joi.string().min(1).required()
 });
+
+export const UpdateUserProfileRequestSchema = Joi.object().keys({
+  id: Joi.string().min(1).required(),
+  userName: Joi.string().min(1).required(),
+  alias: Joi.string().min(1).required(),
+  description: Joi.string().required().allow(''), // allow to be blank
+  encodedImage: Joi.string(), // allow to be undefined
+  postNum: Joi.number().min(0),
+  followerNum: Joi.number().min(0),
+  followingNum: Joi.number().min(0)
+});
