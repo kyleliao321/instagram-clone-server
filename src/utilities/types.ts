@@ -168,6 +168,17 @@ export type LoginResponseBody = {
   jwt: string;
 };
 
+export type GetUserProfileReponseBody = {
+  id: string;
+  userName: string;
+  alias: string;
+  description: string;
+  imageSrc: string | null;
+  postNum: number;
+  followerNum: number;
+  followingNum: number;
+};
+
 export type HttpResponse<T> = {
   headers: {
     'Content-Type': string;
