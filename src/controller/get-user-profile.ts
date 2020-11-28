@@ -11,7 +11,7 @@ import { HttpError } from '../utilities/http-errors';
 
 export default function makeGetUserProfile(dependency: {
   getUserProfileById: GetUserProfileService;
-}): Controller<GetUserProfileReponseBody> {
+}): Controller<HttpResponse<GetUserProfileReponseBody>> {
   return async function getUserProfile(
     request: Request
   ): Promise<HttpResponse<GetUserProfileReponseBody>> {

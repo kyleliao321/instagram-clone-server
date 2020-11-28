@@ -14,7 +14,7 @@ import {
 export default function makeRegister(dependency: {
   addNewAccount: AddNewAccountService;
   addNewUserProfile: AddNewUserProfileService;
-}): Controller<RegisterResponseBody> {
+}): Controller<HttpResponse<RegisterResponseBody>> {
   return async function register(
     httpRequest: Request
   ): Promise<HttpResponse<RegisterResponseBody>> {

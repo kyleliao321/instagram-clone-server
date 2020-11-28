@@ -128,7 +128,13 @@ export type GenerateTokenService = (id: string) => string;
 /////////////////////////////////// Controller //////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-export type Controller<T> = (httpRequest: Request) => Promise<HttpResponse<T>>;
+export type GenericController = (
+  httpRequest: Request
+) => Promise<GenericHttpResponse>;
+
+export type Controller<R extends GenericHttpResponse> = (
+  httpRequest: Request
+) => Promise<R>;
 
 /////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////  infrastructure ////////////////////////////////////
@@ -179,13 +185,21 @@ export type GetUserProfileReponseBody = {
   followingNum: number;
 };
 
-export type HttpResponse<T> = {
+export type GenericHttpResponse = {
+  headers: {
+    'Content-Type': string;
+  };
+  status: number;
+  body?: unknown;
+};
+
+export interface HttpResponse<T> extends GenericHttpResponse {
   headers: {
     'Content-Type': string;
   };
   status: number;
   body?: T;
-};
+}
 
 /////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////  HTTP Request /////////////////////////////////////

@@ -1,11 +1,11 @@
-import { Controller } from './types';
+import { GenericController, GenericHttpResponse } from './types';
 import { Request, Response } from 'express';
 import { logger } from '../infrastructure';
 
-export default function makeRouteCallback(controller: Controller) {
+export default function makeRouteCallback(controller: GenericController) {
   return function routeCallback(req: Request, res: Response): void {
     controller(req)
-      .then((httpResponse) => {
+      .then((httpResponse: GenericHttpResponse) => {
         logger.info(JSON.stringify(httpResponse));
         if (httpResponse.headers) {
           res.set(httpResponse.headers);

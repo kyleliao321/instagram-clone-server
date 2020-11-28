@@ -13,7 +13,7 @@ import {
 export default function makeLogin(dependency: {
   generateToken: GenerateTokenService;
   verifyAccount: VerifyAccountService;
-}): Controller<LoginResponseBody> {
+}): Controller<HttpResponse<LoginResponseBody>> {
   return async function login(
     httpRequest: Request
   ): Promise<HttpResponse<LoginResponseBody>> {
