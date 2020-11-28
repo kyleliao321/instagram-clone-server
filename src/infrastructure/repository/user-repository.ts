@@ -44,7 +44,9 @@ export default function makeBuildUserRepository() {
       const id = updatedUserProfile.getId();
 
       if (!userProfileTable.has(id)) {
-        throw new Error('Updated User Profile ID does not exist in database.');
+        throw new NoContentError(
+          'Updated User Profile ID does not exist in database.'
+        );
       }
 
       const targetUserProfile = userProfileTable.get(id);

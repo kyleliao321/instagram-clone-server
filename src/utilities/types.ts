@@ -202,7 +202,9 @@ export type UserRepository = {
 
 export type RegisterResponseBody = null;
 
-export type UpdateUserProfileResponseBody = null;
+export type UpdateUserProfileResponseBody = {
+  userId: string;
+};
 
 export type LoginResponseBody = {
   jwt: string;
