@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import { GenerateTokenService } from '../../utilities/types';
 
-export default function makeGenerateToken(dependency: {
+export default function makeGenerateTokenService(dependency: {
   key: string;
 }): GenerateTokenService {
-  return function generateToken(id: string): string {
+  return function generateTokenService(id: string): string {
     const token = jwt.sign(
       {
         id

@@ -3,9 +3,9 @@ import {
   NewUserProfile,
   UserRepository
 } from '../../utilities/types';
-import makeAddNewUserProfile from './add-new-user-profile';
+import makeAddNewUserProfileService from './add-new-user-profile';
 
-describe('add-new-user-profile', () => {
+describe('add-new-user-profile-service', () => {
   test('should return correct result when invoke successfully', async () => {
     // given
     const mockId = 'mockId';
@@ -27,13 +27,13 @@ describe('add-new-user-profile', () => {
       insertNewUserProfile: jest.fn(() => Promise.resolve(mockId))
     } as unknown) as UserRepository;
 
-    const addNewUserProfile = makeAddNewUserProfile({
+    const addNewUserProfileService = makeAddNewUserProfileService({
       buildNewUserProfile: mockBuildNewUserProfile,
       userRepository: mockUserRepository
     });
 
     // when
-    const result = addNewUserProfile({
+    const result = addNewUserProfileService({
       id: mockId,
       userName: mockUserName
     });

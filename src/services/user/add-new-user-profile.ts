@@ -5,11 +5,11 @@ import {
   UserRepository
 } from '../../utilities/types';
 
-export default function buildAddNewUserProfile(dependency: {
+export default function buildAddNewUserProfileService(dependency: {
   buildNewUserProfile: BuildNewUserProfile;
   userRepository: UserRepository;
 }): AddNewUserProfileService {
-  return async function addNewUserProfile(
+  return async function addNewUserProfileService(
     newUserProfileInfo: NewUserProfileInfo
   ): Promise<string> {
     const newUserProfile = dependency.buildNewUserProfile(newUserProfileInfo);

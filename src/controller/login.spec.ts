@@ -16,15 +16,15 @@ describe('login', () => {
       }
     } as Request;
 
-    const mockGenerateToken: GenerateTokenService = jest.fn(() => {
+    const mockGenerateTokenService: GenerateTokenService = jest.fn(() => {
       throw new Error('Unknown error from GenerateToken');
     });
 
-    const mockVerifyAccount: VerifyAccountService = jest.fn();
+    const mockVerifyAccountService: VerifyAccountService = jest.fn();
 
     const login = makeLogin({
-      generateToken: mockGenerateToken,
-      verifyAccount: mockVerifyAccount
+      generateTokenService: mockGenerateTokenService,
+      verifyAccountService: mockVerifyAccountService
     });
 
     // when
@@ -52,15 +52,17 @@ describe('login', () => {
       }
     } as Request;
 
-    const mockGenerateToken: GenerateTokenService = jest.fn(() => mockToken);
+    const mockGenerateTokenService: GenerateTokenService = jest.fn(
+      () => mockToken
+    );
 
-    const mockVerifyAccount: VerifyAccountService = jest.fn(() => {
+    const mockVerifyAccountService: VerifyAccountService = jest.fn(() => {
       throw new Error('Unknown error from VerifyAccount');
     });
 
     const login = makeLogin({
-      generateToken: mockGenerateToken,
-      verifyAccount: mockVerifyAccount
+      generateTokenService: mockGenerateTokenService,
+      verifyAccountService: mockVerifyAccountService
     });
 
     // when
@@ -88,15 +90,17 @@ describe('login', () => {
       }
     } as Request;
 
-    const mockGenerateToken: GenerateTokenService = jest.fn(() => mockToken);
+    const mockGenerateTokenService: GenerateTokenService = jest.fn(
+      () => mockToken
+    );
 
-    const mockVerifyAccount: VerifyAccountService = jest.fn(() => {
+    const mockVerifyAccountService: VerifyAccountService = jest.fn(() => {
       throw new AuthenticationError();
     });
 
     const login = makeLogin({
-      generateToken: mockGenerateToken,
-      verifyAccount: mockVerifyAccount
+      generateTokenService: mockGenerateTokenService,
+      verifyAccountService: mockVerifyAccountService
     });
 
     // when

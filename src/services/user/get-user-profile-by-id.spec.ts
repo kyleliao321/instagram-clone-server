@@ -4,9 +4,9 @@ import {
   UserRepository,
   UserProfile
 } from '../../utilities/types';
-import makeGetUserProfileById from './get-user-profile-by-id';
+import makeGetUserProfileByIdService from './get-user-profile-by-id';
 
-describe('get user profile by id', () => {
+describe('get-user-profile-by-id-service', () => {
   test('should return correct result when invoke successfully', async () => {
     // given
     const mockUserId = 'mockUserId';
@@ -48,13 +48,13 @@ describe('get user profile by id', () => {
       getUserProfile: jest.fn(() => mockUserProfile)
     } as unknown) as UserRepository;
 
-    const getUserProfileById = makeGetUserProfileById({
+    const getUserProfileByIdService = makeGetUserProfileByIdService({
       buildQueryUserProfile: mockBuildQueryUserProfile,
       userRepository: mockUserRepository
     });
 
     // when
-    const result = getUserProfileById(mockUserId);
+    const result = getUserProfileByIdService(mockUserId);
 
     // expect
     expect(result).resolves.toStrictEqual(mockQueryUserProfile);

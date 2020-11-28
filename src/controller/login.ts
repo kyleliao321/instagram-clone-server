@@ -11,8 +11,8 @@ import {
 } from '../utilities/types';
 
 export default function makeLogin(dependency: {
-  generateToken: GenerateTokenService;
-  verifyAccount: VerifyAccountService;
+  generateTokenService: GenerateTokenService;
+  verifyAccountService: VerifyAccountService;
 }): Controller<HttpResponse<LoginResponseBody>> {
   return async function login(
     httpRequest: Request
@@ -20,9 +20,9 @@ export default function makeLogin(dependency: {
     try {
       const data: LoginRequestBody = httpRequest.body;
 
-      const userId = await dependency.verifyAccount(data);
+      const userId = await dependency.verifyAccountService(data);
 
-      const token = dependency.generateToken(userId);
+      const token = dependency.generateTokenService(userId);
 
       return Object.freeze({
         headers: {

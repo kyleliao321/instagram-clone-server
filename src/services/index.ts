@@ -1,9 +1,9 @@
-import makeAddNewAccount from './account/add-new-account';
-import makeAddNewUserProfile from './user/add-new-user-profile';
-import makeUpdateUserProfile from './user/update-user-profile';
-import makeGetUserProfileById from './user/get-user-profile-by-id';
-import makeVerifyAccount from './account/verify-account';
-import makeGenerateToken from './account/generate-token';
+import makeAddNewAccountService from './account/add-new-account';
+import makeAddNewUserProfileService from './user/add-new-user-profile';
+import makeUpdateUserProfileService from './user/update-user-profile';
+import makeGetUserProfileByIdService from './user/get-user-profile-by-id';
+import makeVerifyAccountService from './account/verify-account';
+import makeGenerateTokenService from './account/generate-token';
 import { accountRepository, userRepository } from '../infrastructure';
 import {
   buildNewAccount,
@@ -13,37 +13,40 @@ import {
   buildUpdatedUserProfile
 } from '../models';
 
-const addNewAccount = makeAddNewAccount({ buildNewAccount, accountRepository });
+const addNewAccountService = makeAddNewAccountService({
+  buildNewAccount,
+  accountRepository
+});
 
-const verifyAccount = makeVerifyAccount({
+const verifyAccountService = makeVerifyAccountService({
   buildLoginAccount,
   accountRepository
 });
 
-const addNewUserProfile = makeAddNewUserProfile({
+const addNewUserProfileService = makeAddNewUserProfileService({
   buildNewUserProfile,
   userRepository
 });
 
-const getUserProfileById = makeGetUserProfileById({
+const getUserProfileByIdService = makeGetUserProfileByIdService({
   buildQueryUserProfile,
   userRepository
 });
 
-const updateUserProfile = makeUpdateUserProfile({
+const updateUserProfileService = makeUpdateUserProfileService({
   buildUpdatedUserProfile,
   userRepository
 });
 
-const generateToken = makeGenerateToken({
+const generateTokenService = makeGenerateTokenService({
   key: 'privateKey'
 });
 
 export {
-  addNewAccount,
-  verifyAccount,
-  addNewUserProfile,
-  getUserProfileById,
-  updateUserProfile,
-  generateToken
+  addNewAccountService,
+  verifyAccountService,
+  addNewUserProfileService,
+  getUserProfileByIdService,
+  updateUserProfileService,
+  generateTokenService
 };

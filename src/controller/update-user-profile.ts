@@ -10,7 +10,7 @@ import {
 } from '../utilities/types';
 
 export default function makeUpdateUserProfile(dependency: {
-  updateUserProfile: UpdateUserProfileService;
+  updateUserProfileService: UpdateUserProfileService;
 }): Controller<HttpResponse<UpdateUserProfileResponseBody>> {
   return async function updateUserProfile(
     request: Request
@@ -18,7 +18,7 @@ export default function makeUpdateUserProfile(dependency: {
     try {
       const data: UpdateUserProfileRequestBody = request.body;
 
-      const userId = await dependency.updateUserProfile(data);
+      const userId = await dependency.updateUserProfileService(data);
 
       return Object.freeze({
         headers: {

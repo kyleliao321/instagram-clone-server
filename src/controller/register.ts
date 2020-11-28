@@ -12,8 +12,8 @@ import {
 } from '../utilities/types';
 
 export default function makeRegister(dependency: {
-  addNewAccount: AddNewAccountService;
-  addNewUserProfile: AddNewUserProfileService;
+  addNewAccountService: AddNewAccountService;
+  addNewUserProfileService: AddNewUserProfileService;
 }): Controller<HttpResponse<RegisterResponseBody>> {
   return async function register(
     httpRequest: Request
@@ -21,14 +21,14 @@ export default function makeRegister(dependency: {
     try {
       const data: RegisterRequestBody = httpRequest.body;
 
-      const generatedId = await dependency.addNewAccount(data);
+      const generatedId = await dependency.addNewAccountService(data);
 
       const newUserProfileInfo: NewUserProfileInfo = {
         id: generatedId,
         userName: data.userName
       };
 
-      await dependency.addNewUserProfile(newUserProfileInfo);
+      await dependency.addNewUserProfileService(newUserProfileInfo);
 
       return Object.freeze({
         headers: {

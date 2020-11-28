@@ -5,11 +5,11 @@ import {
   AccountRepository
 } from '../../utilities/types';
 
-export default function makeVerifyAccount(dependency: {
+export default function makeVerifyAccountService(dependency: {
   buildLoginAccount: BuildLoginAccount;
   accountRepository: AccountRepository;
 }): VerifyAccountService {
-  return async function verifyAccount(
+  return async function verifyAccountService(
     loginAccountInfo: LoginAccountInfo
   ): Promise<string> {
     const loginAccount = dependency.buildLoginAccount(loginAccountInfo);

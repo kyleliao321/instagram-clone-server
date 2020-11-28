@@ -4,9 +4,9 @@ import {
   BuildNewAccount,
   NewAccount
 } from '../../utilities/types';
-import makeAddNewAccount from './add-new-account';
+import makeAddNewAccountService from './add-new-account';
 
-describe('add-new-account', () => {
+describe('add-new-account-service', () => {
   test('should return correct result when invoke successfully', async () => {
     // given
     const mockId = 'mockId';
@@ -25,13 +25,15 @@ describe('add-new-account', () => {
       insertNewAccount: jest.fn(() => Promise.resolve(mockId))
     } as unknown) as AccountRepository;
 
-    const addNewAccount: AddNewAccountService = makeAddNewAccount({
-      buildNewAccount,
-      accountRepository
-    });
+    const addNewAccountService: AddNewAccountService = makeAddNewAccountService(
+      {
+        buildNewAccount,
+        accountRepository
+      }
+    );
 
     // when
-    const result = addNewAccount({
+    const result = addNewAccountService({
       userName: mockUserName,
       password: mockPassword
     });

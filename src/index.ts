@@ -1,6 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { register, login, getUserProfile } from './controller';
+import {
+  register,
+  login,
+  getUserProfile,
+  updateUserProfile
+} from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
 import {
@@ -8,6 +13,7 @@ import {
   RegisterRequestSchema,
   GetUserProfileRequestSchema
 } from './utilities/schema';
+import { UpdateUserProfileRequestSchema } from './utilities/schema/schemas';
 
 const app = express();
 
@@ -29,6 +35,12 @@ app.get(
   '/users/:userId',
   makeValidateRequest({ schema: GetUserProfileRequestSchema }),
   makeRouteCallback(getUserProfile)
+);
+
+app.put(
+  '/users/:userId',
+  makeValidateRequest({ schema: UpdateUserProfileRequestSchema }),
+  makeRouteCallback(updateUserProfile)
 );
 
 app.listen(8080);

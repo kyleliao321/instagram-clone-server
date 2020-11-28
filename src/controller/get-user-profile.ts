@@ -10,7 +10,7 @@ import { logger } from '../infrastructure';
 import { HttpError } from '../utilities/http-error';
 
 export default function makeGetUserProfile(dependency: {
-  getUserProfileById: GetUserProfileService;
+  getUserProfileByIdService: GetUserProfileService;
 }): Controller<HttpResponse<GetUserProfileReponseBody>> {
   return async function getUserProfile(
     request: Request
@@ -20,7 +20,7 @@ export default function makeGetUserProfile(dependency: {
 
       const userId = data.userId;
 
-      const userProfile = await dependency.getUserProfileById(userId);
+      const userProfile = await dependency.getUserProfileByIdService(userId);
 
       return Object.freeze({
         headers: {

@@ -5,11 +5,11 @@ import {
   UserRepository
 } from '../../utilities/types';
 
-export default function makeUpdateUserProfile(dependency: {
+export default function makeUpdateUserProfileService(dependency: {
   buildUpdatedUserProfile: BuildUpdatedUserProfile;
   userRepository: UserRepository;
 }): UpdateUserProfileService {
-  return async function updateUserProfile(
+  return async function updateUserProfileService(
     userProfileInfo: UpdatedUserProfileInfo
   ): Promise<string> {
     const userProfile = dependency.buildUpdatedUserProfile(userProfileInfo);

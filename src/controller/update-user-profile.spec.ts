@@ -36,7 +36,7 @@ describe('update user profile controller', () => {
     );
 
     const updateUserProfile = makeUpdateUserProfile({
-      updateUserProfile: mockUpdateUserProfileService
+      updateUserProfileService: mockUpdateUserProfileService
     });
 
     // when
@@ -80,7 +80,7 @@ describe('update user profile controller', () => {
     );
 
     const updateUserProfile = makeUpdateUserProfile({
-      updateUserProfile: mockUpdateUserProfileService
+      updateUserProfileService: mockUpdateUserProfileService
     });
 
     // when
@@ -122,7 +122,7 @@ describe('update user profile controller', () => {
     );
 
     const updateUserProfile = makeUpdateUserProfile({
-      updateUserProfile: mockUpdateUserProfileService
+      updateUserProfileService: mockUpdateUserProfileService
     });
 
     // when

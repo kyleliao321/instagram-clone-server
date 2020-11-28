@@ -5,11 +5,11 @@ import {
   NewAccountInfo
 } from '../../utilities/types';
 
-export default function makeAddNewAccount(dependency: {
+export default function makeAddNewAccountService(dependency: {
   buildNewAccount: BuildNewAccount;
   accountRepository: AccountRepository;
 }): AddNewAccountService {
-  return async function addNewAccount(
+  return async function addNewAccountService(
     newAccountInfo: NewAccountInfo
   ): Promise<string> {
     const newAccount = dependency.buildNewAccount(newAccountInfo);

@@ -5,11 +5,11 @@ import {
   UserRepository
 } from '../../utilities/types';
 
-export default function makeGetUserProfileById(dependency: {
+export default function makeGetUserProfileByIdService(dependency: {
   buildQueryUserProfile: BuildQueryUserProfile;
   userRepository: UserRepository;
 }): GetUserProfileService {
-  return async function getUserProfileById(
+  return async function getUserProfileByIdService(
     userId: string
   ): Promise<QueryUserProfile> {
     const userProfile = await dependency.userRepository.getUserProfile(userId);

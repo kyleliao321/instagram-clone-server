@@ -14,12 +14,12 @@ describe('get user profile controller', () => {
       }
     } as Request;
 
-    const mockGetUserProfileById: GetUserProfileService = jest.fn(() => {
+    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() => {
       throw new Error();
     });
 
     const getUserProfile = makeGetUserProfile({
-      getUserProfileById: mockGetUserProfileById
+      getUserProfileByIdService: mockGetUserProfileByIdService
     });
 
     // when
@@ -44,12 +44,12 @@ describe('get user profile controller', () => {
       }
     } as Request;
 
-    const mockGetUserProfileById: GetUserProfileService = jest.fn(() => {
+    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() => {
       throw new NoContentError();
     });
 
     const getUserProfile = makeGetUserProfile({
-      getUserProfileById: mockGetUserProfileById
+      getUserProfileByIdService: mockGetUserProfileByIdService
     });
 
     // when
@@ -92,12 +92,12 @@ describe('get user profile controller', () => {
       getFollowingNum: () => mockFolloingNum
     };
 
-    const mockGetUserProfileById: GetUserProfileService = jest.fn(() =>
+    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() =>
       Promise.resolve(queryUserProfile)
     );
 
     const getUserProfile = makeGetUserProfile({
-      getUserProfileById: mockGetUserProfileById
+      getUserProfileByIdService: mockGetUserProfileByIdService
     });
 
     // when

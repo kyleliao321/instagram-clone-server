@@ -18,15 +18,15 @@ describe('register', () => {
       }
     } as Request;
 
-    const mockAddNewAccount: AddNewAccountService = jest.fn(() => {
+    const mockAddNewAccountService: AddNewAccountService = jest.fn(() => {
       throw new Error();
     });
 
-    const mockAddUserProfile: AddNewUserProfileService = jest.fn();
+    const mockAddUserProfileService: AddNewUserProfileService = jest.fn();
 
     const register = makeRegister({
-      addNewAccount: mockAddNewAccount,
-      addNewUserProfile: mockAddUserProfile
+      addNewAccountService: mockAddNewAccountService,
+      addNewUserProfileService: mockAddUserProfileService
     });
 
     // when
@@ -54,17 +54,17 @@ describe('register', () => {
       }
     } as Request;
 
-    const mockAddNewAccount: AddNewAccountService = jest.fn(() =>
+    const mockAddNewAccountService: AddNewAccountService = jest.fn(() =>
       Promise.resolve(mockId)
     );
 
-    const mockAddUserProfile: AddNewUserProfileService = jest.fn(() => {
+    const mockAddUserProfileService: AddNewUserProfileService = jest.fn(() => {
       throw new Error();
     });
 
     const register = makeRegister({
-      addNewAccount: mockAddNewAccount,
-      addNewUserProfile: mockAddUserProfile
+      addNewAccountService: mockAddNewAccountService,
+      addNewUserProfileService: mockAddUserProfileService
     });
 
     // when
@@ -92,15 +92,15 @@ describe('register', () => {
       }
     } as Request;
 
-    const mockAddNewAccount: AddNewAccountService = jest.fn(() =>
+    const mockAddNewAccountService: AddNewAccountService = jest.fn(() =>
       Promise.resolve(mockId)
     );
 
-    const mockAddUserProfile: AddNewUserProfileService = jest.fn();
+    const mockAddUserProfileService: AddNewUserProfileService = jest.fn();
 
     const register = makeRegister({
-      addNewAccount: mockAddNewAccount,
-      addNewUserProfile: mockAddUserProfile
+      addNewAccountService: mockAddNewAccountService,
+      addNewUserProfileService: mockAddUserProfileService
     });
 
     // when

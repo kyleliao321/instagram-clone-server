@@ -3,9 +3,9 @@ import {
   BuildLoginAccount,
   LoginAccount
 } from '../../utilities/types';
-import buildVerifyAccount from './verify-account';
+import buildVerifyAccountService from './verify-account';
 
-describe('verify-account', () => {
+describe('verify-account-service', () => {
   test('should return correct result when invoke successfully', async () => {
     // given
     const mockId = 'mockId';
@@ -26,13 +26,13 @@ describe('verify-account', () => {
       verifyLoginAccount: jest.fn(() => Promise.resolve(mockId))
     } as unknown) as AccountRepository;
 
-    const verifyAccount = buildVerifyAccount({
+    const verifyAccountService = buildVerifyAccountService({
       buildLoginAccount,
       accountRepository
     });
 
     // when
-    const result = verifyAccount({
+    const result = verifyAccountService({
       userName: mockUserName,
       password: mockPassword
     });
