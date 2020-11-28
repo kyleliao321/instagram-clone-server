@@ -9,7 +9,8 @@ import {
   buildNewAccount,
   buildNewUserProfile,
   buildLoginAccount,
-  buildQueryUserProfile
+  buildQueryUserProfile,
+  buildUpdatedUserProfile
 } from '../models';
 
 const addNewAccount = makeAddNewAccount({ buildNewAccount, accountRepository });
@@ -30,7 +31,7 @@ const getUserProfileById = makeGetUserProfileById({
 });
 
 const updateUserProfile = makeUpdateUserProfile({
-  buildNewUserProfile,
+  buildUpdatedUserProfile,
   userRepository
 });
 

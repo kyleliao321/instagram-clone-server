@@ -26,7 +26,7 @@ app.post(
 );
 
 app.get(
-  '/users/:id',
+  '/users/:userId',
   makeValidateRequest({ schema: GetUserProfileRequestSchema }),
   makeRouteCallback(getUserProfile)
 );

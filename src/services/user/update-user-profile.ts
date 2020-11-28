@@ -1,18 +1,18 @@
 import {
-  BuildNewUserProfile,
-  NewUserProfileInfo,
+  BuildUpdatedUserProfile,
+  UpdatedUserProfileInfo,
   UpdateUserProfileService,
   UserRepository
 } from '../../utilities/types';
 
 export default function makeUpdateUserProfile(dependency: {
-  buildNewUserProfile: BuildNewUserProfile;
+  buildUpdatedUserProfile: BuildUpdatedUserProfile;
   userRepository: UserRepository;
 }): UpdateUserProfileService {
   return async function updateUserProfile(
-    userProfileInfo: NewUserProfileInfo
+    userProfileInfo: UpdatedUserProfileInfo
   ): Promise<string> {
-    const userProfile = dependency.buildNewUserProfile(userProfileInfo);
+    const userProfile = dependency.buildUpdatedUserProfile(userProfileInfo);
 
     return dependency.userRepository.updateUserProfile(userProfile);
   };

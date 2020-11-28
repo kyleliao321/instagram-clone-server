@@ -1,6 +1,7 @@
 import { NoContentError } from '../../utilities/http-error';
 import {
   NewUserProfile,
+  UpdatedUserProfile,
   UserProfile,
   UserRepository
 } from '../../utilities/types';
@@ -38,7 +39,7 @@ export default function makeBuildUserRepository() {
     }
 
     async function updateUserProfile(
-      updatedUserProfile: NewUserProfile
+      updatedUserProfile: UpdatedUserProfile
     ): Promise<string> {
       const id = updatedUserProfile.getId();
 
@@ -51,6 +52,9 @@ export default function makeBuildUserRepository() {
       targetUserProfile.userName = updatedUserProfile.getUserName();
       targetUserProfile.alias = updatedUserProfile.getAlias();
       targetUserProfile.description = updatedUserProfile.getDescription();
+      targetUserProfile.postNum = updatedUserProfile.getPostNum();
+      targetUserProfile.followerNum = updatedUserProfile.getFollowerNum();
+      targetUserProfile.followingNum = updatedUserProfile.getFollowingNum();
 
       return id;
     }

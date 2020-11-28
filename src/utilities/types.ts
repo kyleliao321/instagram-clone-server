@@ -4,25 +4,12 @@ import { Request } from 'express';
 //////////////////////////////////// Domain Model  //////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
 
-export type NewAccountInfo = {
-  userName: string;
-  password: string;
-};
-
 export type BuildNewAccount = (newAccountInfo: NewAccountInfo) => NewAccount;
 
 export type NewAccount = {
   getId: () => string;
   getUserName: () => string;
   getHashedPassword: () => string;
-};
-
-export type NewUserProfileInfo = {
-  id: string;
-  userName: string;
-  alias?: string;
-  description?: string;
-  imageByteArray?: Int8Array;
 };
 
 export type BuildNewUserProfile = (
@@ -37,11 +24,6 @@ export type NewUserProfile = {
   getImageByteArray: () => Int8Array | undefined;
 };
 
-export type LoginAccountInfo = {
-  userName: string;
-  password: string;
-};
-
 export type LoginAccount = {
   getUserName: () => string;
   getHashedPassword: () => string;
@@ -50,17 +32,6 @@ export type LoginAccount = {
 export type BuildLoginAccount = (
   loginAccountInfo: LoginAccountInfo
 ) => LoginAccount;
-
-export type QueryUserProfileInfo = {
-  id: string;
-  userName: string;
-  alias: string;
-  description: string;
-  imageSrc: string | null;
-  postNum: number;
-  followerNum: number;
-  followingNum: number;
-};
 
 export type QueryUserProfile = {
   getId: () => string;
@@ -76,6 +47,21 @@ export type QueryUserProfile = {
 export type BuildQueryUserProfile = (
   fetchedUserProfileInfo: QueryUserProfileInfo
 ) => QueryUserProfile;
+
+export type UpdatedUserProfile = {
+  getId: () => string;
+  getUserName: () => string;
+  getAlias: () => string;
+  getDescription: () => string;
+  getImageByteArray: () => Int8Array | null;
+  getPostNum: () => number;
+  getFollowerNum: () => number;
+  getFollowingNum: () => number;
+};
+
+export type BuildUpdatedUserProfile = (
+  updateUserProfileInfo: UpdatedUserProfileInfo
+) => UpdatedUserProfile;
 
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  Data Model  ////////////////////////////////////
@@ -111,7 +97,7 @@ export type AddNewUserProfileService = (
 ) => Promise<string>;
 
 export type UpdateUserProfileService = (
-  updatedUserProfileInfo: NewUserProfileInfo
+  updatedUserProfileInfo: UpdatedUserProfileInfo
 ) => Promise<string>;
 
 export type GetUserProfileService = (
@@ -123,6 +109,50 @@ export type VerifyAccountService = (
 ) => Promise<string>;
 
 export type GenerateTokenService = (id: string) => string;
+
+/////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// Services info ////////////////////////.////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+export type LoginAccountInfo = {
+  userName: string;
+  password: string;
+};
+
+export type QueryUserProfileInfo = {
+  id: string;
+  userName: string;
+  alias: string;
+  description: string;
+  imageSrc: string | null;
+  postNum: number;
+  followerNum: number;
+  followingNum: number;
+};
+
+export type NewUserProfileInfo = {
+  id: string;
+  userName: string;
+  alias?: string;
+  description?: string;
+  imageByteArray?: Int8Array;
+};
+
+export type NewAccountInfo = {
+  userName: string;
+  password: string;
+};
+
+export type UpdatedUserProfileInfo = {
+  id: string;
+  userName: string;
+  alias: string;
+  description: string;
+  imageByteArray?: Int8Array;
+  postNum: number;
+  followerNum: number;
+  followingNum: number;
+};
 
 /////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////// Controller //////////////////////////////////////
@@ -160,7 +190,9 @@ export type AccountRepository = {
 
 export type UserRepository = {
   insertNewUserProfile: (newUserProfile: NewUserProfile) => Promise<string>;
-  updateUserProfile: (updatedUserProfile: NewUserProfile) => Promise<string>;
+  updateUserProfile: (
+    updatedUserProfile: UpdatedUserProfile
+  ) => Promise<string>;
   getUserProfile: (userId: string) => Promise<UserProfile>;
 };
 
@@ -169,6 +201,8 @@ export type UserRepository = {
 /////////////////////////////////////////////////////////////////////////////////////
 
 export type RegisterResponseBody = null;
+
+export type UpdateUserProfileResponseBody = null;
 
 export type LoginResponseBody = {
   jwt: string;
@@ -212,3 +246,5 @@ export type GetUserProfileRequestBody = {
 export type LoginRequestBody = LoginAccountInfo;
 
 export type RegisterRequestBody = NewAccountInfo;
+
+export type UpdateUserProfileRequestBody = UpdatedUserProfileInfo;
