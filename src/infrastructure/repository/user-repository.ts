@@ -13,7 +13,8 @@ export default function makeBuildUserRepository() {
     return Object.freeze({
       insertNewUserProfile,
       updateUserProfile,
-      getUserProfile
+      getUserProfile,
+      filterUserProfilesByUserName
     });
 
     async function insertNewUserProfile(
@@ -70,5 +71,15 @@ export default function makeBuildUserRepository() {
     }
 
     return userProfileTable.get(userId);
+  }
+
+  async function filterUserProfilesByUserName(
+    userName: string
+  ): Promise<UserProfile[]> {
+    const userProfileArray = Array.from(userProfileTable.values());
+
+    return userProfileArray.filter((userProfile) =>
+      userProfile.userName.includes(userName)
+    );
   }
 }

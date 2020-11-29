@@ -105,6 +105,10 @@ export type GetUserProfileService = (
   userId: string
 ) => Promise<QueryUserProfile>;
 
+export type GetUserProfileListService = (
+  userName: string
+) => Promise<QueryUserProfile[]>;
+
 export type VerifyAccountService = (
   loginAccountInfo: LoginAccountInfo
 ) => Promise<string>;
@@ -210,6 +214,7 @@ export type UserRepository = {
     updatedUserProfile: UpdatedUserProfile
   ) => Promise<string>;
   getUserProfile: (userId: string) => Promise<UserProfile>;
+  filterUserProfilesByUserName: (userName: string) => Promise<UserProfile[]>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -235,6 +240,10 @@ export type GetUserProfileReponseBody = {
   postNum: number;
   followerNum: number;
   followingNum: number;
+};
+
+export type SearchUserProfilesResponseBody = {
+  users: GetUserProfileReponseBody[];
 };
 
 export type GenericHttpResponse = {

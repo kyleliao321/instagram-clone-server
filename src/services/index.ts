@@ -2,6 +2,7 @@ import makeAddNewAccountService from './account/add-new-account';
 import makeAddNewUserProfileService from './user/add-new-user-profile';
 import makeUpdateUserProfileService from './user/update-user-profile';
 import makeGetUserProfileByIdService from './user/get-user-profile-by-id';
+import makeGetUserProfileListService from './user/get-user-profile-list';
 import makeVerifyAccountService from './account/verify-account';
 import makeGenerateTokenService from './account/generate-token';
 import makeVerifyTokenService from './account/verify-token';
@@ -38,6 +39,11 @@ const getUserProfileByIdService = makeGetUserProfileByIdService({
   userRepository
 });
 
+const getUserProfileListService = makeGetUserProfileListService({
+  buildQueryUserProfile,
+  userRepository
+});
+
 const updateUserProfileService = makeUpdateUserProfileService({
   buildUpdatedUserProfile,
   userRepository
@@ -58,6 +64,7 @@ export {
   verifyAccountService,
   addNewUserProfileService,
   getUserProfileByIdService,
+  getUserProfileListService,
   updateUserProfileService,
   generateTokenService,
   verifyTokenService
