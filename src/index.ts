@@ -4,7 +4,8 @@ import {
   register,
   login,
   getUserProfile,
-  updateUserProfile
+  updateUserProfile,
+  searchUserProfiles
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -17,6 +18,7 @@ import {
 import { RequestKeys } from './utilities/constants';
 import {
   GetUserProfileRequestParamsSchema,
+  SearchUserProfilesRequestQuerySchema,
   UpdateUserProfileRequestParamsSchema
 } from './utilities/schema/schemas';
 
@@ -40,6 +42,15 @@ app.post(
     key: RequestKeys.BODY
   }),
   makeRouteCallback(login)
+);
+
+app.get(
+  '/users',
+  makeValidateRequest({
+    schema: SearchUserProfilesRequestQuerySchema,
+    key: RequestKeys.QUERY
+  }),
+  makeRouteCallback(searchUserProfiles)
 );
 
 app.get(

@@ -18,6 +18,10 @@ export const GetUserProfileRequestParamsSchema = Joi.object().keys({
   userId: Joi.string().required()
 });
 
+export const SearchUserProfilesRequestQuerySchema = Joi.object().keys({
+  userName: Joi.string().required()
+});
+
 export const UpdateUserProfileRequestBodySchema = Joi.object().keys({
   id: Joi.string().min(1).required(),
   userName: Joi.string().min(1).required(),
