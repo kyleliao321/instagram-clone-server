@@ -1,19 +1,20 @@
 import { Request } from 'express';
-import { NoContentError, BadRequestError } from '../../utilities/http-error';
+import { BadRequestError } from '../../utilities/http-error';
 import { GetUserProfileService, QueryUserProfile } from '../../utilities/types';
 import makeGetUserProfile from './get-user-profile';
 
 describe('get user profile controller', () => {
-  test('should response with status code 400 when id params are not compatible between path and body', async () => {
+  test('should throw BadRequestError when id params are not compatible between path and body', async () => {
     // given
-    const mockUserId = 'mockUserId';
+    const mockPathId = 'mockPathId';
+    const mockBodyId = 'mockBodyId';
 
     const mockRequest = ({
       params: {
-        userId: 'mockUserId2'
+        userId: mockPathId
       },
       body: {
-        userId: mockUserId
+        userId: mockBodyId
       }
     } as unknown) as Request;
 
@@ -24,81 +25,12 @@ describe('get user profile controller', () => {
     });
 
     // when
-    const rep = getUserProfile(mockRequest);
-
-    // expect
-    expect(rep).resolves.toStrictEqual({
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      status: BadRequestError.STATUS_CODE
-    });
-  });
-
-  test('should response with status code 500 when getUserProfileById throw a non-http-error', async () => {
-    // given
-    const mockUserId = 'mockUserId';
-
-    const mockRequest = ({
-      params: {
-        userId: 'mockUserId'
-      },
-      body: {
-        userId: mockUserId
-      }
-    } as unknown) as Request;
-
-    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() => {
-      throw new Error();
-    });
-
-    const getUserProfile = makeGetUserProfile({
-      getUserProfileByIdService: mockGetUserProfileByIdService
-    });
-
-    // when
-    const rep = getUserProfile(mockRequest);
-
-    // expect
-    expect(rep).resolves.toStrictEqual({
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      status: 500
-    });
-  });
-
-  test('should response with correct status code when getUserProfileById throw a http-error', async () => {
-    // given
-    const mockUserId = 'mockUserId';
-
-    const mockRequest = ({
-      params: {
-        userId: 'mockUserId'
-      },
-      body: {
-        userId: mockUserId
-      }
-    } as unknown) as Request;
-
-    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn(() => {
-      throw new NoContentError();
-    });
-
-    const getUserProfile = makeGetUserProfile({
-      getUserProfileByIdService: mockGetUserProfileByIdService
-    });
-
-    // when
-    const rep = getUserProfile(mockRequest);
-
-    // expect
-    expect(rep).resolves.toStrictEqual({
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      status: NoContentError.STATUS_CODE
-    });
+    try {
+      await getUserProfile(mockRequest);
+      expect(jest.fn()).not.toBeCalled();
+    } catch (e) {
+      expect(e).toBeInstanceOf(BadRequestError);
+    }
   });
 
   test('should response with correct status and body when getUserProfileById invoke successfully', async () => {

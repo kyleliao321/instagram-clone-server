@@ -1,4 +1,4 @@
-import { AuthenticationError } from '../../utilities/http-error';
+import { UnauthorizedError } from '../../utilities/http-error';
 import {
   AccountRepository,
   NewAccount,
@@ -45,7 +45,7 @@ export default function makeBuildAccountRepository() {
       });
 
       if (result === null) {
-        throw new AuthenticationError();
+        throw new UnauthorizedError();
       }
 
       return result;
