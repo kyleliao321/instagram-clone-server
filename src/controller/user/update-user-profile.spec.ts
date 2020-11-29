@@ -1,8 +1,13 @@
 import { Request } from 'express';
-import { NoContentError, BadRequestError } from '../../utilities/http-error';
+import {
+  NoContentError,
+  BadRequestError,
+  ForbiddenError
+} from '../../utilities/http-error';
 import {
   UpdateUserProfileRequestBody,
-  UpdateUserProfileService
+  UpdateUserProfileService,
+  VerifyTokenService
 } from '../../utilities/types';
 import makeUpdateUserProfile from './update-user-profile';
 
@@ -18,6 +23,9 @@ describe('update user profile controller', () => {
     const mockFollowingNum = 0;
 
     const mockRequest = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
       params: {
         userId: 'mockId2'
       },
@@ -34,7 +42,10 @@ describe('update user profile controller', () => {
 
     const mockUpdateUserProfileService: UpdateUserProfileService = jest.fn();
 
+    const mockVerifyTokenService: VerifyTokenService = jest.fn(() => mockId);
+
     const updateUserProfile = makeUpdateUserProfile({
+      verifyTokenService: mockVerifyTokenService,
       updateUserProfileService: mockUpdateUserProfileService
     });
 
@@ -50,6 +61,55 @@ describe('update user profile controller', () => {
     });
   });
 
+  test('should response with status code 403 when token id is not compatible with body id', async () => {
+    // given
+    const mockId = 'mockId';
+    const mockUserName = 'mockUserName';
+    const mockAlias = 'mockAlias';
+    const mockDescription = 'mockDes';
+    const mockPostNum = 0;
+    const mockFollowerNum = 0;
+    const mockFollowingNum = 0;
+
+    const mockRequest = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
+      params: {
+        userId: mockId
+      },
+      body: {
+        id: mockId,
+        userName: mockUserName,
+        alias: mockAlias,
+        description: mockDescription,
+        postNum: mockPostNum,
+        followerNum: mockFollowerNum,
+        followingNum: mockFollowingNum
+      } as UpdateUserProfileRequestBody
+    } as unknown) as Request;
+
+    const mockUpdateUserProfileService: UpdateUserProfileService = jest.fn();
+
+    const mockVerifyTokenService: VerifyTokenService = jest.fn(() => 'mockId2');
+
+    const updateUserProfile = makeUpdateUserProfile({
+      verifyTokenService: mockVerifyTokenService,
+      updateUserProfileService: mockUpdateUserProfileService
+    });
+
+    // when
+    const result = updateUserProfile(mockRequest);
+
+    // expect
+    expect(result).resolves.toStrictEqual({
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      status: ForbiddenError.STATUS_CODE
+    });
+  });
+
   test('should response with status code 500 when updateUserProfile throw non-http-error', async () => {
     // given
     const mockId = 'mockId';
@@ -61,6 +121,9 @@ describe('update user profile controller', () => {
     const mockFollowingNum = 0;
 
     const mockRequest = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
       params: {
         userId: mockId
       },
@@ -81,7 +144,10 @@ describe('update user profile controller', () => {
       }
     );
 
+    const mockVerifyTokenService: VerifyTokenService = jest.fn(() => mockId);
+
     const updateUserProfile = makeUpdateUserProfile({
+      verifyTokenService: mockVerifyTokenService,
       updateUserProfileService: mockUpdateUserProfileService
     });
 
@@ -108,6 +174,9 @@ describe('update user profile controller', () => {
     const mockFollowingNum = 0;
 
     const mockRequest = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
       params: {
         userId: mockId
       },
@@ -128,7 +197,10 @@ describe('update user profile controller', () => {
       }
     );
 
+    const mockVerifyTokenService: VerifyTokenService = jest.fn(() => mockId);
+
     const updateUserProfile = makeUpdateUserProfile({
+      verifyTokenService: mockVerifyTokenService,
       updateUserProfileService: mockUpdateUserProfileService
     });
 
@@ -155,6 +227,9 @@ describe('update user profile controller', () => {
     const mockFollowingNum = 0;
 
     const mockRequest = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
       params: {
         userId: mockId
       },
@@ -173,7 +248,10 @@ describe('update user profile controller', () => {
       Promise.resolve(mockId)
     );
 
+    const mockVerifyTokenService: VerifyTokenService = jest.fn(() => mockId);
+
     const updateUserProfile = makeUpdateUserProfile({
+      verifyTokenService: mockVerifyTokenService,
       updateUserProfileService: mockUpdateUserProfileService
     });
 

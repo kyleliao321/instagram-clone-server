@@ -1,22 +1,31 @@
 import { Request } from 'express';
 import { logger } from '../../infrastructure';
-import { HttpError } from '../../utilities/http-error';
-import { BadRequestError } from '../../utilities/http-error/http-errors';
+import {
+  HttpError,
+  BadRequestError,
+  ForbiddenError
+} from '../../utilities/http-error';
 import {
   Controller,
   HttpResponse,
   UpdateUserProfileRequestBody,
   UpdateUserProfileResponseBody,
-  UpdateUserProfileService
+  UpdateUserProfileService,
+  VerifyTokenService
 } from '../../utilities/types';
 
 export default function makeUpdateUserProfile(dependency: {
+  verifyTokenService: VerifyTokenService;
   updateUserProfileService: UpdateUserProfileService;
 }): Controller<HttpResponse<UpdateUserProfileResponseBody>> {
   return async function updateUserProfile(
     request: Request
   ): Promise<HttpResponse<UpdateUserProfileResponseBody>> {
     try {
+      const tokenUserId = dependency.verifyTokenService(
+        request.headers.authorization
+      );
+
       const data: UpdateUserProfileRequestBody = request.body;
 
       const pathUserId = request.params.userId;
@@ -25,7 +34,13 @@ export default function makeUpdateUserProfile(dependency: {
 
       if (pathUserId !== bodyUserId) {
         throw new BadRequestError(
-          `HttpError.BadRequest: path id - ${pathUserId} is not compatible with body id - ${bodyUserId}`
+          `HttpError.BadRequest: path id ${pathUserId} is not compatible with body id ${bodyUserId}`
+        );
+      }
+
+      if (tokenUserId !== bodyUserId) {
+        throw new ForbiddenError(
+          `HttpError.ForbiddenError: user ${tokenUserId} trying to update other user's profile ${bodyUserId}`
         );
       }
 
@@ -41,7 +56,7 @@ export default function makeUpdateUserProfile(dependency: {
         }
       });
     } catch (e) {
-      logger.info(JSON.stringify(e));
+      logger.error(JSON.stringify(e));
 
       if (e instanceof HttpError) {
         return Object.freeze({

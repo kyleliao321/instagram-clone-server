@@ -7,8 +7,7 @@ import {
   HttpResponse
 } from '../../utilities/types';
 import { logger } from '../../infrastructure';
-import { HttpError } from '../../utilities/http-error';
-import { BadRequestError } from '../../utilities/http-error/http-errors';
+import { HttpError, BadRequestError } from '../../utilities/http-error';
 
 export default function makeGetUserProfile(dependency: {
   getUserProfileByIdService: GetUserProfileService;
@@ -50,7 +49,7 @@ export default function makeGetUserProfile(dependency: {
         }
       });
     } catch (e) {
-      logger.info(JSON.stringify(e));
+      logger.error(JSON.stringify(e));
 
       if (e instanceof HttpError) {
         return Object.freeze({

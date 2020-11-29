@@ -16,7 +16,7 @@ export default function makeVerifyTokenService(dependency: {
     const bearer = bearerHeader.split(' ')[0];
 
     // check if the authentication token is in right format
-    if (!bearer || bearer !== 'bearer') {
+    if (!bearer || bearer !== 'Bearer') {
       throw new UnauthorizedError(
         `HttpError.UnauthorizedError: bearer header ${bearerHeader} is not in right format.`
       );

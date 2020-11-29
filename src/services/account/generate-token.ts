@@ -7,7 +7,7 @@ export default function makeGenerateTokenService(dependency: {
   return function generateTokenService(id: string): string {
     const token = dependency.authHandler.sign(
       {
-        id
+        userId: id
       },
       dependency.key,
       { expiresIn: '1h' }

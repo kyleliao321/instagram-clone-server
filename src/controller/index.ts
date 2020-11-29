@@ -4,7 +4,8 @@ import {
   getUserProfileByIdService,
   updateUserProfileService,
   verifyAccountService,
-  generateTokenService
+  generateTokenService,
+  verifyTokenService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
@@ -20,6 +21,9 @@ const login = makeLogin({ generateTokenService, verifyAccountService });
 
 const getUserProfile = makeGetUserProfile({ getUserProfileByIdService });
 
-const updateUserProfile = makeUpdateUserProfile({ updateUserProfileService });
+const updateUserProfile = makeUpdateUserProfile({
+  verifyTokenService,
+  updateUserProfileService
+});
 
 export { register, login, getUserProfile, updateUserProfile };

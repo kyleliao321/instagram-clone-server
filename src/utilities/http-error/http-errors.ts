@@ -52,4 +52,10 @@ class BadRequestError extends HttpError {
   }
 }
 
-export { HttpError, UnauthorizedError, NoContentError, BadRequestError, ForbiddenError };
+export {
+  HttpError,
+  UnauthorizedError,
+  NoContentError,
+  BadRequestError,
+  ForbiddenError
+};

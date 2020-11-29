@@ -69,7 +69,7 @@ describe('verify-token-service', () => {
 
   test('should throw an error when given bearer header is not ended with a token', () => {
     // given
-    const mockBearerHeader = 'bearer';
+    const mockBearerHeader = 'Bearer';
 
     const mockAuthHandler = ({
       verify: jest.fn()
@@ -90,7 +90,7 @@ describe('verify-token-service', () => {
 
   test('should return userId when verifyTokenService invoke successfully', () => {
     // given
-    const mockBearerHeader = 'bearer mockToken';
+    const mockBearerHeader = 'Bearer mockToken';
 
     const mockId = 'mockId';
 

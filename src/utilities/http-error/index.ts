@@ -6,4 +6,10 @@ import {
   ForbiddenError
 } from './http-errors';
 
-export { HttpError, UnauthorizedError, NoContentError, BadRequestError, ForbiddenError };
+export {
+  HttpError,
+  UnauthorizedError,
+  NoContentError,
+  BadRequestError,
+  ForbiddenError
+};
