@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { SignOptions, VerifyOptions } from 'jsonwebtoken';
 
 /////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////// Domain Model  //////////////////////////////////
@@ -110,6 +111,8 @@ export type VerifyAccountService = (
 
 export type GenerateTokenService = (id: string) => string;
 
+export type VerifyTokenService = (bearerHeader?: string) => string;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -181,6 +184,19 @@ export type HashHandler = {
 
 export type ImageHandler = {
   isValid: (filePath: string | null) => boolean;
+};
+
+export type AuthHandler = {
+  sign: (
+    payload: Record<string, unknown>,
+    key: string,
+    options?: SignOptions
+  ) => string;
+  verify: (
+    token: string,
+    key: string,
+    options?: VerifyOptions
+  ) => string | unknown;
 };
 
 export type AccountRepository = {

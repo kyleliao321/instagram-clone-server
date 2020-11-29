@@ -4,7 +4,12 @@ import makeUpdateUserProfileService from './user/update-user-profile';
 import makeGetUserProfileByIdService from './user/get-user-profile-by-id';
 import makeVerifyAccountService from './account/verify-account';
 import makeGenerateTokenService from './account/generate-token';
-import { accountRepository, userRepository } from '../infrastructure';
+import makeVerifyTokenService from './account/verify-token';
+import {
+  accountRepository,
+  userRepository,
+  authHandler
+} from '../infrastructure';
 import {
   buildNewAccount,
   buildNewUserProfile,
@@ -39,6 +44,12 @@ const updateUserProfileService = makeUpdateUserProfileService({
 });
 
 const generateTokenService = makeGenerateTokenService({
+  authHandler,
+  key: 'privateKey'
+});
+
+const verifyTokenService = makeVerifyTokenService({
+  authHandler,
   key: 'privateKey'
 });
 
@@ -48,5 +59,6 @@ export {
   addNewUserProfileService,
   getUserProfileByIdService,
   updateUserProfileService,
-  generateTokenService
+  generateTokenService,
+  verifyTokenService
 };

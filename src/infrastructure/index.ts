@@ -1,5 +1,6 @@
 import makeBuildAccountRepository from './repository/account-repository';
 import makeBuildUserRepository from './repository/user-repository';
+import makeAuthHandler from './auth-handler/auth-handler';
 import makeHashHandler from './hash-handler/hash-handler';
 import makeIdHandler from './id-handler/id-handler';
 import makeImageHandler from './image-handler/image-handler';
@@ -15,6 +16,8 @@ const hashHandler = makeHashHandler();
 
 const imageHandler = makeImageHandler();
 
+const authHandler = makeAuthHandler();
+
 const logger = makeLogger();
 
 const accountRepository = buildAccountRepository();
@@ -27,5 +30,6 @@ export {
   idHandler,
   hashHandler,
   imageHandler,
+  authHandler,
   logger
 };

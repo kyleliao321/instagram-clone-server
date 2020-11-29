@@ -1,11 +1,11 @@
-import jwt from 'jsonwebtoken';
-import { GenerateTokenService } from '../../utilities/types';
+import { AuthHandler, GenerateTokenService } from '../../utilities/types';
 
 export default function makeGenerateTokenService(dependency: {
+  authHandler: AuthHandler;
   key: string;
 }): GenerateTokenService {
   return function generateTokenService(id: string): string {
-    const token = jwt.sign(
+    const token = dependency.authHandler.sign(
       {
         id
       },
