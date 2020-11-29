@@ -22,6 +22,16 @@ class UnauthorizedError extends HttpError {
   }
 }
 
+class ForbiddenError extends HttpError {
+  static STATUS_CODE = 403;
+
+  constructor(message?: string) {
+    super(message);
+
+    this.status = ForbiddenError.STATUS_CODE;
+  }
+}
+
 class NoContentError extends HttpError {
   static STATUS_CODE = 204;
 
@@ -42,4 +52,4 @@ class BadRequestError extends HttpError {
   }
 }
 
-export { HttpError, UnauthorizedError, NoContentError, BadRequestError };
+export { HttpError, UnauthorizedError, NoContentError, BadRequestError, ForbiddenError };
