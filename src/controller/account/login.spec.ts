@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { AuthenticationError } from '../../utilities/http-error';
+import { UnauthorizedError } from '../../utilities/http-error';
 import {
   GenerateTokenService,
   VerifyAccountService
@@ -98,7 +98,7 @@ describe('login', () => {
     );
 
     const mockVerifyAccountService: VerifyAccountService = jest.fn(() => {
-      throw new AuthenticationError();
+      throw new UnauthorizedError();
     });
 
     const login = makeLogin({
@@ -114,7 +114,7 @@ describe('login', () => {
       headers: {
         'Content-Type': 'application/json'
       },
-      status: AuthenticationError.STATUS_CODE
+      status: UnauthorizedError.STATUS_CODE
     });
   });
 });

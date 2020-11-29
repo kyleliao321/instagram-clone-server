@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import { Secret, SignOptions, VerifyOptions } from 'jsonwebtoken';
 import { AuthHandler } from '../../utilities/types';
+import { UnauthorizedError } from '../../utilities/http-error';
 
 export default function makeAuthHandler(): AuthHandler {
   return Object.freeze({
@@ -21,6 +22,12 @@ export default function makeAuthHandler(): AuthHandler {
     key: Secret,
     options?: VerifyOptions
   ): string | unknown {
-    return jwt.verify(token, key, options);
+    try {
+      return jwt.verify(token, key, options);
+    } catch (e) {
+      throw new UnauthorizedError(
+        `Http.UnauthorizedError: token ${token} is invalid.`
+      );
+    }
   }
 }

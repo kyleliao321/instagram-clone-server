@@ -1,4 +1,4 @@
-import { AuthenticationError } from '../../utilities/http-error';
+import { UnauthorizedError } from '../../utilities/http-error';
 import { AuthHandler, VerifyTokenService } from '../../utilities/types';
 
 export default function makeVerifyTokenService(dependency: {
@@ -8,8 +8,8 @@ export default function makeVerifyTokenService(dependency: {
   return function verifyTokenService(bearerHeader?: string): string {
     // check if the header has authentication information
     if (bearerHeader === undefined) {
-      throw new AuthenticationError(
-        'HttpError.AutenticationError: trying to access private route.'
+      throw new UnauthorizedError(
+        'HttpError.UnauthorizedError: trying to access private route.'
       );
     }
 
@@ -17,33 +17,29 @@ export default function makeVerifyTokenService(dependency: {
 
     // check if the authentication token is in right format
     if (!bearer || bearer !== 'bearer') {
-      throw new AuthenticationError(
-        `HttpError.AutenticationError: bearer header ${bearerHeader} is not in right format.`
+      throw new UnauthorizedError(
+        `HttpError.UnauthorizedError: bearer header ${bearerHeader} is not in right format.`
       );
     }
 
     const token = bearerHeader.split(' ')[1];
 
     if (!token) {
-      throw new AuthenticationError(
-        `HttpError.AutenticationError: bearer header ${bearerHeader} is not in right format.`
+      throw new UnauthorizedError(
+        `HttpError.UnauthorizedError: bearer header ${bearerHeader} is not in right format.`
       );
     }
 
-    try {
-      const decoded = dependency.authHandler.verify(token, dependency.key) as {
-        userId: string;
-      };
+    const decoded = dependency.authHandler.verify(token, dependency.key) as {
+      userId?: string;
+    };
 
-      if (decoded.userId === undefined) {
-        throw new Error();
-      }
-
-      return decoded.userId;
-    } catch (e) {
-      throw new AuthenticationError(
-        `HttpError.AuthenticationError: token ${token} is not valid.`
+    if (decoded.userId === undefined) {
+      throw new UnauthorizedError(
+        `HttpError.UnauthorizedError: token ${token} is invalid.`
       );
     }
+
+    return decoded.userId;
   };
 }

@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 import makeValidateRequest from './validate-request';
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { RequestKeys } from '../constants';
 
 describe('validate request', () => {

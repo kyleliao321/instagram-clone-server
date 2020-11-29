@@ -1,3 +1,8 @@
-import { HttpError, AuthenticationError, NoContentError } from './http-errors';
+import {
+  HttpError,
+  UnauthorizedError,
+  NoContentError,
+  BadRequestError
+} from './http-errors';
 
-export { HttpError, AuthenticationError, NoContentError };
+export { HttpError, UnauthorizedError, NoContentError, BadRequestError };

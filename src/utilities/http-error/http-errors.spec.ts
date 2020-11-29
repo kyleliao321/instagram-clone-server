@@ -1,12 +1,12 @@
-import { AuthenticationError, HttpError } from './http-errors';
+import { UnauthorizedError, HttpError } from './http-errors';
 
 describe('http-errors', () => {
   test('class exetended from HttpError should be the instance of HttpError', () => {
     // given
-    const authenticationError = new AuthenticationError();
+    const unauthorizedError = new UnauthorizedError();
 
     // when
-    const result = authenticationError instanceof HttpError;
+    const result = unauthorizedError instanceof HttpError;
 
     // expect
     expect(result).toBe(true);

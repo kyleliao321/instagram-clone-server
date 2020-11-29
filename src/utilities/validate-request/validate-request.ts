@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { Schema } from 'joi';
 import { RequestKeys } from '../constants';
-import { BadRequestError } from '../http-error/http-errors';
+import { BadRequestError } from '../http-error';
 
 export default function makeValidateRequest(dependency: {
   schema: Schema;

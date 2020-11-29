@@ -12,13 +12,13 @@ class HttpError {
   }
 }
 
-class AuthenticationError extends HttpError {
+class UnauthorizedError extends HttpError {
   static STATUS_CODE = 401;
 
   constructor(message?: string) {
     super(message);
 
-    this.status = AuthenticationError.STATUS_CODE;
+    this.status = UnauthorizedError.STATUS_CODE;
   }
 }
 
@@ -42,4 +42,4 @@ class BadRequestError extends HttpError {
   }
 }
 
-export { HttpError, AuthenticationError, NoContentError, BadRequestError };
+export { HttpError, UnauthorizedError, NoContentError, BadRequestError };
