@@ -6,6 +6,8 @@ import makeGetUserProfile from './get-user-profile';
 describe('get user profile controller', () => {
   test('should throw BadRequestError when id params are not compatible between path and body', async () => {
     // given
+    const shouldNotToBeCalled = jest.fn();
+
     const mockPathId = 'mockPathId';
     const mockBodyId = 'mockBodyId';
 
@@ -27,9 +29,11 @@ describe('get user profile controller', () => {
     // when
     try {
       await getUserProfile(mockRequest);
-      expect(jest.fn()).not.toBeCalled();
+      shouldNotToBeCalled();
     } catch (e) {
       expect(e).toBeInstanceOf(BadRequestError);
+    } finally {
+      expect(shouldNotToBeCalled).not.toBeCalled();
     }
   });
 

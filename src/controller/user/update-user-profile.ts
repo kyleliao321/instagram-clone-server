@@ -34,7 +34,7 @@ export default function makeUpdateUserProfile(dependency: {
 
     if (tokenUserId !== bodyUserId) {
       throw new ForbiddenError(
-        `HttpError.ForbiddenError: user ${tokenUserId} trying to update other user's profile ${bodyUserId}`
+        `HttpError.ForbiddenError: ${tokenUserId}(user-id) trying to act as ${bodyUserId} to update its profile.`
       );
     }
 

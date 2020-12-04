@@ -10,6 +10,8 @@ import makeUpdateUserProfile from './update-user-profile';
 describe('update user profile controller', () => {
   test('should throw BadRequestError when given id params are not compatible between path-param and body-param', async () => {
     // given
+    const shouldNotToBeCalled = jest.fn();
+
     const mockId = 'mockId';
     const mockUserName = 'mockUserName';
     const mockAlias = 'mockAlias';
@@ -48,14 +50,18 @@ describe('update user profile controller', () => {
     // when
     try {
       await updateUserProfile(mockRequest);
-      expect(jest.fn()).not.toBeCalled();
+      shouldNotToBeCalled;
     } catch (e) {
       expect(e).toBeInstanceOf(BadRequestError);
+    } finally {
+      expect(shouldNotToBeCalled).not.toBeCalled();
     }
   });
 
   test('should throw ForbiddenError when token id is not compatible with body id', async () => {
     // given
+    const shouldNotToBeCalled = jest.fn();
+
     const mockId = 'mockId';
     const mockUserName = 'mockUserName';
     const mockAlias = 'mockAlias';
@@ -94,9 +100,11 @@ describe('update user profile controller', () => {
     // when
     try {
       await updateUserProfile(mockRequest);
-      expect(jest.fn()).not.toBeCalled();
+      shouldNotToBeCalled();
     } catch (e) {
       expect(e).toBeInstanceOf(ForbiddenError);
+    } finally {
+      expect(shouldNotToBeCalled).not.toBeCalled();
     }
   });
 

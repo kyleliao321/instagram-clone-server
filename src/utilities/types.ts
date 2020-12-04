@@ -268,6 +268,10 @@ export type SearchUserProfilesResponseBody = {
   users: GetUserProfileReponseBody[];
 };
 
+export type FollowUserResponseBody = {
+  followings: GetUserProfileReponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -297,3 +301,5 @@ export type LoginRequestBody = LoginAccountInfo;
 export type RegisterRequestBody = NewAccountInfo;
 
 export type UpdateUserProfileRequestBody = UpdatedUserProfileInfo;
+
+export type FollowUserRequestBody = FollowUserServiceInfo;
