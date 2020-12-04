@@ -2,12 +2,20 @@ import {
   LoginRequestBodySchema,
   RegisterRequestBodySchema,
   GetUserProfileRequestBodySchema,
-  UpdateUserProfileRequestBodySchema
+  UpdateUserProfileRequestBodySchema,
+  GetUserProfileRequestParamsSchema,
+  SearchUserProfilesRequestQuerySchema,
+  UpdateUserProfileRequestParamsSchema,
+  FollowUserBodySchema
 } from './schemas';
 
 export {
   LoginRequestBodySchema,
   RegisterRequestBodySchema,
   GetUserProfileRequestBodySchema,
-  UpdateUserProfileRequestBodySchema
+  UpdateUserProfileRequestBodySchema,
+  GetUserProfileRequestParamsSchema,
+  SearchUserProfilesRequestQuerySchema,
+  UpdateUserProfileRequestParamsSchema,
+  FollowUserBodySchema
 };

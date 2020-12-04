@@ -36,3 +36,8 @@ export const UpdateUserProfileRequestBodySchema = Joi.object().keys({
 export const UpdateUserProfileRequestParamsSchema = Joi.object().keys({
   userId: Joi.string().required()
 });
+
+export const FollowUserBodySchema = Joi.object().keys({
+  followerId: Joi.string().required(),
+  followingId: Joi.string().required()
+});

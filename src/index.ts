@@ -5,7 +5,8 @@ import {
   login,
   getUserProfile,
   updateUserProfile,
-  searchUserProfiles
+  searchUserProfiles,
+  followUser
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -13,14 +14,13 @@ import {
   LoginRequestBodySchema,
   RegisterRequestBodySchema,
   GetUserProfileRequestBodySchema,
-  UpdateUserProfileRequestBodySchema
-} from './utilities/schema';
-import { RequestKeys } from './utilities/constants';
-import {
+  UpdateUserProfileRequestBodySchema,
   GetUserProfileRequestParamsSchema,
   SearchUserProfilesRequestQuerySchema,
-  UpdateUserProfileRequestParamsSchema
-} from './utilities/schema/schemas';
+  UpdateUserProfileRequestParamsSchema,
+  FollowUserBodySchema
+} from './utilities/schema';
+import { RequestKeys } from './utilities/constants';
 
 const app = express();
 
@@ -81,6 +81,15 @@ app.put(
     })
   ],
   makeRouteCallback(updateUserProfile)
+);
+
+app.post(
+  '/relation/follow',
+  makeValidateRequest({
+    schema: FollowUserBodySchema,
+    key: RequestKeys.BODY
+  }),
+  makeRouteCallback(followUser)
 );
 
 app.listen(8080);

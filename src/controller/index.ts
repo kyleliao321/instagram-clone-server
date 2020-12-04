@@ -6,13 +6,15 @@ import {
   updateUserProfileService,
   verifyAccountService,
   generateTokenService,
-  verifyTokenService
+  verifyTokenService,
+  followUserService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
 import makeGetUserProfile from './user/get-user-profile';
 import makeUpdateUserProfile from './user/update-user-profile';
 import makeSearchUserProfiles from './user/search-user-profiles';
+import makeFollowUser from './relation/follow-user';
 
 const register = makeRegister({
   addNewAccountService,
@@ -32,10 +34,16 @@ const updateUserProfile = makeUpdateUserProfile({
   updateUserProfileService
 });
 
+const followUser = makeFollowUser({
+  verifyTokenService,
+  followUserService
+});
+
 export {
   register,
   login,
   getUserProfile,
   searchUserProfiles,
-  updateUserProfile
+  updateUserProfile,
+  followUser
 };
