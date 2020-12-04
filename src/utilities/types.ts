@@ -117,6 +117,10 @@ export type GenerateTokenService = (id: string) => string;
 
 export type VerifyTokenService = (bearerHeader?: string) => string;
 
+export type FollowUserService = (
+  followUserInfo: FollowUserServiceInfo
+) => Promise<QueryUserProfile[]>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -159,6 +163,11 @@ export type UpdatedUserProfileInfo = {
   postNum: number;
   followerNum: number;
   followingNum: number;
+};
+
+export type FollowUserServiceInfo = {
+  followerId: string;
+  followingId: string;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -215,6 +224,19 @@ export type UserRepository = {
   ) => Promise<string>;
   getUserProfile: (userId: string) => Promise<UserProfile>;
   filterUserProfilesByUserName: (userName: string) => Promise<UserProfile[]>;
+};
+
+export type RelationRepository = {
+  getFollowers: (userId: string) => Promise<UserProfile[]>;
+  getFollowings: (userId: string) => Promise<UserProfile[]>;
+  followUser: (
+    followerId: string,
+    followingId: string
+  ) => Promise<UserProfile[]>;
+  cancelFollowing: (
+    followerId: string,
+    followingId: string
+  ) => Promise<UserProfile[]>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

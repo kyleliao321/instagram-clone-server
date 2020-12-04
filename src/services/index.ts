@@ -6,9 +6,11 @@ import makeGetUserProfileListService from './user/get-user-profile-list';
 import makeVerifyAccountService from './account/verify-account';
 import makeGenerateTokenService from './account/generate-token';
 import makeVerifyTokenService from './account/verify-token';
+import makeFollowUserService from './relation/follow-user-service';
 import {
   accountRepository,
   userRepository,
+  relationRepository,
   authHandler
 } from '../infrastructure';
 import {
@@ -59,6 +61,11 @@ const verifyTokenService = makeVerifyTokenService({
   key: 'privateKey'
 });
 
+const followUserService = makeFollowUserService({
+  buildQueryUserProfile,
+  relationRepository
+});
+
 export {
   addNewAccountService,
   verifyAccountService,
@@ -67,5 +74,6 @@ export {
   getUserProfileListService,
   updateUserProfileService,
   generateTokenService,
-  verifyTokenService
+  verifyTokenService,
+  followUserService
 };
