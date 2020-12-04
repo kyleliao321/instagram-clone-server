@@ -75,6 +75,17 @@ export type NewPost = {
 
 export type BuildNewPost = (newPostInfo: NewPostInfo) => NewPost;
 
+export type QueryPost = {
+  getId: () => string;
+  getDescription: () => string;
+  getLocation: () => string | null;
+  getTimeStamp: () => string;
+  getImageSrc: () => string;
+  getPostedUserId: () => string;
+};
+
+export type BuildQueryPost = (queryPostInfo: Post) => QueryPost;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  Data Model  ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -94,6 +105,15 @@ export type UserProfile = {
   postNum: number;
   followerNum: number;
   followingNum: number;
+};
+
+export type Post = {
+  id: string;
+  description: string;
+  location?: string;
+  timestamp: string;
+  imageSrc: string;
+  postedUserId: string;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -143,6 +163,10 @@ export type GetFollowerListService = (
 export type GetFollowingListService = (
   userId: string
 ) => Promise<QueryUserProfile[]>;
+
+export type AddNewPostService = (
+  newPostInfo: NewPostInfo
+) => Promise<QueryPost>;
 
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
@@ -273,6 +297,12 @@ export type RelationRepository = {
     followerId: string,
     followingId: string
   ) => Promise<UserProfile[]>;
+};
+
+export type PostRepository = {
+  getPost: (postId: string) => Promise<Post>;
+  getPosts: (userId: string) => Promise<Post[]>;
+  insertNewPost: (newPost: NewPost) => Promise<Post>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
