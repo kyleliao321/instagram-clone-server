@@ -46,3 +46,11 @@ export const CancelFollowingBodySchema = Joi.object().keys({
   followerId: Joi.string().required(),
   followingId: Joi.string().required()
 });
+
+export const GetFollowersBodySchema = Joi.object().keys({
+  userId: Joi.string().required()
+});
+
+export const GetFollowingsBodySchema = Joi.object().keys({
+  userId: Joi.string().required()
+});

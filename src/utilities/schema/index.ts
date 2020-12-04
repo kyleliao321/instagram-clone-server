@@ -7,7 +7,9 @@ import {
   SearchUserProfilesRequestQuerySchema,
   UpdateUserProfileRequestParamsSchema,
   FollowUserBodySchema,
-  CancelFollowingBodySchema
+  CancelFollowingBodySchema,
+  GetFollowersBodySchema,
+  GetFollowingsBodySchema
 } from './schemas';
 
 export {
@@ -19,5 +21,7 @@ export {
   SearchUserProfilesRequestQuerySchema,
   UpdateUserProfileRequestParamsSchema,
   FollowUserBodySchema,
-  CancelFollowingBodySchema
+  CancelFollowingBodySchema,
+  GetFollowersBodySchema,
+  GetFollowingsBodySchema
 };

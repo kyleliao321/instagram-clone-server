@@ -125,6 +125,14 @@ export type CacnelFollowingService = (
   cancelFollowingInfo: CacnelFollowingServiceInfo
 ) => Promise<QueryUserProfile[]>;
 
+export type GetFollowerListService = (
+  userId: string
+) => Promise<QueryUserProfile[]>;
+
+export type GetFollowingListService = (
+  userId: string
+) => Promise<QueryUserProfile[]>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -285,6 +293,14 @@ export type CancelFollowingResponseBody = {
   followings: GetUserProfileReponseBody[];
 };
 
+export type GetFollowersResponseBody = {
+  followers: GetUserProfileReponseBody[];
+};
+
+export type GetFollowingsResponseBody = {
+  followings: GetUserProfileReponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -318,3 +334,11 @@ export type UpdateUserProfileRequestBody = UpdatedUserProfileInfo;
 export type FollowUserRequestBody = FollowUserServiceInfo;
 
 export type CancelFollowingRequestBody = CacnelFollowingServiceInfo;
+
+export type GetFollowersRequestBody = {
+  userId: string;
+};
+
+export type GetFollowingsRequestBody = {
+  userId: string;
+};

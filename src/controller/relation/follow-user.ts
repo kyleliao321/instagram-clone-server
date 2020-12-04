@@ -30,7 +30,7 @@ export default function makeFollowUser(dependencies: {
 
     const updatedFollowings = await dependencies.followUserService(data);
 
-    return {
+    return Object.freeze({
       headers: {
         'Content-Type': 'application/json'
       },
@@ -49,6 +49,6 @@ export default function makeFollowUser(dependencies: {
           };
         })
       }
-    };
+    });
   };
 }

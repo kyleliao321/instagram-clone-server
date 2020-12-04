@@ -8,6 +8,8 @@ import makeGenerateTokenService from './account/generate-token';
 import makeVerifyTokenService from './account/verify-token';
 import makeFollowUserService from './relation/follow-user-service';
 import makeCancelFollowingService from './relation/cancel-following-service';
+import makeGetFollowerListService from './relation/get-follower-list-service';
+import makeGetFollowingListService from './relation/get-following-list-service';
 import {
   accountRepository,
   userRepository,
@@ -72,6 +74,16 @@ const cancelFollowingService = makeCancelFollowingService({
   relationRepository
 });
 
+const getFollowerListService = makeGetFollowerListService({
+  buildQueryUserProfile,
+  relationRepository
+});
+
+const getFollowingListService = makeGetFollowingListService({
+  buildQueryUserProfile,
+  relationRepository
+});
+
 export {
   addNewAccountService,
   verifyAccountService,
@@ -82,5 +94,7 @@ export {
   generateTokenService,
   verifyTokenService,
   followUserService,
-  cancelFollowingService
+  cancelFollowingService,
+  getFollowerListService,
+  getFollowingListService
 };
