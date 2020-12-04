@@ -6,7 +6,8 @@ import {
   GetUserProfileRequestParamsSchema,
   SearchUserProfilesRequestQuerySchema,
   UpdateUserProfileRequestParamsSchema,
-  FollowUserBodySchema
+  FollowUserBodySchema,
+  CancelFollowingBodySchema
 } from './schemas';
 
 export {
@@ -17,5 +18,6 @@ export {
   GetUserProfileRequestParamsSchema,
   SearchUserProfilesRequestQuerySchema,
   UpdateUserProfileRequestParamsSchema,
-  FollowUserBodySchema
+  FollowUserBodySchema,
+  CancelFollowingBodySchema
 };

@@ -7,7 +7,8 @@ import {
   verifyAccountService,
   generateTokenService,
   verifyTokenService,
-  followUserService
+  followUserService,
+  cancelFollowingService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
@@ -15,6 +16,7 @@ import makeGetUserProfile from './user/get-user-profile';
 import makeUpdateUserProfile from './user/update-user-profile';
 import makeSearchUserProfiles from './user/search-user-profiles';
 import makeFollowUser from './relation/follow-user';
+import makeCancelFollowing from './relation/cancel-following';
 
 const register = makeRegister({
   addNewAccountService,
@@ -39,11 +41,17 @@ const followUser = makeFollowUser({
   followUserService
 });
 
+const cancelFollowing = makeCancelFollowing({
+  verifyTokenService,
+  cancelFollowingService
+});
+
 export {
   register,
   login,
   getUserProfile,
   searchUserProfiles,
   updateUserProfile,
-  followUser
+  followUser,
+  cancelFollowing
 };

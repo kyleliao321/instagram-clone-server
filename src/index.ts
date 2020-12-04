@@ -6,7 +6,8 @@ import {
   getUserProfile,
   updateUserProfile,
   searchUserProfiles,
-  followUser
+  followUser,
+  cancelFollowing
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -18,7 +19,8 @@ import {
   GetUserProfileRequestParamsSchema,
   SearchUserProfilesRequestQuerySchema,
   UpdateUserProfileRequestParamsSchema,
-  FollowUserBodySchema
+  FollowUserBodySchema,
+  CancelFollowingBodySchema
 } from './utilities/schema';
 import { RequestKeys } from './utilities/constants';
 
@@ -90,6 +92,15 @@ app.post(
     key: RequestKeys.BODY
   }),
   makeRouteCallback(followUser)
+);
+
+app.post(
+  '/relation/cancel',
+  makeValidateRequest({
+    schema: CancelFollowingBodySchema,
+    key: RequestKeys.BODY
+  }),
+  makeRouteCallback(cancelFollowing)
 );
 
 app.listen(8080);

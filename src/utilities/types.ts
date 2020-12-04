@@ -121,6 +121,10 @@ export type FollowUserService = (
   followUserInfo: FollowUserServiceInfo
 ) => Promise<QueryUserProfile[]>;
 
+export type CacnelFollowingService = (
+  cancelFollowingInfo: CacnelFollowingServiceInfo
+) => Promise<QueryUserProfile[]>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -166,6 +170,11 @@ export type UpdatedUserProfileInfo = {
 };
 
 export type FollowUserServiceInfo = {
+  followerId: string;
+  followingId: string;
+};
+
+export type CacnelFollowingServiceInfo = {
   followerId: string;
   followingId: string;
 };
@@ -272,6 +281,10 @@ export type FollowUserResponseBody = {
   followings: GetUserProfileReponseBody[];
 };
 
+export type CancelFollowingResponseBody = {
+  followings: GetUserProfileReponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -303,3 +316,5 @@ export type RegisterRequestBody = NewAccountInfo;
 export type UpdateUserProfileRequestBody = UpdatedUserProfileInfo;
 
 export type FollowUserRequestBody = FollowUserServiceInfo;
+
+export type CancelFollowingRequestBody = CacnelFollowingServiceInfo;
