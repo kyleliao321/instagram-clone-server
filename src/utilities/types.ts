@@ -64,6 +64,17 @@ export type BuildUpdatedUserProfile = (
   updateUserProfileInfo: UpdatedUserProfileInfo
 ) => UpdatedUserProfile;
 
+export type NewPost = {
+  getId: () => string;
+  getDescription: () => string;
+  getLocation: () => string | null;
+  getTimeStamp: () => string;
+  getEncodedImage: () => string;
+  getPostedUserId: () => string;
+};
+
+export type BuildNewPost = (newPostInfo: NewPostInfo) => NewPost;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  Data Model  ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -185,6 +196,14 @@ export type FollowUserServiceInfo = {
 export type CacnelFollowingServiceInfo = {
   followerId: string;
   followingId: string;
+};
+
+export type NewPostInfo = {
+  description?: string;
+  timestamp: string;
+  location?: string;
+  encodedImage: string;
+  postedUserId: string;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
