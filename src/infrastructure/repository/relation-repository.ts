@@ -17,7 +17,7 @@ export default function makeBuildRelationRepository() {
     async function getFollowers(userId: string): Promise<UserProfile[]> {
       if (!followerTable.has(userId)) {
         throw new NoContentError(
-          `HttpError.NoContentError: user id ${userId} does not exist in database.`
+          `user id ${userId} does not exist in database.`
         );
       }
 
@@ -27,7 +27,7 @@ export default function makeBuildRelationRepository() {
     async function getFollowings(userId: string): Promise<UserProfile[]> {
       if (!followingTable.has(userId)) {
         throw new NoContentError(
-          `HttpError.NoContentError: user id ${userId} does not exist in database.`
+          `user id ${userId} does not exist in database.`
         );
       }
 

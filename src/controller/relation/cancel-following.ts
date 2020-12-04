@@ -24,7 +24,7 @@ export default function makeCancelFollowing(dependencies: {
 
     if (tokenUserId !== data.followerId) {
       throw new UnauthorizedError(
-        `HttpError.UnauthorizedError: ${tokenUserId}(user-id) is trying to act as ${data.followerId}(user-id) to cancel following relationship with ${data.followingId}(user-id).`
+        `${tokenUserId}(user-id) is trying to act as ${data.followerId}(user-id) to cancel following relationship with ${data.followingId}(user-id).`
       );
     }
 

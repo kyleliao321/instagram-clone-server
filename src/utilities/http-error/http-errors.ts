@@ -10,6 +10,11 @@ class HttpError {
   getStatus(): number {
     return this.status;
   }
+
+  toString(): string {
+    const printedMessage = this.message ?? 'unknonw';
+    return `HttpError.${this.constructor.name}: ${printedMessage}`;
+  }
 }
 
 class UnauthorizedError extends HttpError {

@@ -22,7 +22,7 @@ export default function makeGetUserProfile(dependency: {
 
     if (pathUserId !== bodyUserId) {
       throw new BadRequestError(
-        `HttpError.BadRequest: path id - ${pathUserId} is not compatible with body id - ${bodyUserId}`
+        `path id - ${pathUserId} is not compatible with body id - ${bodyUserId}`
       );
     }
 

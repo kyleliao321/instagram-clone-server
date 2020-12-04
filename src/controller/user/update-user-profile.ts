@@ -28,13 +28,13 @@ export default function makeUpdateUserProfile(dependency: {
 
     if (pathUserId !== bodyUserId) {
       throw new BadRequestError(
-        `HttpError.BadRequest: path id ${pathUserId} is not compatible with body id ${bodyUserId}`
+        `path id ${pathUserId} is not compatible with body id ${bodyUserId}`
       );
     }
 
     if (tokenUserId !== bodyUserId) {
       throw new ForbiddenError(
-        `HttpError.ForbiddenError: ${tokenUserId}(user-id) trying to act as ${bodyUserId} to update its profile.`
+        `${tokenUserId}(user-id) trying to act as ${bodyUserId} to update its profile.`
       );
     }
 

@@ -8,9 +8,7 @@ export default function makeVerifyTokenService(dependency: {
   return function verifyTokenService(bearerHeader?: string): string {
     // check if the header has authentication information
     if (bearerHeader === undefined) {
-      throw new UnauthorizedError(
-        'HttpError.UnauthorizedError: trying to access private route.'
-      );
+      throw new UnauthorizedError('trying to access private route.');
     }
 
     const bearer = bearerHeader.split(' ')[0];
@@ -18,7 +16,7 @@ export default function makeVerifyTokenService(dependency: {
     // check if the authentication token is in right format
     if (!bearer || bearer !== 'Bearer') {
       throw new UnauthorizedError(
-        `HttpError.UnauthorizedError: bearer header ${bearerHeader} is not in right format.`
+        `bearer header ${bearerHeader} is not in right format.`
       );
     }
 
@@ -26,7 +24,7 @@ export default function makeVerifyTokenService(dependency: {
 
     if (!token) {
       throw new UnauthorizedError(
-        `HttpError.UnauthorizedError: bearer header ${bearerHeader} is not in right format.`
+        `bearer header ${bearerHeader} is not in right format.`
       );
     }
 
@@ -35,9 +33,7 @@ export default function makeVerifyTokenService(dependency: {
     };
 
     if (decoded.userId === undefined) {
-      throw new UnauthorizedError(
-        `HttpError.UnauthorizedError: token ${token} is invalid.`
-      );
+      throw new UnauthorizedError(`token ${token} is invalid.`);
     }
 
     return decoded.userId;

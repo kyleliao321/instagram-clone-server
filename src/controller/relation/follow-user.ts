@@ -24,7 +24,7 @@ export default function makeFollowUser(dependencies: {
 
     if (tokenUserId !== data.followerId) {
       throw new UnauthorizedError(
-        `HttpError.UnauthorizedError: ${tokenUserId}(user-id) trying to act as ${data.followerId}(user-id) to follow ${data.followingId}(user-id).`
+        `${tokenUserId}(user-id) trying to act as ${data.followerId}(user-id) to follow ${data.followingId}(user-id).`
       );
     }
 
