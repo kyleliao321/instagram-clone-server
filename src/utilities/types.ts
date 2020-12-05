@@ -176,6 +176,10 @@ export type LikePostService = (
   likePostServiceInfo: LikePostServiceInfo
 ) => Promise<QueryUserProfile[]>;
 
+export type DislikePostService = (
+  disLikePostServiceInfo: DislikePostServiceInfo
+) => Promise<QueryUserProfile[]>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -239,6 +243,11 @@ export type NewPostInfo = {
 };
 
 export type LikePostServiceInfo = {
+  userId: string;
+  postId: string;
+};
+
+export type DislikePostServiceInfo = {
   userId: string;
   postId: string;
 };
@@ -388,6 +397,10 @@ export type LikePostResponseBody = {
   likedUsers: GetUserProfileReponseBody[];
 };
 
+export type DislikePostResponseBody = {
+  likedUsers: GetUserProfileReponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -441,6 +454,11 @@ export type GetPostsRequestBody = {
 };
 
 export type LikePostRequestBody = {
+  userId: string;
+  postId: string;
+};
+
+export type DislikePostRequestBody = {
   userId: string;
   postId: string;
 };
