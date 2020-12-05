@@ -405,6 +405,10 @@ export type DislikePostResponseBody = {
   likedUsers: GetUserProfileReponseBody[];
 };
 
+export type GetLikedUsersResponseBody = {
+  likedUsers: GetUserProfileReponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
