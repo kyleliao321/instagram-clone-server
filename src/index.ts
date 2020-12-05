@@ -11,7 +11,8 @@ import {
   getFollowers,
   getFollowings,
   addNewPost,
-  getPost
+  getPost,
+  getPosts
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -28,10 +29,11 @@ import {
   GetFollowersBodySchema,
   GetFollowingsBodySchema,
   AddNewPostBodySchema,
-  GetPostBodySchema
+  GetPostParamsSchema,
+  GetPostBodySchema,
+  GetPostsBodySchema
 } from './utilities/schema';
 import { RequestKeys } from './utilities/constants';
-import { GetPostParamsSchema } from './utilities/schema/schemas';
 
 const app = express();
 
@@ -152,6 +154,15 @@ app.get(
     })
   ],
   makeRouteCallback(getPost)
+);
+
+app.get(
+  '/posts',
+  makeValidateRequest({
+    schema: GetPostsBodySchema,
+    key: RequestKeys.BODY
+  }),
+  makeRouteCallback(getPosts)
 );
 
 app.listen(8080);

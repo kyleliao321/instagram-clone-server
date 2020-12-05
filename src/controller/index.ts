@@ -12,7 +12,8 @@ import {
   getFollowerListService,
   getFollowingListService,
   addNewPostService,
-  getPostService
+  getPostService,
+  getPostListService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
@@ -25,6 +26,7 @@ import makeGetFollowers from './relation/get-followers';
 import makeGetFollowings from './relation/get-followings';
 import makeAddNewPost from './post/add-new-post';
 import makeGetPost from './post/get-post';
+import makeGetPosts from './post/get-posts';
 
 const register = makeRegister({
   addNewAccountService,
@@ -62,6 +64,8 @@ const addNewPost = makeAddNewPost({ verifyTokenService, addNewPostService });
 
 const getPost = makeGetPost({ getPostService });
 
+const getPosts = makeGetPosts({ getPostListService });
+
 export {
   register,
   login,
@@ -73,5 +77,6 @@ export {
   getFollowers,
   getFollowings,
   addNewPost,
-  getPost
+  getPost,
+  getPosts
 };
