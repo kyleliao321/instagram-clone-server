@@ -384,6 +384,10 @@ export type GetPostsResponseBody = {
   posts: GetPostResponseBody[];
 };
 
+export type LikePostResponseBody = {
+  likedUsers: GetUserProfileReponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -434,4 +438,9 @@ export type GetPostRequestBody = {
 
 export type GetPostsRequestBody = {
   userId: string;
+};
+
+export type LikePostRequestBody = {
+  userId: string;
+  postId: string;
 };
