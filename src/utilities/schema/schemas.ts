@@ -74,3 +74,8 @@ export const GetPostParamsSchema = Joi.object().keys({
 export const GetPostsBodySchema = Joi.object().keys({
   userId: Joi.string().required()
 });
+
+export const LikePostBodySchema = Joi.object().keys({
+  userId: Joi.string().required(),
+  postId: Joi.string().required()
+});

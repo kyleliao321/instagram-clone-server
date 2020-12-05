@@ -12,7 +12,8 @@ import {
   getFollowings,
   addNewPost,
   getPost,
-  getPosts
+  getPosts,
+  likePost
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -31,7 +32,8 @@ import {
   AddNewPostBodySchema,
   GetPostParamsSchema,
   GetPostBodySchema,
-  GetPostsBodySchema
+  GetPostsBodySchema,
+  LikePostBodySchema
 } from './utilities/schema';
 import { RequestKeys } from './utilities/constants';
 
@@ -163,6 +165,15 @@ app.get(
     key: RequestKeys.BODY
   }),
   makeRouteCallback(getPosts)
+);
+
+app.post(
+  '/likes',
+  makeValidateRequest({
+    schema: LikePostBodySchema,
+    key: RequestKeys.BODY
+  }),
+  makeRouteCallback(likePost)
 );
 
 app.listen(8080);
