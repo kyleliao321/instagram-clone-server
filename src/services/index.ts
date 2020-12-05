@@ -11,6 +11,7 @@ import makeCancelFollowingService from './relation/cancel-following-service';
 import makeGetFollowerListService from './relation/get-follower-list-service';
 import makeGetFollowingListService from './relation/get-following-list-service';
 import makeAddNewPostService from './post/add-new-post-service';
+import makeGetPostService from './post/get-post-service';
 import {
   accountRepository,
   userRepository,
@@ -94,6 +95,11 @@ const addNewPostService = makeAddNewPostService({
   postRepository
 });
 
+const getPostService = makeGetPostService({
+  buildQueryPost,
+  postRepository
+});
+
 export {
   addNewAccountService,
   verifyAccountService,
@@ -107,5 +113,6 @@ export {
   cancelFollowingService,
   getFollowerListService,
   getFollowingListService,
-  addNewPostService
+  addNewPostService,
+  getPostService
 };
