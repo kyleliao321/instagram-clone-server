@@ -17,16 +17,7 @@ export default function makeGetUserProfileListService(dependency: {
     );
 
     return userProfileList.map((userProfile) =>
-      dependency.buildQueryUserProfile({
-        id: userProfile.id,
-        userName: userProfile.userName,
-        alias: userProfile.alias,
-        description: userProfile.description,
-        imageSrc: userProfile.imageSrc,
-        postNum: userProfile.postNum,
-        followerNum: userProfile.followerNum,
-        followingNum: userProfile.followingNum
-      })
+      dependency.buildQueryUserProfile(userProfile)
     );
   };
 }

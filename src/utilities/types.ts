@@ -172,6 +172,10 @@ export type GetPostService = (postId: string) => Promise<QueryPost>;
 
 export type GetPostListService = (userId: string) => Promise<QueryPost[]>;
 
+export type LikePostService = (
+  likePostServiceInfo: LikePostServiceInfo
+) => Promise<QueryUserProfile[]>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -186,7 +190,7 @@ export type QueryUserProfileInfo = {
   userName: string;
   alias: string;
   description: string;
-  imageSrc: string | null;
+  imageSrc?: string;
   postNum: number;
   followerNum: number;
   followingNum: number;
@@ -232,6 +236,11 @@ export type NewPostInfo = {
   location?: string;
   encodedImage: string;
   postedUserId: string;
+};
+
+export type LikePostServiceInfo = {
+  userId: string;
+  postId: string;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -307,6 +316,12 @@ export type PostRepository = {
   getPost: (postId: string) => Promise<Post>;
   getPosts: (userId: string) => Promise<Post[]>;
   insertNewPost: (newPost: NewPost) => Promise<Post>;
+};
+
+export type LikeSystemRepository = {
+  getLikedUsers: (postId: string) => Promise<UserProfile[]>;
+  likePost: (userId: string, postId: string) => Promise<UserProfile[]>;
+  dislikePost: (userId: string, postId: string) => Promise<UserProfile[]>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

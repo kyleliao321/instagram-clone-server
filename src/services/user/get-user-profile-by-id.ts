@@ -14,15 +14,6 @@ export default function makeGetUserProfileByIdService(dependency: {
   ): Promise<QueryUserProfile> {
     const userProfile = await dependency.userRepository.getUserProfile(userId);
 
-    return dependency.buildQueryUserProfile({
-      id: userProfile.id,
-      userName: userProfile.userName,
-      alias: userProfile.alias,
-      description: userProfile.description,
-      imageSrc: userProfile.imageSrc,
-      postNum: userProfile.postNum,
-      followerNum: userProfile.followerNum,
-      followingNum: userProfile.followingNum
-    });
+    return dependency.buildQueryUserProfile(userProfile);
   };
 }
