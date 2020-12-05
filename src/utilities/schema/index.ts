@@ -14,7 +14,8 @@ import {
   GetPostBodySchema,
   GetPostsBodySchema,
   GetPostParamsSchema,
-  LikePostBodySchema
+  LikePostBodySchema,
+  DislikePostBodySchema
 } from './schemas';
 
 export {
@@ -33,5 +34,6 @@ export {
   GetPostBodySchema,
   GetPostsBodySchema,
   GetPostParamsSchema,
-  LikePostBodySchema
+  LikePostBodySchema,
+  DislikePostBodySchema
 };

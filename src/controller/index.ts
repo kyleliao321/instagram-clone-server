@@ -14,7 +14,8 @@ import {
   addNewPostService,
   getPostService,
   getPostListService,
-  likePostService
+  likePostService,
+  dislikePostService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
@@ -29,6 +30,7 @@ import makeAddNewPost from './post/add-new-post';
 import makeGetPost from './post/get-post';
 import makeGetPosts from './post/get-posts';
 import makeLikePost from './like/like-post';
+import makeDislikePost from './like/dislike-post';
 
 const register = makeRegister({
   addNewAccountService,
@@ -73,6 +75,11 @@ const likePost = makeLikePost({
   likePostService
 });
 
+const dislikePost = makeDislikePost({
+  verifyTokenService,
+  dislikePostService
+});
+
 export {
   register,
   login,
@@ -86,5 +93,6 @@ export {
   addNewPost,
   getPost,
   getPosts,
-  likePost
+  likePost,
+  dislikePost
 };
