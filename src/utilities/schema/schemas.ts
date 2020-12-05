@@ -54,3 +54,11 @@ export const GetFollowersBodySchema = Joi.object().keys({
 export const GetFollowingsBodySchema = Joi.object().keys({
   userId: Joi.string().required()
 });
+
+export const AddNewPostBodySchema = Joi.object().keys({
+  description: Joi.string().allow(''),
+  location: Joi.string(),
+  timestamp: Joi.string().required(),
+  encodedImage: Joi.string().required(),
+  postedUserId: Joi.string().required()
+});

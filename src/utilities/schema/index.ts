@@ -9,7 +9,8 @@ import {
   FollowUserBodySchema,
   CancelFollowingBodySchema,
   GetFollowersBodySchema,
-  GetFollowingsBodySchema
+  GetFollowingsBodySchema,
+  AddNewPostBodySchema
 } from './schemas';
 
 export {
@@ -23,5 +24,6 @@ export {
   FollowUserBodySchema,
   CancelFollowingBodySchema,
   GetFollowersBodySchema,
-  GetFollowingsBodySchema
+  GetFollowingsBodySchema,
+  AddNewPostBodySchema
 };

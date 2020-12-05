@@ -9,7 +9,8 @@ import {
   followUser,
   cancelFollowing,
   getFollowers,
-  getFollowings
+  getFollowings,
+  addNewPost
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -24,7 +25,8 @@ import {
   FollowUserBodySchema,
   CancelFollowingBodySchema,
   GetFollowersBodySchema,
-  GetFollowingsBodySchema
+  GetFollowingsBodySchema,
+  AddNewPostBodySchema
 } from './utilities/schema';
 import { RequestKeys } from './utilities/constants';
 
@@ -123,6 +125,15 @@ app.get(
     key: RequestKeys.BODY
   }),
   makeRouteCallback(getFollowings)
+);
+
+app.post(
+  '/posts',
+  makeValidateRequest({
+    schema: AddNewPostBodySchema,
+    key: RequestKeys.BODY
+  }),
+  makeRouteCallback(addNewPost)
 );
 
 app.listen(8080);

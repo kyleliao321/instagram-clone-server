@@ -10,7 +10,8 @@ import {
   followUserService,
   cancelFollowingService,
   getFollowerListService,
-  getFollowingListService
+  getFollowingListService,
+  addNewPostService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
@@ -21,6 +22,7 @@ import makeFollowUser from './relation/follow-user';
 import makeCancelFollowing from './relation/cancel-following';
 import makeGetFollowers from './relation/get-followers';
 import makeGetFollowings from './relation/get-followings';
+import makeAddNewPost from './post/add-new-post';
 
 const register = makeRegister({
   addNewAccountService,
@@ -54,6 +56,8 @@ const getFollowers = makeGetFollowers({ getFollowerListService });
 
 const getFollowings = makeGetFollowings({ getFollowingListService });
 
+const addNewPost = makeAddNewPost({ verifyTokenService, addNewPostService });
+
 export {
   register,
   login,
@@ -63,5 +67,6 @@ export {
   followUser,
   cancelFollowing,
   getFollowers,
-  getFollowings
+  getFollowings,
+  addNewPost
 };
