@@ -15,6 +15,7 @@ import makeGetPostService from './post/get-post-service';
 import makeGetPostListService from './post/get-post-list-service';
 import makeLikePostService from './like/like-post-service';
 import makeDislikePostService from './like/dislike-post-service';
+import makeGetLikedUserListService from './like/get-liked-user-list-service';
 import {
   accountRepository,
   userRepository,
@@ -119,6 +120,11 @@ const dislikePostService = makeDislikePostService({
   likeSystemRepository
 });
 
+const getLikedUserListService = makeGetLikedUserListService({
+  buildQueryUserProfile,
+  likeSystemRepository
+});
+
 export {
   addNewAccountService,
   verifyAccountService,
@@ -136,5 +142,6 @@ export {
   getPostService,
   getPostListService,
   likePostService,
-  dislikePostService
+  dislikePostService,
+  getLikedUserListService
 };
