@@ -112,4 +112,122 @@ describe('add-new-post-controller', () => {
       postedUserId: mokcPostedUserId
     });
   });
+
+  test('should accept unknow as description info', async () => {
+    // given
+    const mockId = 'mockId';
+    const mockLoc = 'mockLoc';
+    const mockTis = 'mockTis';
+    const mockEncodedImg = 'mockEncodedImg';
+    const mockImgSrc = 'mockImgSrc';
+    const mokcPostedUserId = 'mokcPostedUserId';
+
+    const mockReq = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
+      body: {
+        location: mockLoc,
+        timestamp: mockTis,
+        encodedImage: mockEncodedImg,
+        postedUserId: mokcPostedUserId
+      } as AddNewPostRequestBody
+    } as unknown) as Request;
+
+    const verifyTokenService: VerifyTokenService = jest.fn(
+      () => mokcPostedUserId
+    );
+
+    const addNewPostService: AddNewPostService = jest.fn(() =>
+      Promise.resolve({
+        getId: jest.fn(() => mockId),
+        getDescription: jest.fn(() => null),
+        getLocation: jest.fn(() => mockLoc),
+        getTimeStamp: jest.fn(() => mockTis),
+        getImageSrc: jest.fn(() => mockImgSrc),
+        getPostedUserId: jest.fn(() => mokcPostedUserId)
+      })
+    );
+
+    const addNewPost = makeAddNewPost({
+      verifyTokenService,
+      addNewPostService
+    });
+
+    // given
+    const result = await addNewPost(mockReq);
+
+    // expect
+    expect(result.headers).toStrictEqual({
+      'Content-Type': 'application/json'
+    });
+    expect(result.status).toBe(201);
+    expect(result.body).toStrictEqual({
+      id: mockId,
+      description: null,
+      location: mockLoc,
+      timestamp: mockTis,
+      imageSrc: mockImgSrc,
+      postedUserId: mokcPostedUserId
+    });
+  });
+
+  test('should accept unknow as location info', async () => {
+    // given
+    const mockId = 'mockId';
+    const mockDes = 'mockDes';
+    const mockTis = 'mockTis';
+    const mockEncodedImg = 'mockEncodedImg';
+    const mockImgSrc = 'mockImgSrc';
+    const mokcPostedUserId = 'mokcPostedUserId';
+
+    const mockReq = ({
+      headers: {
+        authorization: 'mockAuth'
+      },
+      body: {
+        description: mockDes,
+        timestamp: mockTis,
+        encodedImage: mockEncodedImg,
+        postedUserId: mokcPostedUserId
+      } as AddNewPostRequestBody
+    } as unknown) as Request;
+
+    const verifyTokenService: VerifyTokenService = jest.fn(
+      () => mokcPostedUserId
+    );
+
+    const addNewPostService: AddNewPostService = jest.fn(() =>
+      Promise.resolve({
+        getId: jest.fn(() => mockId),
+        getDescription: jest.fn(() => mockDes),
+        getLocation: jest.fn(() => null),
+        getTimeStamp: jest.fn(() => mockTis),
+        getImageSrc: jest.fn(() => mockImgSrc),
+        getPostedUserId: jest.fn(() => mokcPostedUserId)
+      })
+    );
+
+    const addNewPost = makeAddNewPost({
+      verifyTokenService,
+      addNewPostService
+    });
+
+    // given
+    const result = await addNewPost(mockReq);
+
+    // expect
+    expect(result.headers).toStrictEqual({
+      'Content-Type': 'application/json'
+    });
+    expect(result.status).toBe(201);
+    expect(result.body).toStrictEqual({
+      id: mockId,
+      description: mockDes,
+      location: null,
+      timestamp: mockTis,
+      imageSrc: mockImgSrc,
+      postedUserId: mokcPostedUserId
+    });
+  });
 });
