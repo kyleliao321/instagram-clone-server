@@ -365,6 +365,10 @@ export type AddNewPostResponseBody = {
 
 export type GetPostResponseBody = AddNewPostResponseBody;
 
+export type GetPostsResponseBody = {
+  posts: GetPostResponseBody[];
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -411,4 +415,8 @@ export type AddNewPostRequestBody = NewPostInfo;
 
 export type GetPostRequestBody = {
   postId: string;
+};
+
+export type GetPostsRequestBody = {
+  userId: string;
 };
