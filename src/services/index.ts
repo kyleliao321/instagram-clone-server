@@ -13,11 +13,13 @@ import makeGetFollowingListService from './relation/get-following-list-service';
 import makeAddNewPostService from './post/add-new-post-service';
 import makeGetPostService from './post/get-post-service';
 import makeGetPostListService from './post/get-post-list-service';
+import makeLikePostService from './like/like-post-service';
 import {
   accountRepository,
   userRepository,
   relationRepository,
   postRepository,
+  likeSystemRepository,
   authHandler
 } from '../infrastructure';
 import {
@@ -106,6 +108,11 @@ const getPostListService = makeGetPostListService({
   postRepository
 });
 
+const likePostService = makeLikePostService({
+  buildQueryUserProfile,
+  likeSystemRepository
+});
+
 export {
   addNewAccountService,
   verifyAccountService,
@@ -121,5 +128,6 @@ export {
   getFollowingListService,
   addNewPostService,
   getPostService,
-  getPostListService
+  getPostListService,
+  likePostService
 };
