@@ -10,7 +10,8 @@ import {
   cancelFollowing,
   getFollowers,
   getFollowings,
-  addNewPost
+  addNewPost,
+  getPost
 } from './controller';
 import makeRouteCallback from './utilities/route-callback';
 import makeValidateRequest from './utilities/validate-request';
@@ -26,9 +27,11 @@ import {
   CancelFollowingBodySchema,
   GetFollowersBodySchema,
   GetFollowingsBodySchema,
-  AddNewPostBodySchema
+  AddNewPostBodySchema,
+  GetPostBodySchema
 } from './utilities/schema';
 import { RequestKeys } from './utilities/constants';
+import { GetPostParamsSchema } from './utilities/schema/schemas';
 
 const app = express();
 
@@ -134,6 +137,21 @@ app.post(
     key: RequestKeys.BODY
   }),
   makeRouteCallback(addNewPost)
+);
+
+app.get(
+  '/posts/:postId',
+  [
+    makeValidateRequest({
+      schema: GetPostParamsSchema,
+      key: RequestKeys.PARAMS
+    }),
+    makeValidateRequest({
+      schema: GetPostBodySchema,
+      key: RequestKeys.BODY
+    })
+  ],
+  makeRouteCallback(getPost)
 );
 
 app.listen(8080);

@@ -6,6 +6,7 @@ import {
   GetPostService,
   HttpResponse
 } from '../../utilities/types';
+import { BadRequestError } from '../../utilities/http-error';
 
 export default function makeGetPost(dependencies: {
   getPostService: GetPostService;
@@ -13,7 +14,15 @@ export default function makeGetPost(dependencies: {
   return async function getPost(
     req: Request
   ): Promise<HttpResponse<GetPostResponseBody>> {
+    const pathPostId: string = req.params.postId;
+
     const data: GetPostRequestBody = req.body;
+
+    if (pathPostId !== data.postId) {
+      throw new BadRequestError(
+        `${pathPostId}(post-id) in params is not compatible with ${data.postId}(post-id) in body.`
+      );
+    }
 
     const queryPost = await dependencies.getPostService(data.postId);
 

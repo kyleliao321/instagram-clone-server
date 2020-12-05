@@ -62,3 +62,11 @@ export const AddNewPostBodySchema = Joi.object().keys({
   encodedImage: Joi.string().required(),
   postedUserId: Joi.string().required()
 });
+
+export const GetPostBodySchema = Joi.object().keys({
+  postId: Joi.string().required()
+});
+
+export const GetPostParamsSchema = Joi.object().keys({
+  postId: Joi.string().required()
+});
