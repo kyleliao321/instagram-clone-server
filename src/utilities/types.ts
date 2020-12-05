@@ -350,6 +350,15 @@ export type GetFollowingsResponseBody = {
   followings: GetUserProfileReponseBody[];
 };
 
+export type AddNewPostResponseBody = {
+  id: string;
+  description: string;
+  location: string | null;
+  timestamp: string;
+  imageSrc: string;
+  postedUserId: string;
+};
+
 export type GenericHttpResponse = {
   headers: {
     'Content-Type': string;
@@ -391,3 +400,5 @@ export type GetFollowersRequestBody = {
 export type GetFollowingsRequestBody = {
   userId: string;
 };
+
+export type AddNewPostRequestBody = NewPostInfo;
