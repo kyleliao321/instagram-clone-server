@@ -10,10 +10,12 @@ import makeFollowUserService from './relation/follow-user-service';
 import makeCancelFollowingService from './relation/cancel-following-service';
 import makeGetFollowerListService from './relation/get-follower-list-service';
 import makeGetFollowingListService from './relation/get-following-list-service';
+import makeAddNewPostService from './post/add-new-post-service';
 import {
   accountRepository,
   userRepository,
   relationRepository,
+  postRepository,
   authHandler
 } from '../infrastructure';
 import {
@@ -21,7 +23,9 @@ import {
   buildNewUserProfile,
   buildLoginAccount,
   buildQueryUserProfile,
-  buildUpdatedUserProfile
+  buildUpdatedUserProfile,
+  buildNewPost,
+  buildQueryPost
 } from '../models';
 
 const addNewAccountService = makeAddNewAccountService({
@@ -84,6 +88,12 @@ const getFollowingListService = makeGetFollowingListService({
   relationRepository
 });
 
+const addNewPostService = makeAddNewPostService({
+  buildNewPost,
+  buildQueryPost,
+  postRepository
+});
+
 export {
   addNewAccountService,
   verifyAccountService,
@@ -96,5 +106,6 @@ export {
   followUserService,
   cancelFollowingService,
   getFollowerListService,
-  getFollowingListService
+  getFollowingListService,
+  addNewPostService
 };
