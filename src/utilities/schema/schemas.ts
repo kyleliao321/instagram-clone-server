@@ -71,7 +71,7 @@ export const GetPostParamsSchema = Joi.object().keys({
   postId: Joi.string().required()
 });
 
-export const GetPostsBodySchema = Joi.object().keys({
+export const GetPostsQuerySchema = Joi.object().keys({
   userId: Joi.string().required()
 });
 

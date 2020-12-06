@@ -5,7 +5,6 @@ import {
   GetPostsRequestBody,
   QueryPost
 } from '../../utilities/types';
-import { convertToObject } from 'typescript';
 
 describe('get-posts-controller', () => {
   test('should trigger getPostListService and return correct result when invoke successfully', async () => {
@@ -13,9 +12,9 @@ describe('get-posts-controller', () => {
     const mockUserId = 'mockUserId';
 
     const mockReq = ({
-      body: {
+      query: {
         userId: mockUserId
-      } as GetPostsRequestBody
+      }
     } as unknown) as Request;
 
     const mockPost: QueryPost = {

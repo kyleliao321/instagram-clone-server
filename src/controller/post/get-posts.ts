@@ -2,7 +2,6 @@ import { Request } from 'express';
 import {
   Controller,
   GetPostListService,
-  GetPostsRequestBody,
   GetPostsResponseBody,
   HttpResponse
 } from '../../utilities/types';
@@ -13,9 +12,9 @@ export default function makeGetPosts(dependencies: {
   return async function getPosts(
     req: Request
   ): Promise<HttpResponse<GetPostsResponseBody>> {
-    const data: GetPostsRequestBody = req.body;
+    const userId = req.query.userId as string;
 
-    const queryPosts = await dependencies.getPostListService(data.userId);
+    const queryPosts = await dependencies.getPostListService(userId);
 
     return Object.freeze({
       headers: {

@@ -34,7 +34,7 @@ import {
   AddNewPostBodySchema,
   GetPostParamsSchema,
   GetPostBodySchema,
-  GetPostsBodySchema,
+  GetPostsQuerySchema,
   LikePostBodySchema,
   DislikePostBodySchema,
   GetLikedUsersQuerySchema
@@ -165,8 +165,8 @@ app.get(
 app.get(
   '/posts',
   makeValidateRequest({
-    schema: GetPostsBodySchema,
-    key: RequestKeys.BODY
+    schema: GetPostsQuerySchema,
+    key: RequestKeys.QUERY
   }),
   makeRouteCallback(getPosts)
 );
