@@ -1,7 +1,7 @@
-import { accountDao, LoginAccount, NewAccount } from '../../utilities/types';
+import { AccountDao, LoginAccount, NewAccount } from '../../utilities/types';
 
 export default function makeBuildAccountDao() {
-  return function buildAccountDao(): accountDao {
+  return function buildAccountDao(): AccountDao {
     return Object.freeze({
       insert,
       verify
