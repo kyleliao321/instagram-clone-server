@@ -298,6 +298,14 @@ export type AuthHandler = {
   ) => string | unknown;
 };
 
+export type QueryHandler = {
+  getQuery: (name: string) => string;
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////  Repositories /////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
 export type AccountRepository = {
   insertNewAccount: (newAccount: NewAccount) => Promise<string>;
   verifyLoginAccount: (loginAccount: LoginAccount) => Promise<string>;
