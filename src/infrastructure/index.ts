@@ -12,6 +12,7 @@ import makeBuildUserDao from './dao/user-dao';
 import makeBuildAccountDao from './dao/account-dao';
 import makeBuildRelationDao from './dao/relation-dao';
 import makeBuildPostDao from './dao/post-dao';
+import makeBuildLikeSystemDao from './dao/like-system-dao';
 
 // initialize data-access-objects
 const buildUserDao = makeBuildUserDao();
@@ -22,6 +23,8 @@ const buildRelationDao = makeBuildRelationDao();
 
 const buildPostDao = makeBuildPostDao();
 
+const buildLikeSystemDao = makeBuildLikeSystemDao();
+
 const userDao = buildUserDao();
 
 const accountDao = buildAccountDao();
@@ -29,6 +32,8 @@ const accountDao = buildAccountDao();
 const relationDao = buildRelationDao();
 
 const postDao = buildPostDao();
+
+const likeSystemDao = buildLikeSystemDao();
 
 // initialize repositories
 
@@ -40,7 +45,9 @@ const buildRelationRepository = makeBuildRelationRepository({ relationDao });
 
 const buildPostRepository = makeBuildPostRepository({ postDao });
 
-const buildLikeSystemRepository = makeBuildLikeSystemRepository();
+const buildLikeSystemRepository = makeBuildLikeSystemRepository({
+  likeSystemDao
+});
 
 const accountRepository = buildAccountRepository();
 

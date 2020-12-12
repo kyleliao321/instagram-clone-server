@@ -366,6 +366,12 @@ export type PostDao = {
   filterByPostedUserId: (userId: string) => Promise<Post[]>;
 };
 
+export type LikeSystemDao = {
+  insert: (userId: string, postId: string) => Promise<UserProfile[]>;
+  remove: (userId: string, postId: string) => Promise<UserProfile[]>;
+  filterByPostId: (postId) => Promise<UserProfile[]>;
+};
+
 /////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////  HTTP Response /////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
