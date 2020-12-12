@@ -17,10 +17,6 @@ export default function makeBuildRelationDao() {
       throw new Error('Not yet implemented.');
     }
 
-    async function getFollowers(userId: string): Promise<UserProfile[]> {
-      throw new Error('Not yet implemented.');
-    }
-
     async function filterByFollowingId(
       followingId: string
     ): Promise<UserProfile[]> {
