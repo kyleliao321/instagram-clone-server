@@ -11,6 +11,7 @@ import makeLogger from './logger/logger';
 import makeBuildUserDao from './dao/user-dao';
 import makeBuildAccountDao from './dao/account-dao';
 import makeBuildRelationDao from './dao/relation-dao';
+import makeBuildPostDao from './dao/post-dao';
 
 // initialize data-access-objects
 const buildUserDao = makeBuildUserDao();
@@ -19,11 +20,15 @@ const buildAccountDao = makeBuildAccountDao();
 
 const buildRelationDao = makeBuildRelationDao();
 
+const buildPostDao = makeBuildPostDao();
+
 const userDao = buildUserDao();
 
 const accountDao = buildAccountDao();
 
 const relationDao = buildRelationDao();
+
+const postDao = buildPostDao();
 
 // initialize repositories
 
@@ -33,7 +38,7 @@ const buildUserRepository = makeBuildUserRepository({ userDao });
 
 const buildRelationRepository = makeBuildRelationRepository({ relationDao });
 
-const buildPostRepository = makeBuildPostRepository();
+const buildPostRepository = makeBuildPostRepository({ postDao });
 
 const buildLikeSystemRepository = makeBuildLikeSystemRepository();
 

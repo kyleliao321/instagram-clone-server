@@ -1,9 +1,8 @@
-import { PostRepository, Post, NewPost } from '../../utilities/types';
-import { NoContentError } from '../../utilities/http-error';
+import { PostRepository, Post, NewPost, PostDao } from '../../utilities/types';
 
-export default function makeBuildPostRepository() {
-  const postTable = new Map<string, Post>();
-
+export default function makeBuildPostRepository(dependencies: {
+  postDao: PostDao;
+}) {
   return function buildPostRepository(): PostRepository {
     return Object.freeze({
       getPost,
@@ -12,40 +11,15 @@ export default function makeBuildPostRepository() {
     });
 
     async function getPost(postId: string): Promise<Post> {
-      if (!postTable.has(postId)) {
-        throw new NoContentError(
-          `${postId}(post-id) is not exist in database.`
-        );
-      }
-
-      return postTable.get(postId);
+      return await dependencies.postDao.getOne(postId);
     }
 
     async function getPosts(userId: string): Promise<Post[]> {
-      const postArray = Array.from(postTable.values());
-
-      return postArray.filter((post) => post.postedUserId === userId);
+      return await dependencies.postDao.filterByPostedUserId(userId);
     }
 
     async function insertNewPost(newPost: NewPost): Promise<Post> {
-      if (!postTable.has(newPost.getId())) {
-        throw new Error(
-          `${newPost.getId()}(post-id) is already exist in database.`
-        );
-      }
-
-      const addedPost: Post = {
-        id: newPost.getId(),
-        description: newPost.getDescription(),
-        location: newPost.getLocation(),
-        timestamp: newPost.getTimeStamp(),
-        imageSrc: newPost.getEncodedImage(),
-        postedUserId: newPost.getPostedUserId()
-      };
-
-      postTable.set(newPost.getId(), addedPost);
-
-      return addedPost;
+      return await dependencies.postDao.insert(newPost);
     }
   };
 }
