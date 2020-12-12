@@ -17,7 +17,10 @@ export default function makeBuildQueryUserProfile(dependency: {
       throw new Error('Fetched User Profile must have a valid user id.');
     }
 
-    if (!dependency.imageHandler.isValid(fetchedUserProfileInfo.imageSrc)) {
+    if (
+      fetchedUserProfileInfo.imageSrc &&
+      !dependency.imageHandler.isValid(fetchedUserProfileInfo.imageSrc)
+    ) {
       throw new Error('Fetched User Profile must have a valid file path.');
     }
 

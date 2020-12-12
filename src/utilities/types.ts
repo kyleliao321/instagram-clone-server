@@ -369,7 +369,7 @@ export type PostDao = {
 export type LikeSystemDao = {
   insert: (userId: string, postId: string) => Promise<UserProfile[]>;
   remove: (userId: string, postId: string) => Promise<UserProfile[]>;
-  filterByPostId: (postId) => Promise<UserProfile[]>;
+  filterByPostId: (postId: string) => Promise<UserProfile[]>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

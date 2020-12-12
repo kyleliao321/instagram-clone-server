@@ -1,7 +1,7 @@
 class HttpError {
   protected readonly message?: string;
 
-  protected status: number;
+  protected status = 500;
 
   constructor(message?: string) {
     this.message = message;

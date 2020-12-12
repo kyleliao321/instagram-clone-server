@@ -1,4 +1,7 @@
-{
+module.exports = api => {
+  const isTest = api.env('test');
+
+  return {
     "presets": [
       "@babel/preset-env",
       "@babel/typescript"
@@ -8,7 +11,8 @@
       "@babel/plugin-proposal-object-rest-spread",
       "@babel/plugin-transform-runtime"
     ],
-    "ignore": [
+    "ignore": isTest ? [] : [
       "src/**/*.spec.ts"
     ]
   }
+}
