@@ -8,9 +8,21 @@ import makeHashHandler from './hash-handler/hash-handler';
 import makeIdHandler from './id-handler/id-handler';
 import makeImageHandler from './image-handler/image-handler';
 import makeLogger from './logger/logger';
-import { userDao } from './dao';
+import makeBuildUserDao from './dao/user-dao';
+import makeBuildAccountDao from './dao/account-dao';
 
-const buildAccountRepository = makeBuildAccountRepository();
+// initialize data-access-objects
+const buildUserDao = makeBuildUserDao();
+
+const buildAccountDao = makeBuildAccountDao();
+
+const userDao = buildUserDao();
+
+const accountDao = buildAccountDao();
+
+// initialize repositories
+
+const buildAccountRepository = makeBuildAccountRepository({ accountDao });
 
 const buildUserRepository = makeBuildUserRepository({ userDao });
 
@@ -19,16 +31,6 @@ const buildRelationRepository = makeBuildRelationRepository();
 const buildPostRepository = makeBuildPostRepository();
 
 const buildLikeSystemRepository = makeBuildLikeSystemRepository();
-
-const idHandler = makeIdHandler();
-
-const hashHandler = makeHashHandler();
-
-const imageHandler = makeImageHandler();
-
-const authHandler = makeAuthHandler();
-
-const logger = makeLogger();
 
 const accountRepository = buildAccountRepository();
 
@@ -39,6 +41,18 @@ const relationRepository = buildRelationRepository();
 const postRepository = buildPostRepository();
 
 const likeSystemRepository = buildLikeSystemRepository();
+
+// initialize handlers
+
+const idHandler = makeIdHandler();
+
+const hashHandler = makeHashHandler();
+
+const imageHandler = makeImageHandler();
+
+const authHandler = makeAuthHandler();
+
+const logger = makeLogger();
 
 export {
   accountRepository,

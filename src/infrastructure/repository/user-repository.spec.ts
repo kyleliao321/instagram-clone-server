@@ -29,7 +29,7 @@ describe('user-repository', () => {
     const userRepository = buildUserRepository();
 
     // when
-    userRepository.insertNewUserProfile(mockNewUserProfile);
+    await userRepository.insertNewUserProfile(mockNewUserProfile);
 
     // expect
     expect(mockUserDao.insert).toHaveBeenCalledTimes(1);
@@ -61,7 +61,7 @@ describe('user-repository', () => {
     const userRepository = buildUserRepository();
 
     // when
-    userRepository.updateUserProfile(mockUpdatedUserProfile);
+    await userRepository.updateUserProfile(mockUpdatedUserProfile);
 
     // expect
     expect(mockUserDao.update).toHaveBeenCalledTimes(1);
@@ -84,7 +84,7 @@ describe('user-repository', () => {
     const userRepository = buildUserRepository();
 
     // when
-    userRepository.getUserProfile(mockUserID);
+    await userRepository.getUserProfile(mockUserID);
 
     // expect
     expect(mockUserDao.getOne).toHaveBeenCalledTimes(1);
@@ -107,7 +107,7 @@ describe('user-repository', () => {
     const userRepository = buildUserRepository();
 
     // when
-    userRepository.filterUserProfilesByUserName(mockUserName);
+    await userRepository.filterUserProfilesByUserName(mockUserName);
 
     // expect
     expect(mockUserDao.filter).toHaveBeenCalledTimes(1);
