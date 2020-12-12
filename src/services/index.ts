@@ -21,9 +21,9 @@ import {
   userRepository,
   relationRepository,
   postRepository,
-  likeSystemRepository,
-  authHandler
-} from '../infrastructure';
+  likeSystemRepository
+} from '../data';
+import { authHandler } from '../infrastructure';
 import {
   buildNewAccount,
   buildNewUserProfile,
