@@ -10,15 +10,20 @@ import makeImageHandler from './image-handler/image-handler';
 import makeLogger from './logger/logger';
 import makeBuildUserDao from './dao/user-dao';
 import makeBuildAccountDao from './dao/account-dao';
+import makeBuildRelationDao from './dao/relation-dao';
 
 // initialize data-access-objects
 const buildUserDao = makeBuildUserDao();
 
 const buildAccountDao = makeBuildAccountDao();
 
+const buildRelationDao = makeBuildRelationDao();
+
 const userDao = buildUserDao();
 
 const accountDao = buildAccountDao();
+
+const relationDao = buildRelationDao();
 
 // initialize repositories
 
@@ -26,7 +31,7 @@ const buildAccountRepository = makeBuildAccountRepository({ accountDao });
 
 const buildUserRepository = makeBuildUserRepository({ userDao });
 
-const buildRelationRepository = makeBuildRelationRepository();
+const buildRelationRepository = makeBuildRelationRepository({ relationDao });
 
 const buildPostRepository = makeBuildPostRepository();
 

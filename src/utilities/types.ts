@@ -348,9 +348,16 @@ export type UserDao = {
   filter: (userName: string) => Promise<UserProfile[]>;
 };
 
-export type accountDao = {
+export type AccountDao = {
   insert: (newAccount: NewAccount) => Promise<string>;
   verify: (loginAccount: LoginAccount) => Promise<string>;
+};
+
+export type RelationDao = {
+  filterByFollowingId: (followingId: string) => Promise<UserProfile[]>;
+  filterByFollowerId: (followerId: string) => Promise<UserProfile[]>;
+  insert: (followerId: string, followingId: string) => Promise<UserProfile[]>;
+  remove: (followerId: string, followingId: string) => Promise<UserProfile[]>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

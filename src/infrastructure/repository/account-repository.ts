@@ -2,11 +2,11 @@ import {
   AccountRepository,
   NewAccount,
   LoginAccount,
-  accountDao
+  AccountDao
 } from '../../utilities/types';
 
 export default function makeBuildAccountRepository(dependencies: {
-  accountDao: accountDao;
+  accountDao: AccountDao;
 }) {
   return function buildAccountRepository(): AccountRepository {
     return Object.freeze({

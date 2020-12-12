@@ -1,4 +1,4 @@
-import { accountDao, LoginAccount, NewAccount } from '../../utilities/types';
+import { AccountDao, LoginAccount, NewAccount } from '../../utilities/types';
 import makeBuildAccountRepository from './account-repository';
 
 describe('account-repository', () => {
@@ -10,7 +10,7 @@ describe('account-repository', () => {
       getHashedPassword: jest.fn()
     };
 
-    const mockAccountDao: accountDao = {
+    const mockAccountDao: AccountDao = {
       insert: jest.fn(),
       verify: jest.fn()
     };
@@ -35,7 +35,7 @@ describe('account-repository', () => {
       getHashedPassword: jest.fn()
     };
 
-    const mockAccountDao: accountDao = {
+    const mockAccountDao: AccountDao = {
       insert: jest.fn(),
       verify: jest.fn()
     };
