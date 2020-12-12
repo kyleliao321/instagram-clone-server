@@ -8,10 +8,11 @@ import makeHashHandler from './hash-handler/hash-handler';
 import makeIdHandler from './id-handler/id-handler';
 import makeImageHandler from './image-handler/image-handler';
 import makeLogger from './logger/logger';
+import { userDao } from './dao';
 
 const buildAccountRepository = makeBuildAccountRepository();
 
-const buildUserRepository = makeBuildUserRepository();
+const buildUserRepository = makeBuildUserRepository({ userDao });
 
 const buildRelationRepository = makeBuildRelationRepository();
 
