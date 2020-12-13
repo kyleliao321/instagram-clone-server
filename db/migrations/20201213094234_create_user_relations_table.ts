@@ -1,16 +1,20 @@
 import Knex from 'knex';
+import { UserRelationsTable } from '../constants';
 
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable(
-    'user_relations_table',
+    UserRelationsTable.name,
     (table: Knex.TableBuilder) => {
-      table.uuid('follower_id').notNullable();
-      table.uuid('following_id').notNullable();
-      table.primary(['follower_id', 'following_id']);
+      table.uuid(UserRelationsTable.columns.followerId).notNullable();
+      table.uuid(UserRelationsTable.columns.followingId).notNullable();
+      table.primary([
+        UserRelationsTable.columns.followerId,
+        UserRelationsTable.columns.followingId
+      ]);
     }
   );
 }
 
 export async function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTable('user_relations_table');
+  return knex.schema.dropTable(UserRelationsTable.name);
 }
