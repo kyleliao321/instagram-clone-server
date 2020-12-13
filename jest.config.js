@@ -1,6 +1,7 @@
 module.exports = {
     "roots": [
-        "src"
+        "src",
+        "db"
     ],
     "testMatch": [
         "**/__tests__/**/*.+(ts|tsx|js)",
@@ -8,5 +9,8 @@ module.exports = {
       ],
     "transform": {
       "^.+\\.(ts|tsx)$": "babel-jest"
-    }
+    },
+    "setupFiles": [
+      'dotenv/config'
+    ]
 }

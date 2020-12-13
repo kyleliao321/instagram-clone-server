@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('location');
     table.timestamp('created_on');
     table.string('image_src').notNullable();
-    table.uuid('posted_user').references('user_ud').inTable('users_table');
+    table.uuid('posted_user').references('user_id').inTable('users_table');
   });
 }
 

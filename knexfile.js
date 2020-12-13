@@ -1,7 +1,14 @@
+require('ts-node/register');
+
 module.exports = {
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/instagram_clone_server_test',
+    connection: {
+      host: process.env.TEST_DB_HOST,
+      user: process.env.TEST_DB_USER,
+      password: process.env.TEST_DB_PASSWORD,
+      database: process.env.TEST_DB_NAME
+    },
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -11,7 +18,12 @@ module.exports = {
   },
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/instagram_clone_server_dev',
+    connection: {
+      host: process.env.DEV_DB_HOST,
+      user: process.env.DEV_DB_USER,
+      password: process.env.DEV_DB_PASSWORD,
+      database: process.env.DEV_DB_NAME
+    },
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -21,7 +33,12 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: {
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME
+    },
     migrations: {
       directory: __dirname + '/db/migrations'
     },
