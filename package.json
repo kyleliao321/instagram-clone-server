@@ -11,7 +11,7 @@
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "clean": "rimraf dist",
-    "prettier-format": "prettier --config .prettierrc src/**/*.ts --write"
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" \"db/**/*.ts\" --write"
   },
   "keywords": [],
   "author": "",
@@ -44,7 +44,9 @@
     "fs-extra": "^9.0.1",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
+    "knex": "^0.21.13",
     "nodemon": "^2.0.6",
+    "pg": "^8.5.1",
     "winston": "^3.3.3"
   }
 }
