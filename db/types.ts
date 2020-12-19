@@ -56,8 +56,8 @@ declare module 'knex/types/tables' {
     posts: Post;
     posts_table: Knex.CompositeTableType<
       Post,
-      Pick<Post, 'post_id'|'image_src'|'created_at'|'posted_id'> &
-        Partial<Pick<Post, 'location'|'description'>>,
+      Pick<Post, 'post_id' | 'image_src' | 'created_at' | 'posted_id'> &
+        Partial<Pick<Post, 'location' | 'description'>>,
       Partial<Omit<Post, 'post_id'>>
     >;
 
