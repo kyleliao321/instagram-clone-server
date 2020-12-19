@@ -9,8 +9,10 @@ import makeBuildRelationDao from './dao/relation-dao';
 import makeBuildPostDao from './dao/post-dao';
 import makeBuildLikeSystemDao from './dao/like-system-dao';
 
+import db from '../../db';
+
 // initialize data-access-objects
-const buildUserDao = makeBuildUserDao();
+const buildUserDao = makeBuildUserDao({ db });
 
 const buildAccountDao = makeBuildAccountDao();
 

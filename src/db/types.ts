@@ -6,7 +6,7 @@ declare module 'knex/types/tables' {
     user_name: string;
     alias: string;
     description: string | null;
-    imageSrc: string | null;
+    image_src: string | null;
     post_num: number;
     follower_num: number;
     following_num: number;

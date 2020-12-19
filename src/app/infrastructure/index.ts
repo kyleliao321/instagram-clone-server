@@ -16,10 +16,4 @@ const authHandler = makeAuthHandler();
 
 const logger = makeLogger();
 
-export {
-  idHandler,
-  hashHandler,
-  imageHandler,
-  authHandler,
-  logger
-};
+export { idHandler, hashHandler, imageHandler, authHandler, logger };
