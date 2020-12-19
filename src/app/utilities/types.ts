@@ -282,7 +282,8 @@ export type HashHandler = {
 };
 
 export type ImageHandler = {
-  isValid: (filePath: string | null) => boolean;
+  isValid: (filName: string) => boolean;
+  exports: (encodedImage: string) => Promise<string>;
 };
 
 export type AuthHandler = {
