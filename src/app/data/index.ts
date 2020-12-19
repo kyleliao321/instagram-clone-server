@@ -14,7 +14,7 @@ import db from '../../db';
 // initialize data-access-objects
 const buildUserDao = makeBuildUserDao({ db });
 
-const buildAccountDao = makeBuildAccountDao();
+const buildAccountDao = makeBuildAccountDao({ db });
 
 const buildRelationDao = makeBuildRelationDao();
 
