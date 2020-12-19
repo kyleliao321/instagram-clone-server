@@ -1,4 +1,3 @@
-import { NoContentError } from '../../utilities/http-error';
 import {
   NewUserProfile,
   UpdatedUserProfile,
