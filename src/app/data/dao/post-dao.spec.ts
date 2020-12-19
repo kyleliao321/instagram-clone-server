@@ -1,6 +1,6 @@
 import makeBuildPostDao from './post-dao';
 import makeBuildUserDao from './user-dao';
-import db from '../../../db';
+import db from '../../infrastructure/database';
 import { NewPost, NewUserProfile } from '../../utilities/types';
 
 describe('post-dao', () => {

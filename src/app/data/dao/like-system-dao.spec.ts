@@ -1,7 +1,7 @@
 import makeBuildLikeSystemDao from './like-system-dao';
 import makeBuildPostDao from './post-dao';
 import makeBuildUserDao from './user-dao';
-import db from '../../../db';
+import db from '../../infrastructure/database';
 import { NewPost, NewUserProfile } from '../../utilities/types';
 
 describe('like-system-dao', () => {

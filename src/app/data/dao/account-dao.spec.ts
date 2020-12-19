@@ -1,7 +1,7 @@
-import db from '../../../db';
 import { UnauthorizedError } from '../../utilities/http-error';
 import { LoginAccount, NewAccount } from '../../utilities/types';
 import makeBuildAccountDao from './account-dao';
+import db from '../../infrastructure/database';
 
 describe('accounts-dao', () => {
   beforeAll(async () => {

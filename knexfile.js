@@ -10,10 +10,10 @@ module.exports = {
       database: process.env.TEST_DB_NAME
     },
     migrations: {
-      directory: __dirname + '/src/db/migrations'
+      directory: __dirname + '/db/migrations'
     },
     seeds: {
-      directory: __dirname + '/src/db/seeds/test'
+      directory: __dirname + '/db/seeds/test'
     }
   },
   development: {
@@ -25,10 +25,10 @@ module.exports = {
       database: process.env.DEV_DB_NAME
     },
     migrations: {
-      directory: __dirname + '/src/db/migrations'
+      directory: __dirname + '/db/migrations'
     },
     seeds: {
-      directory: __dirname + '/src/db/seeds/development'
+      directory: __dirname + '/db/seeds/development'
     }
   },
   production: {
@@ -40,10 +40,10 @@ module.exports = {
       database: process.env.DB_NAME
     },
     migrations: {
-      directory: __dirname + '/src/db/migrations'
+      directory: __dirname + '/db/migrations'
     },
     seeds: {
-      directory: __dirname + '/src/db/seeds/production'
+      directory: __dirname + '/db/seeds/production'
     }
   }
 };
