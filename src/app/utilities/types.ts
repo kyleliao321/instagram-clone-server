@@ -392,6 +392,7 @@ export type UpdateUserProfileResponseBody = {
 
 export type LoginResponseBody = {
   jwt: string;
+  userId: string;
 };
 
 export type GetUserProfileReponseBody = {

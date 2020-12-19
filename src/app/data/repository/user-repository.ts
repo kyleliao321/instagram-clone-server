@@ -28,15 +28,15 @@ export default function makeBuildUserRepository(dependencies: {
     ): Promise<string> {
       return await dependencies.userDao.update(updatedUserProfile);
     }
+
+    async function getUserProfile(userId: string): Promise<UserProfile> {
+      return await dependencies.userDao.getOne(userId);
+    }
+
+    async function filterUserProfilesByUserName(
+      userName: string
+    ): Promise<UserProfile[]> {
+      return await dependencies.userDao.filter(userName);
+    }
   };
-
-  async function getUserProfile(userId: string): Promise<UserProfile> {
-    return await dependencies.userDao.getOne(userId);
-  }
-
-  async function filterUserProfilesByUserName(
-    userName: string
-  ): Promise<UserProfile[]> {
-    return await dependencies.userDao.filter(userName);
-  }
 }
