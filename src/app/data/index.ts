@@ -16,7 +16,7 @@ const buildUserDao = makeBuildUserDao({ db });
 
 const buildAccountDao = makeBuildAccountDao({ db });
 
-const buildRelationDao = makeBuildRelationDao();
+const buildRelationDao = makeBuildRelationDao({ db });
 
 const buildPostDao = makeBuildPostDao({ db });
 
