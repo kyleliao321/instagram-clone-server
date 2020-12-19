@@ -1,5 +1,5 @@
 import makeBuildUserDao from './user-dao';
-import db from '../../infrastructure/database';
+import { db } from '../../infrastructure';
 import { NewUserProfile, UpdatedUserProfile } from '../../utilities/types';
 
 describe('user-dao', () => {
