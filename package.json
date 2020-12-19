@@ -11,7 +11,7 @@
     "test": "jest",
     "lint": "eslint . --ext .ts",
     "clean": "rimraf dist",
-    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" \"db/**/*.ts\" --write"
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write"
   },
   "keywords": [],
   "author": "",
