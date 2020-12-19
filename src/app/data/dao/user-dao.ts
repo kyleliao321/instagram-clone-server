@@ -1,4 +1,5 @@
 import Knex from 'knex';
+import { NotFoundError } from '../../utilities/http-error';
 import {
   UserDao,
   NewUserProfile,
@@ -49,20 +50,20 @@ export default function makeBuildUserDao(dependencies: { db: Knex }) {
         .where('user_id', userId)
         .first();
 
-      if (result === undefined) {
-        throw new Error('User Profile does not exist in database.');
+      if (result) {
+        return Object.freeze({
+          id: result.user_id,
+          userName: result.user_name,
+          alias: result.alias,
+          description: result.description ?? '',
+          imageSrc: result.image_src ?? undefined,
+          postNum: result.post_num,
+          followerNum: result.follower_num,
+          followingNum: result.following_num
+        });
       }
 
-      return Object.freeze({
-        id: result.user_id,
-        userName: result.user_name,
-        alias: result.alias,
-        description: result.description ?? '',
-        imageSrc: result.image_src ?? undefined,
-        postNum: result.post_num,
-        followerNum: result.follower_num,
-        followingNum: result.following_num
-      });
+      throw new NotFoundError('User Profile doest not exist in database.');
     }
 
     async function filter(pattern: string): Promise<UserProfile[]> {

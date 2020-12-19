@@ -18,13 +18,15 @@ declare module 'knex/types/tables' {
     hashed_password: string;
   }
 
+  // TODO: Support different type-check for `created_at` column. For insertion, it should be string,
+  //       as for selection, it should be Date object.
   interface Post {
     post_id: string;
     location: string | null;
     description: string | null;
     created_at: string;
     image_src: string;
-    posted_id: string;
+    posted_user: string;
   }
 
   interface UserRelation {
@@ -56,7 +58,7 @@ declare module 'knex/types/tables' {
     posts: Post;
     posts_table: Knex.CompositeTableType<
       Post,
-      Pick<Post, 'post_id' | 'image_src' | 'created_at' | 'posted_id'> &
+      Pick<Post, 'post_id' | 'image_src' | 'created_at' | 'posted_user'> &
         Partial<Pick<Post, 'location' | 'description'>>,
       Partial<Omit<Post, 'post_id'>>
     >;

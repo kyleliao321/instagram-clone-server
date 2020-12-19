@@ -37,6 +37,16 @@ class ForbiddenError extends HttpError {
   }
 }
 
+class NotFoundError extends HttpError {
+  static STATUS_CODE = 404;
+
+  constructor(message?: string) {
+    super(message);
+
+    this.status = NotFoundError.STATUS_CODE;
+  }
+}
+
 class NoContentError extends HttpError {
   static STATUS_CODE = 204;
 
@@ -62,5 +72,6 @@ export {
   UnauthorizedError,
   NoContentError,
   BadRequestError,
-  ForbiddenError
+  ForbiddenError,
+  NotFoundError
 };
