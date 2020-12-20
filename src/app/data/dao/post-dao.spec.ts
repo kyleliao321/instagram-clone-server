@@ -17,7 +17,8 @@ describe('post-dao', () => {
       getUserName: jest.fn(() => userName),
       getAlias: jest.fn(() => alias),
       getDescription: jest.fn(() => null),
-      getEncodedImage: jest.fn(() => null)
+      getEncodedImage: jest.fn(),
+      getImageSrc: jest.fn(() => Promise.resolve(null))
     };
 
     const buildUserDao = makeBuildUserDao({ db });
@@ -50,8 +51,9 @@ describe('post-dao', () => {
       getLocation: jest.fn(() => location),
       getDescription: jest.fn(() => description),
       getTimeStamp: jest.fn(() => timestamp),
-      getEncodedImage: jest.fn(() => imageSrc),
-      getPostedUserId: jest.fn(() => postedUserId)
+      getEncodedImage: jest.fn(),
+      getPostedUserId: jest.fn(() => postedUserId),
+      getImageSrc: jest.fn(() => Promise.resolve(imageSrc))
     };
 
     const buildPostDao = makeBuildPostDao({ db });
@@ -86,8 +88,9 @@ describe('post-dao', () => {
       getLocation: jest.fn(() => location),
       getDescription: jest.fn(() => description),
       getTimeStamp: jest.fn(() => timestamp),
-      getEncodedImage: jest.fn(() => imageSrc),
-      getPostedUserId: jest.fn(() => postedUserId)
+      getEncodedImage: jest.fn(),
+      getPostedUserId: jest.fn(() => postedUserId),
+      getImageSrc: jest.fn(() => Promise.resolve(imageSrc))
     };
 
     const buildPostDao = makeBuildPostDao({ db });
@@ -124,8 +127,9 @@ describe('post-dao', () => {
       getLocation: jest.fn(() => location),
       getDescription: jest.fn(() => description),
       getTimeStamp: jest.fn(() => timestamp),
-      getEncodedImage: jest.fn(() => imageSrc),
-      getPostedUserId: jest.fn(() => postedUserId)
+      getEncodedImage: jest.fn(),
+      getPostedUserId: jest.fn(() => postedUserId),
+      getImageSrc: jest.fn(() => Promise.resolve(imageSrc))
     };
 
     const buildPostDao = makeBuildPostDao({ db });

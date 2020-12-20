@@ -11,12 +11,14 @@ export default function makeBuildPostDao(dependencies: { db: Knex }) {
     });
 
     async function insert(newPost: NewPost): Promise<Post> {
+      const imageSrc = await newPost.getImageSrc();
+
       await dependencies.db('posts_table').insert({
         post_id: newPost.getId(),
         location: newPost.getLocation(),
         created_at: newPost.getTimeStamp(),
         description: newPost.getDescription(),
-        image_src: newPost.getEncodedImage(),
+        image_src: imageSrc,
         posted_user: newPost.getPostedUserId()
       });
 
@@ -25,7 +27,7 @@ export default function makeBuildPostDao(dependencies: { db: Knex }) {
         location: newPost.getLocation() ?? undefined,
         timestamp: newPost.getTimeStamp(),
         description: newPost.getDescription(),
-        imageSrc: newPost.getEncodedImage(),
+        imageSrc: imageSrc,
         postedUserId: newPost.getPostedUserId()
       });
     }

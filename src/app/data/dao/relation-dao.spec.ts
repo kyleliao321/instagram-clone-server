@@ -31,7 +31,8 @@ describe('relation-dao', () => {
         getUserName: jest.fn(() => u.userName),
         getAlias: jest.fn(() => u.alias),
         getDescription: jest.fn(() => null),
-        getEncodedImage: jest.fn(() => null)
+        getEncodedImage: jest.fn(),
+        getImageSrc: jest.fn(() => Promise.resolve(null))
       };
     });
 

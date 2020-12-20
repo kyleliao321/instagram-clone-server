@@ -22,7 +22,7 @@ export default function makeBuildUserDao(dependencies: { db: Knex }) {
         user_name: newUserProfile.getUserName(),
         alias: newUserProfile.getAlias(),
         description: newUserProfile.getDescription(),
-        image_src: newUserProfile.getEncodedImage()
+        image_src: await newUserProfile.getImageSrc()
       });
 
       return newUserProfile.getId();
@@ -31,15 +31,28 @@ export default function makeBuildUserDao(dependencies: { db: Knex }) {
     async function update(
       updatedUserProfile: UpdatedUserProfile
     ): Promise<string> {
-      await dependencies.db('users_table').update({
-        user_name: updatedUserProfile.getUserName(),
-        alias: updatedUserProfile.getAlias(),
-        description: updatedUserProfile.getDescription(),
-        image_src: updatedUserProfile.getEncodedImage(),
-        post_num: updatedUserProfile.getPostNum(),
-        follower_num: updatedUserProfile.getFollowerNum(),
-        following_num: updatedUserProfile.getFollowingNum()
-      });
+      const updatedImageSrc = await updatedUserProfile.getImageSrc();
+
+      if (updatedImageSrc) {
+        await dependencies.db('users_table').update({
+          user_name: updatedUserProfile.getUserName(),
+          alias: updatedUserProfile.getAlias(),
+          description: updatedUserProfile.getDescription(),
+          image_src: updatedImageSrc,
+          post_num: updatedUserProfile.getPostNum(),
+          follower_num: updatedUserProfile.getFollowerNum(),
+          following_num: updatedUserProfile.getFollowingNum()
+        });
+      } else {
+        await dependencies.db('users_table').update({
+          user_name: updatedUserProfile.getUserName(),
+          alias: updatedUserProfile.getAlias(),
+          description: updatedUserProfile.getDescription(),
+          post_num: updatedUserProfile.getPostNum(),
+          follower_num: updatedUserProfile.getFollowerNum(),
+          following_num: updatedUserProfile.getFollowingNum()
+        });
+      }
 
       return updatedUserProfile.getId();
     }

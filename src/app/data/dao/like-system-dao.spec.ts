@@ -43,7 +43,8 @@ describe('like-system-dao', () => {
         getUserName: jest.fn(() => u.userName),
         getAlias: jest.fn(() => u.alias),
         getDescription: jest.fn(() => null),
-        getEncodedImage: jest.fn(() => null)
+        getEncodedImage: jest.fn(() => null),
+        getImageSrc: jest.fn(() => Promise.resolve(null))
       };
     });
 
@@ -53,8 +54,9 @@ describe('like-system-dao', () => {
         getLocation: jest.fn(() => p.location),
         getDescription: jest.fn(() => p.description),
         getTimeStamp: jest.fn(() => p.timestamp),
-        getEncodedImage: jest.fn(() => p.imageSrc),
-        getPostedUserId: jest.fn(() => p.postedUserId)
+        getEncodedImage: jest.fn(),
+        getPostedUserId: jest.fn(() => p.postedUserId),
+        getImageSrc: jest.fn(() => Promise.resolve(p.imageSrc))
       };
     });
 
