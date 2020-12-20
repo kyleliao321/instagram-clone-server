@@ -4,7 +4,10 @@ import fse from 'fs-extra';
 
 export default function makeBuildImageHandler(dependencies: {
   idHandler: IdHandler;
-}) {
+}): () => ImageHandler {
+  const imageDirName = process.env.NODE_ENV || 'development';
+  const defaultPaths = ['public', 'images', imageDirName];
+
   return function buildImageHandler(): ImageHandler {
     return Object.freeze({
       isValid,
@@ -24,7 +27,7 @@ export default function makeBuildImageHandler(dependencies: {
      * @param filName Name of image file.
      */
     function isFileExist(filName: string): boolean {
-      const fullPath = join(process.cwd(), 'public', 'images', filName);
+      const fullPath = join(process.cwd(), ...defaultPaths, filName);
       return fse.pathExistsSync(fullPath);
     }
 
@@ -55,7 +58,7 @@ export default function makeBuildImageHandler(dependencies: {
       }
 
       const fileName = 'Image_' + dependencies.idHandler.getId() + '.jpeg';
-      const filePath = join(process.cwd(), 'public', 'images', fileName);
+      const filePath = join(process.cwd(), ...defaultPaths, fileName);
 
       const buf = Buffer.from(encodedImage, 'base64');
 
