@@ -1,7 +1,7 @@
-import makeBuildPostDao from './post-dao';
-import makeBuildUserDao from './user-dao';
-import { db } from '../../infrastructure';
-import { NewPost, NewUserProfile } from '../../utilities/types';
+import makeBuildPostDao from '../post-dao';
+import makeBuildUserDao from '../user-dao';
+import { db } from '../../../infrastructure';
+import { NewPost, NewUserProfile } from '../../../utilities/types';
 
 describe('post-dao', () => {
   beforeAll(async () => {

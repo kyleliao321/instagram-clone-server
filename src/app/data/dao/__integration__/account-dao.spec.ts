@@ -1,7 +1,7 @@
-import { UnauthorizedError } from '../../utilities/http-error';
-import { LoginAccount, NewAccount } from '../../utilities/types';
-import makeBuildAccountDao from './account-dao';
-import { db } from '../../infrastructure';
+import { UnauthorizedError } from '../../../utilities/http-error';
+import { LoginAccount, NewAccount } from '../../../utilities/types';
+import makeBuildAccountDao from '../account-dao';
+import { db } from '../../../infrastructure';
 
 describe('accounts-dao', () => {
   beforeAll(async () => {

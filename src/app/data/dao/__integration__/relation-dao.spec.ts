@@ -1,7 +1,7 @@
-import makeBuildRelationDao from './relation-dao';
-import makeBuildUserDao from './user-dao';
-import { db } from '../../infrastructure';
-import { NewUserProfile } from '../../utilities/types';
+import makeBuildRelationDao from '../relation-dao';
+import makeBuildUserDao from '../user-dao';
+import { db } from '../../../infrastructure';
+import { NewUserProfile } from '../../../utilities/types';
 
 describe('relation-dao', () => {
   const users = [

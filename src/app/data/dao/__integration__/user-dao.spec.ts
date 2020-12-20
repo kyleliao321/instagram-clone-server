@@ -1,6 +1,6 @@
-import makeBuildUserDao from './user-dao';
-import { db } from '../../infrastructure';
-import { NewUserProfile, UpdatedUserProfile } from '../../utilities/types';
+import makeBuildUserDao from '../user-dao';
+import { db } from '../../../infrastructure';
+import { NewUserProfile, UpdatedUserProfile } from '../../../utilities/types';
 
 describe('user-dao', () => {
   beforeAll(async () => {
