@@ -9,7 +9,10 @@ import { idHandler, hashHandler, imageHandler } from '../infrastructure';
 
 const buildNewAccount = makeBuildNewAccount({ idHandler, hashHandler });
 
-const buildNewUserProfile = makeBuildNewUserProfile({ idHandler });
+const buildNewUserProfile = makeBuildNewUserProfile({
+  idHandler,
+  imageHandler
+});
 
 const buildLoginAccount = makeBuildLoginAccount({ hashHandler });
 

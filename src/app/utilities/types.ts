@@ -23,6 +23,7 @@ export type NewUserProfile = {
   getAlias: () => string;
   getDescription: () => string | null;
   getEncodedImage: () => string | null;
+  getImageSrc: () => Promise<string | null>;
 };
 
 export type LoginAccount = {
