@@ -43,7 +43,7 @@ import { RequestKeys } from './utilities/constants';
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '1mb' }));
 
 app.post(
   '/register',

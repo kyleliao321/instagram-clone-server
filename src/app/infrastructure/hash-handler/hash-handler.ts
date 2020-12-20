@@ -10,7 +10,7 @@ export default function makeBuildHashHandler() {
     function hash(input: string): string {
       const h = crypto.createHash('sha256');
       h.update(input);
-      return h.digest().toString();
+      return h.digest().toString('hex');
     }
   };
 }
