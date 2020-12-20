@@ -25,7 +25,8 @@ const buildUpdatedUserProfile = makeBuildUpdatedUserProfile({ idHandler });
 
 const buildNewPost = makeBuildNewPost({
   postIdHandler: idHandler,
-  userIdHandler: idHandler
+  userIdHandler: idHandler,
+  imageHandler
 });
 
 const buildQueryPost = makeBuildQueryPost({

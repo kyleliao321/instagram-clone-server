@@ -2,12 +2,14 @@ import {
   BuildNewPost,
   IdHandler,
   NewPostInfo,
-  NewPost
+  NewPost,
+  ImageHandler
 } from '../../utilities/types';
 
 export default function makeBuildNewPost(dependencies: {
   postIdHandler: IdHandler;
   userIdHandler: IdHandler;
+  imageHandler: ImageHandler;
 }): BuildNewPost {
   return function buildNewPost(newPostInfo: NewPostInfo): NewPost {
     const generatedPostId = dependencies.postIdHandler.getId();
@@ -26,7 +28,12 @@ export default function makeBuildNewPost(dependencies: {
       getLocation: () => newPostInfo.location ?? null,
       getTimeStamp: () => newPostInfo.timestamp,
       getEncodedImage: () => newPostInfo.encodedImage,
-      getPostedUserId: () => newPostInfo.postedUserId
+      getPostedUserId: () => newPostInfo.postedUserId,
+      getImageSrc: async () => exportImage(newPostInfo.encodedImage)
     });
+
+    async function exportImage(encodedImage: string): Promise<string> {
+      return await dependencies.imageHandler.exports(encodedImage);
+    }
   };
 }

@@ -72,6 +72,7 @@ export type NewPost = {
   getTimeStamp: () => string;
   getEncodedImage: () => string;
   getPostedUserId: () => string;
+  getImageSrc: () => Promise<string>;
 };
 
 export type BuildNewPost = (newPostInfo: NewPostInfo) => NewPost;
