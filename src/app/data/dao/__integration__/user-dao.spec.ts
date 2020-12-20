@@ -197,4 +197,72 @@ describe('user-dao', () => {
       followingNum: followingNum
     });
   });
+
+  test('should get correct list of user profile when filter user name exists', async () => {
+    // given
+    const userId = '1229d5f3-3e5a-4a21-a2ed-f3149833222c';
+    const userName = 'user_name_1';
+    const alias = 'user_alias_1';
+    const description = 'user_description_1';
+    const imageSrc = 'user_image_src_1';
+
+    const newUserProfile: NewUserProfile = {
+      getId: jest.fn(() => userId),
+      getUserName: jest.fn(() => userName),
+      getAlias: jest.fn(() => alias),
+      getDescription: jest.fn(() => description),
+      getEncodedImage: jest.fn(),
+      getImageSrc: jest.fn(() => Promise.resolve(imageSrc))
+    };
+
+    const buildUserDao = makeBuildUserDao({ db });
+
+    const userDao = buildUserDao();
+
+    // when
+    await userDao.insert(newUserProfile);
+    const result = await userDao.filter('name');
+
+    // expect
+    expect(result.length).toBe(1);
+    expect(result[0]).toStrictEqual({
+      id: userId,
+      userName: userName,
+      alias: alias,
+      description: description,
+      imageSrc: imageSrc,
+      postNum: 0,
+      followerNum: 0,
+      followingNum: 0
+    });
+  });
+
+  test('should get correct list of user profile when filter user name does not exist', async () => {
+    // given
+    const userId = '1229d5f3-3e5a-4a21-a2ed-f3149833222c';
+    const userName = 'user_name_1';
+    const alias = 'user_alias_1';
+    const description = 'user_description_1';
+    const imageSrc = 'user_image_src_1';
+
+    const newUserProfile: NewUserProfile = {
+      getId: jest.fn(() => userId),
+      getUserName: jest.fn(() => userName),
+      getAlias: jest.fn(() => alias),
+      getDescription: jest.fn(() => description),
+      getEncodedImage: jest.fn(),
+      getImageSrc: jest.fn(() => Promise.resolve(imageSrc))
+    };
+
+    const buildUserDao = makeBuildUserDao({ db });
+
+    const userDao = buildUserDao();
+
+    // when
+    await userDao.insert(newUserProfile);
+    const result = await userDao.filter('test');
+
+    // expect
+    expect(result.length).toBe(0);
+  });
 });

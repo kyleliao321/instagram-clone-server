@@ -79,10 +79,10 @@ export default function makeBuildUserDao(dependencies: { db: Knex }) {
       throw new NotFoundError('User Profile doest not exist in database.');
     }
 
-    async function filter(pattern: string): Promise<UserProfile[]> {
+    async function filter(userName: string): Promise<UserProfile[]> {
       const result = await dependencies
         .db('users_table')
-        .where('user_name', 'like', pattern);
+        .where('user_name', 'like', `%${userName}%`);
 
       return result.map((user) => {
         return Object.freeze({
