@@ -59,6 +59,7 @@ export type UpdatedUserProfile = {
   getPostNum: () => number;
   getFollowerNum: () => number;
   getFollowingNum: () => number;
+  getImageSrc: () => Promise<string | null>;
 };
 
 export type BuildUpdatedUserProfile = (

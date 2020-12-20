@@ -21,7 +21,10 @@ const buildQueryUserProfile = makeBuildQueryUserProfile({
   imageHandler
 });
 
-const buildUpdatedUserProfile = makeBuildUpdatedUserProfile({ idHandler });
+const buildUpdatedUserProfile = makeBuildUpdatedUserProfile({
+  idHandler,
+  imageHandler
+});
 
 const buildNewPost = makeBuildNewPost({
   postIdHandler: idHandler,

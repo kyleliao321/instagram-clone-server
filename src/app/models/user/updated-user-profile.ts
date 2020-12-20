@@ -1,17 +1,20 @@
+import { logger } from '../../infrastructure';
 import {
   BuildUpdatedUserProfile,
   IdHandler,
   UpdatedUserProfileInfo,
-  UpdatedUserProfile
+  UpdatedUserProfile,
+  ImageHandler
 } from '../../utilities/types';
 
-export default function makeBuildUpdatedUserProfile(dependency: {
+export default function makeBuildUpdatedUserProfile(dependencies: {
   idHandler: IdHandler;
+  imageHandler: ImageHandler;
 }): BuildUpdatedUserProfile {
   return function buildUpdatedUserProfile(
     updatedUserProfileInfo: UpdatedUserProfileInfo
   ): UpdatedUserProfile {
-    if (!dependency.idHandler.isValid(updatedUserProfileInfo.id)) {
+    if (!dependencies.idHandler.isValid(updatedUserProfileInfo.id)) {
       throw new Error('Updated User Profile must have a valid id.');
     }
 
@@ -41,7 +44,21 @@ export default function makeBuildUpdatedUserProfile(dependency: {
       getEncodedImage: () => updatedUserProfileInfo.encodedImage ?? null,
       getPostNum: () => updatedUserProfileInfo.postNum,
       getFollowerNum: () => updatedUserProfileInfo.followerNum,
-      getFollowingNum: () => updatedUserProfileInfo.followingNum
+      getFollowingNum: () => updatedUserProfileInfo.followingNum,
+      getImageSrc: async () => exportImage(updatedUserProfileInfo.encodedImage)
     });
+
+    async function exportImage(encodedImage?: string): Promise<string | null> {
+      if (!encodedImage) {
+        return null;
+      }
+
+      try {
+        return await dependencies.imageHandler.exports(encodedImage);
+      } catch (e) {
+        logger.error(e);
+        return null;
+      }
+    }
   };
 }
