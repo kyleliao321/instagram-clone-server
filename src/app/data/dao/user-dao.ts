@@ -34,24 +34,30 @@ export default function makeBuildUserDao(dependencies: { db: Knex }) {
       const updatedImageSrc = await updatedUserProfile.getImageSrc();
 
       if (updatedImageSrc) {
-        await dependencies.db('users_table').update({
-          user_name: updatedUserProfile.getUserName(),
-          alias: updatedUserProfile.getAlias(),
-          description: updatedUserProfile.getDescription(),
-          image_src: updatedImageSrc,
-          post_num: updatedUserProfile.getPostNum(),
-          follower_num: updatedUserProfile.getFollowerNum(),
-          following_num: updatedUserProfile.getFollowingNum()
-        });
+        await dependencies
+          .db('users_table')
+          .where('user_id', updatedUserProfile.getId())
+          .update({
+            user_name: updatedUserProfile.getUserName(),
+            alias: updatedUserProfile.getAlias(),
+            description: updatedUserProfile.getDescription(),
+            image_src: updatedImageSrc,
+            post_num: updatedUserProfile.getPostNum(),
+            follower_num: updatedUserProfile.getFollowerNum(),
+            following_num: updatedUserProfile.getFollowingNum()
+          });
       } else {
-        await dependencies.db('users_table').update({
-          user_name: updatedUserProfile.getUserName(),
-          alias: updatedUserProfile.getAlias(),
-          description: updatedUserProfile.getDescription(),
-          post_num: updatedUserProfile.getPostNum(),
-          follower_num: updatedUserProfile.getFollowerNum(),
-          following_num: updatedUserProfile.getFollowingNum()
-        });
+        await dependencies
+          .db('users_table')
+          .where('user_id', updatedUserProfile.getId())
+          .update({
+            user_name: updatedUserProfile.getUserName(),
+            alias: updatedUserProfile.getAlias(),
+            description: updatedUserProfile.getDescription(),
+            post_num: updatedUserProfile.getPostNum(),
+            follower_num: updatedUserProfile.getFollowerNum(),
+            following_num: updatedUserProfile.getFollowingNum()
+          });
       }
 
       return updatedUserProfile.getId();

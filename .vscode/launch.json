@@ -1,0 +1,52 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Jest e2e",
+        "type": "node",
+        "request": "launch",
+        "runtimeArgs": [
+          "--inspect-brk",
+          "${workspaceRoot}/node_modules/jest/bin/jest.js",
+          "./__e2e__",
+          "--runInBand",
+          "-c",
+          "jest.config.e2e.js"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "port": 9229
+      },
+      {
+        "name": "Debug Jest Unit",
+        "type": "node",
+        "request": "launch",
+        "runtimeArgs": [
+          "--inspect-brk",
+          "${workspaceRoot}/node_modules/jest/bin/jest.js",
+          "--runInBand",
+          "-c",
+          "jest.config.js"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "port": 9229
+      },
+      {
+        "name": "Debug Jest Integration",
+        "type": "node",
+        "request": "launch",
+        "runtimeArgs": [
+          "--inspect-brk",
+          "${workspaceRoot}/node_modules/jest/bin/jest.js",
+          "./__integration__",
+          "--runInBand",
+          "-c",
+          "jest.config.integration.js"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "port": 9229
+      }
+    ]
+}

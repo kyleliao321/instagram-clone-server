@@ -10,10 +10,11 @@
     "build": "tsc && babel src --out-dir dist --extensions \".ts, .tsx\" --source-maps inline",
     "rebuild": "npm run clean && npm run build",
     "test:unit": "jest",
-    "test:e2e": "jest ./__integration__ -c jest.config.integraion.js --runInBand",
+    "test:integration": "jest ./__integration__ -c jest.config.integration.js --runInBand",
+    "test:e2e": "jest ./__e2e__ -c jest.config.e2e.js --runInBand",
     "lint": "eslint . --ext .ts",
     "clean": "rimraf dist",
-    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write"
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" \"db/**/*.ts\" --write"
   },
   "keywords": [],
   "author": "",
@@ -27,12 +28,14 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
     "@types/jest": "^26.0.15",
+    "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
     "prettier": "^2.1.2",
+    "supertest": "^6.0.1",
     "typescript": "^4.0.5"
   },
   "dependencies": {
