@@ -45,7 +45,7 @@ exports.seed = async function (knex: Knex): Promise<void> {
         post_id: 'a727ccd6-bd17-4eaf-a1c7-b14993589c37',
         location: 'location_1',
         created_at: '1999-01-07T20:05:06.000Z',
-        image_src: 'image_src_1',
+        image_src: 'IMG_001.jpg',
         description: 'description_1',
         posted_user: '4fbc9df6-556e-45f5-928e-1bc39a79317f'
       }

@@ -57,7 +57,7 @@ export default function makeBuildImageHandler(dependencies: {
         throw new Error('Can only exports as jpeg file.');
       }
 
-      const fileName = 'Image_' + dependencies.idHandler.getId() + '.jpeg';
+      const fileName = 'IMG_' + dependencies.idHandler.getId() + '.jpeg';
       const filePath = join(process.cwd(), ...defaultPaths, fileName);
 
       const buf = Buffer.from(encodedImage, 'base64');
