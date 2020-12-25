@@ -28,8 +28,10 @@ export default function makeBuildRelationDao(dependencies: { db: Knex }) {
     ): Promise<UserProfile[]> {
       await dependencies
         .db('user_relations_table')
-        .where('follower_id', followerId)
-        .andWhere('following_id', followingId)
+        .where({
+          following_id: followingId,
+          follower_id: followerId
+        })
         .del();
 
       return await filterByFollowerId(followerId);

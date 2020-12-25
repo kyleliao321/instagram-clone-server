@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { UnauthorizedError } from '../../utilities/http-error';
+import { ForbiddenError } from '../../utilities/http-error';
 import {
   Controller,
   FollowUserRequestBody,
@@ -23,7 +23,7 @@ export default function makeFollowUser(dependencies: {
     const data: FollowUserRequestBody = req.body;
 
     if (tokenUserId !== data.followerId) {
-      throw new UnauthorizedError(
+      throw new ForbiddenError(
         `${tokenUserId}(user-id) trying to act as ${data.followerId}(user-id) to follow ${data.followingId}(user-id).`
       );
     }
@@ -34,7 +34,7 @@ export default function makeFollowUser(dependencies: {
       headers: {
         'Content-Type': 'application/json'
       },
-      status: 200,
+      status: 201,
       body: {
         followings: updatedFollowings.map((userProfile) => {
           return {

@@ -6,7 +6,7 @@ import {
   QueryUserProfile
 } from '../../utilities/types';
 import { Request } from 'express';
-import { UnauthorizedError } from '../../utilities/http-error';
+import { ForbiddenError } from '../../utilities/http-error';
 
 describe('follow-user-controller', () => {
   test('should throw UnauthorizedError when tokenUserId is not compatible with followerId', async () => {
@@ -42,7 +42,7 @@ describe('follow-user-controller', () => {
       await followUser(mockRequest);
       shouldNotTobeCalled();
     } catch (e) {
-      expect(e).toBeInstanceOf(UnauthorizedError);
+      expect(e).toBeInstanceOf(ForbiddenError);
     } finally {
       expect(shouldNotTobeCalled).not.toBeCalled();
     }
@@ -102,7 +102,7 @@ describe('follow-user-controller', () => {
     expect(result.headers).toStrictEqual({
       'Content-Type': 'application/json'
     });
-    expect(result.status).toBe(200);
+    expect(result.status).toBe(201);
     result.body.followings.forEach((userProfile, index) => {
       expect(userProfile).toStrictEqual({
         id: mockFollowingId,
