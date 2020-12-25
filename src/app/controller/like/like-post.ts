@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { UnauthorizedError } from '../../utilities/http-error';
+import { ForbiddenError } from '../../utilities/http-error';
 import {
   Controller,
   HttpResponse,
@@ -23,7 +23,7 @@ export default function makeLikePost(dependencies: {
     const data: LikePostRequestBody = req.body;
 
     if (tokenUserId !== data.userId) {
-      throw new UnauthorizedError(
+      throw new ForbiddenError(
         `${tokenUserId}(user-id) is trying to act as ${data.userId}(user-id) to like post - ${data.postId}.`
       );
     }

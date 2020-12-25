@@ -6,7 +6,7 @@ import {
   QueryUserProfile,
   VerifyTokenService
 } from '../../utilities/types';
-import { UnauthorizedError } from '../../utilities/http-error';
+import { ForbiddenError } from '../../utilities/http-error';
 
 describe('like-post-controller', () => {
   test('should throw an UnauthorizedError when tokenUserId is not compatible with userId in req.body', async () => {
@@ -34,7 +34,7 @@ describe('like-post-controller', () => {
       await likePost(mockReq);
       shouldNotBeCalled();
     } catch (e) {
-      expect(e).toBeInstanceOf(UnauthorizedError);
+      expect(e).toBeInstanceOf(ForbiddenError);
     } finally {
       expect(shouldNotBeCalled).not.toBeCalled();
     }

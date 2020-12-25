@@ -54,11 +54,5 @@ exports.seed = async function (knex: Knex): Promise<void> {
   await knex('user_relations_table').del();
 
   await knex('user_post_relations_table')
-    .del()
-    .insert([
-      {
-        user_id: 'a471fe7c-f728-4e31-801e-1776e854fb2d',
-        post_id: 'a727ccd6-bd17-4eaf-a1c7-b14993589c37'
-      }
-    ]);
+    .del();
 };

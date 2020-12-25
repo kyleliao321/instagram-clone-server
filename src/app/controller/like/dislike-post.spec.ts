@@ -6,7 +6,7 @@ import {
   QueryUserProfile,
   VerifyTokenService
 } from '../../utilities/types';
-import { UnauthorizedError } from '../../utilities/http-error';
+import { ForbiddenError } from '../../utilities/http-error';
 
 describe('dislike-post-controller', () => {
   test('should throw an UnauthorizedError when tokenUserId is not compatible with userId in req.body', async () => {
@@ -37,7 +37,7 @@ describe('dislike-post-controller', () => {
       await dislikePost(mockReq);
       shouldNotBeCalled();
     } catch (e) {
-      expect(e).toBeInstanceOf(UnauthorizedError);
+      expect(e).toBeInstanceOf(ForbiddenError);
     } finally {
       expect(shouldNotBeCalled).not.toBeCalled();
     }
@@ -99,7 +99,7 @@ describe('dislike-post-controller', () => {
     expect(result.headers).toStrictEqual({
       'Content-Type': 'application/json'
     });
-    expect(result.status).toBe(201);
+    expect(result.status).toBe(200);
 
     result.body.likedUsers.forEach((userProfile, index) => {
       const fromUserProfile = mockLikedUsers[index];
