@@ -53,6 +53,5 @@ exports.seed = async function (knex: Knex): Promise<void> {
 
   await knex('user_relations_table').del();
 
-  await knex('user_post_relations_table')
-    .del();
+  await knex('user_post_relations_table').del();
 };

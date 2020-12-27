@@ -184,16 +184,16 @@ describe('user-post-relations-api-test', () => {
     };
 
     const insertReqBody = {
-        userId,
-        postId
+      userId,
+      postId
     };
 
     // when
     await request(app)
-        .post('/api/v1/likes/')
-        .set('Authorization', `Bearer ${firstLoginUserToken}`)
-        .set('Accept', 'application/json')
-        .send(insertReqBody);
+      .post('/api/v1/likes/')
+      .set('Authorization', `Bearer ${firstLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(insertReqBody);
 
     const queryRes = await request(app)
       .get('/api/v1/likes/')
