@@ -231,6 +231,17 @@ export type UpdatedUserProfileInfo = {
   followingNum: number;
 };
 
+export type UpdateUserProfileServiceInfo = {
+  id: string;
+  userName?: string;
+  alias?: string;
+  description?: string;
+  encodedImage?: string;
+  postNum?: number;
+  followerNum?: number;
+  followingNum?: number;
+};
+
 export type FollowUserServiceInfo = {
   followerId: string;
   followingId: string;
