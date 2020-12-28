@@ -17,6 +17,15 @@ export type BuildNewUserProfile = (
   newUserProfileInfo: NewUserProfileInfo
 ) => NewUserProfile;
 
+export type UpdatedAccount = {
+  getUserName: () => string | undefined;
+  getHashedPassword: () => string | undefined;
+};
+
+export type BuildUpdatedAccount = (
+  updatedAccountServiceInfo: UpdateAccountServiceInfo
+) => UpdatedAccount;
+
 export type NewUserProfile = {
   getId: () => string;
   getUserName: () => string;
@@ -187,6 +196,10 @@ export type GetLikedUserListService = (
   postId: string
 ) => Promise<QueryUserProfile[]>;
 
+export type UpdateAccountService = (
+  updateAccountServiceInfo: UpdateAccountServiceInfo
+) => Promise<string>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -194,6 +207,11 @@ export type GetLikedUserListService = (
 export type LoginAccountInfo = {
   userName: string;
   password: string;
+};
+
+export type UpdateAccountServiceInfo = {
+  userName?: string;
+  password?: string;
 };
 
 export type QueryUserProfileInfo = {
@@ -323,6 +341,7 @@ export type QueryHandler = {
 
 export type AccountRepository = {
   insertNewAccount: (newAccount: NewAccount) => Promise<string>;
+  updateAccount: (updatedAccount: UpdatedAccount) => Promise<string>;
   verifyLoginAccount: (loginAccount: LoginAccount) => Promise<string>;
 };
 

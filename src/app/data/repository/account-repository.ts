@@ -2,7 +2,8 @@ import {
   AccountRepository,
   NewAccount,
   LoginAccount,
-  AccountDao
+  AccountDao,
+  UpdatedAccount
 } from '../../utilities/types';
 
 export default function makeBuildAccountRepository(dependencies: {
@@ -11,7 +12,8 @@ export default function makeBuildAccountRepository(dependencies: {
   return function buildAccountRepository(): AccountRepository {
     return Object.freeze({
       insertNewAccount,
-      verifyLoginAccount
+      verifyLoginAccount,
+      updateAccount
     });
 
     async function insertNewAccount(newAccount: NewAccount): Promise<string> {
@@ -22,6 +24,12 @@ export default function makeBuildAccountRepository(dependencies: {
       loginAccount: LoginAccount
     ): Promise<string> {
       return await dependencies.accountDao.verify(loginAccount);
+    }
+
+    async function updateAccount(
+      updatedAccount: UpdatedAccount
+    ): Promise<string> {
+      throw new Error('Not yet implemented');
     }
   };
 }
