@@ -61,7 +61,9 @@ const followUser = makeFollowUser({
 
 const cancelFollowing = makeCancelFollowing({
   verifyTokenService,
-  cancelFollowingService
+  cancelFollowingService,
+  getUserProfileByIdService,
+  updateUserProfileService
 });
 
 const getFollowers = makeGetFollowers({ getFollowerListService });
