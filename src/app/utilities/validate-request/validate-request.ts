@@ -17,8 +17,7 @@ export default function makeValidateRequest(dependency: {
 
     if (error) {
       logger.error(error);
-      res.status(BadRequestError.STATUS_CODE);
-      res.send('Invalid request');
+      res.sendStatus(BadRequestError.STATUS_CODE);
     } else {
       next();
     }
