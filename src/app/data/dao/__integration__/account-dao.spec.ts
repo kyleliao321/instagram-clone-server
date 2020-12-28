@@ -1,5 +1,9 @@
 import { UnauthorizedError } from '../../../utilities/http-error';
-import { LoginAccount, NewAccount } from '../../../utilities/types';
+import {
+  LoginAccount,
+  NewAccount,
+  UpdatedAccount
+} from '../../../utilities/types';
 import makeBuildAccountDao from '../account-dao';
 import { db } from '../../../infrastructure';
 
@@ -179,5 +183,37 @@ describe('accounts-dao', () => {
     } finally {
       expect(shouldNotBeCalled).not.toBeCalled();
     }
+  });
+
+  test('should return correct result when given updatedAccount is valid', async () => {
+    // given
+    const userId = '1229d5f3-3e5a-4a21-a2ed-f3149833222c';
+    const userName = 'user_name_1';
+    const hashedPassword = 'user_hashed_passowrd_1';
+    const updatedUserName = 'user_name_2';
+    const updatedPassword = 'user_hashed_password_2';
+
+    const newAccount: NewAccount = {
+      getId: jest.fn(() => userId),
+      getUserName: jest.fn(() => userName),
+      getHashedPassword: jest.fn(() => hashedPassword)
+    };
+
+    const updatedAccount: UpdatedAccount = {
+      getId: jest.fn(() => userId),
+      getUserName: jest.fn(() => updatedUserName),
+      getHashedPassword: jest.fn(() => updatedPassword)
+    };
+
+    const buildAccountDao = makeBuildAccountDao({ db });
+
+    const accountDao = buildAccountDao();
+
+    // when
+    await accountDao.insert(newAccount);
+    const result = await accountDao.update(updatedAccount);
+
+    // expect
+    expect(result).toBe(userId);
   });
 });

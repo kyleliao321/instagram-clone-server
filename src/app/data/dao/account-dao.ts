@@ -1,11 +1,17 @@
 import Knex from 'knex';
 import { UnauthorizedError } from '../../utilities/http-error';
-import { AccountDao, LoginAccount, NewAccount } from '../../utilities/types';
+import {
+  AccountDao,
+  LoginAccount,
+  NewAccount,
+  UpdatedAccount
+} from '../../utilities/types';
 
 export default function makeBuildAccountDao(dependencies: { db: Knex }) {
   return function buildAccountDao(): AccountDao {
     return Object.freeze({
       insert,
+      update,
       verify
     });
 
@@ -29,6 +35,23 @@ export default function makeBuildAccountDao(dependencies: { db: Knex }) {
 
       if (result) {
         return result.user_id;
+      }
+
+      throw new UnauthorizedError('User Account does not exist');
+    }
+
+    async function update(updatedAccount: UpdatedAccount): Promise<string> {
+      const result = await dependencies
+        .db('accounts_table')
+        .where('user_id', updatedAccount.getId())
+        .update({
+          user_name: updatedAccount.getUserName(),
+          hashed_password: updatedAccount.getHashedPassword()
+        })
+        .returning('user_id');
+
+      if (result.length === 1) {
+        return result[0];
       }
 
       throw new UnauthorizedError('User Account does not exist');

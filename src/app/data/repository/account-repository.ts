@@ -29,7 +29,7 @@ export default function makeBuildAccountRepository(dependencies: {
     async function updateAccount(
       updatedAccount: UpdatedAccount
     ): Promise<string> {
-      throw new Error('Not yet implemented');
+      return await dependencies.accountDao.update(updatedAccount);
     }
   };
 }

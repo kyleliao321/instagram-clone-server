@@ -17,6 +17,7 @@ export default function makeBuildUpdatedAccount(dependencies: {
         : dependencies.hashHandler.hash(updatedAccountInfo.password);
 
     return Object.freeze({
+      getId: () => updatedAccountInfo.id,
       getUserName: () => updatedAccountInfo.userName,
       getHashedPassword: () => hashedPassword
     });

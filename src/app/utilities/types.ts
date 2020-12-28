@@ -18,6 +18,7 @@ export type BuildNewUserProfile = (
 ) => NewUserProfile;
 
 export type UpdatedAccount = {
+  getId: () => string;
   getUserName: () => string | undefined;
   getHashedPassword: () => string | undefined;
 };
@@ -210,6 +211,7 @@ export type LoginAccountInfo = {
 };
 
 export type UpdateAccountServiceInfo = {
+  id: string;
   userName?: string;
   password?: string;
 };
@@ -392,6 +394,7 @@ export type UserDao = {
 
 export type AccountDao = {
   insert: (newAccount: NewAccount) => Promise<string>;
+  update: (updatedAccount: UpdatedAccount) => Promise<string>;
   verify: (loginAccount: LoginAccount) => Promise<string>;
 };
 
