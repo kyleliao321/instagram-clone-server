@@ -84,6 +84,24 @@ describe('posts-api-test', () => {
     expect(keys.includes('postedUserId')).toBe(true);
   });
 
+  test('GET /api/v1/posts/:postId - incorrect request body format', async () => {
+    // given
+    const postId = '12fb4169-22aa-42d6-9d16-eda752db00a5';
+
+    const reqBody = {}; // without postId
+
+    const url = `/api/v1/posts/${postId}`;
+
+    // when
+    const res = await request(app)
+      .get(url)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
   test('GET /api/v1/posts/:postId - post does not exist', async () => {
     // given
     const postId = '12fb4169-22aa-42d6-9d16-eda752db00a5';
@@ -165,6 +183,23 @@ describe('posts-api-test', () => {
     expect(keys.includes('imageSrc')).toBe(true);
     expect(keys.includes('timestamp')).toBe(true);
     expect(keys.includes('postedUserId')).toBe(true);
+  });
+
+  test('POST /api/v1/posts/ - incorrect request format', async () => {
+    // given
+    const reqBody = {};
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/posts/')
+      .set('Authorization', `Bearer ${loginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    const keys = Object.keys(res.body);
+
+    // expect
+    expect(res.status).toBe(400);
   });
 
   test('POST /api/v1/posts/ - unauthorized access', async () => {

@@ -66,6 +66,59 @@ describe('user-post-relations-api-test', () => {
     expect(res.body.likedUsers.length).toBe(1);
   });
 
+  test('POST /api/v1/likes/ - incorrect request body format - without userId', async () => {
+    // given
+    const postId = validPostId;
+
+    const reqBody = {
+      postId
+    };
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/likes/')
+      .set('Authorization', `Bearer ${firstLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
+  test('POST /api/v1/likes/ - incorrect request body format - without postId', async () => {
+    // given
+    const userId = firstLoginUserId;
+
+    const reqBody = {
+      userId
+    };
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/likes/')
+      .set('Authorization', `Bearer ${firstLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
+  test('POST /api/v1/likes/ - incorrect request body format - empty body', async () => {
+    // given
+    const reqBody = {};
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/likes/')
+      .set('Authorization', `Bearer ${firstLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
   test('POST /api/v1/likes/ - forbidden access', async () => {
     // given
     const userId = firstLoginUserId;
@@ -131,6 +184,59 @@ describe('user-post-relations-api-test', () => {
     expect(keys.length).toBe(1);
     expect(keys.includes('likedUsers')).toBe(true);
     expect(res.body.likedUsers.length).toBe(0);
+  });
+
+  test('DELETE /api/v1/liles/ - incorrect request format - without userId', async () => {
+    // given
+    const postId = validPostId;
+
+    const reqBody = {
+      postId
+    };
+
+    // when
+    const res = await request(app)
+      .delete('/api/v1/likes/')
+      .set('Authorization', `Bearer ${secondLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
+  test('DELETE /api/v1/liles/ - incorrect request format - without postId', async () => {
+    // given
+    const userId = secondLoginUserId;
+
+    const reqBody = {
+      userId
+    };
+
+    // when
+    const res = await request(app)
+      .delete('/api/v1/likes/')
+      .set('Authorization', `Bearer ${secondLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
+  test('DELETE /api/v1/liles/ - incorrect request format - empty body', async () => {
+    // given
+    const reqBody = {};
+
+    // when
+    const res = await request(app)
+      .delete('/api/v1/likes/')
+      .set('Authorization', `Bearer ${secondLoginUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
   });
 
   test('DELETE /api/v1/likes/ - forbidden access', async () => {
@@ -207,5 +313,19 @@ describe('user-post-relations-api-test', () => {
     expect(queryBodyKeys.length).toBe(1);
     expect(queryBodyKeys.includes('likedUsers')).toBe(true);
     expect(queryRes.body.likedUsers.length).toBe(1);
+  });
+
+  test('GET /api/v1/likes/ - incorrect request query format', async () => {
+    // given
+    const queryBody = {};
+
+    // when
+    const res = await request(app)
+      .get('/api/v1/likes/')
+      .query(queryBody)
+      .set('Accept', 'application/json');
+
+    // expect
+    expect(res.status).toBe(400);
   });
 });

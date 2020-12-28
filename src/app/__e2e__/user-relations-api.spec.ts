@@ -64,6 +64,59 @@ describe('user-relations-api-test', () => {
     expect(res.body.followings.length).toBe(1);
   });
 
+  test('POST /api/v1/relations/ - incorrect request body format - without followingId', async () => {
+    // given
+    const followerId = firstUserId;
+
+    const reqBody = {
+      followerId
+    };
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/relations/')
+      .set('Authorization', `Bearer ${firstUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
+  test('POST /api/v1/relations/ - incorrect request body format - without followerId', async () => {
+    // given
+    const followingId = secUserId;
+
+    const reqBody = {
+      followingId
+    };
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/relations/')
+      .set('Authorization', `Bearer ${firstUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
+  test('POST /api/v1/relations/ - incorrect request body format - emtpy body', async () => {
+    // given
+    const reqBody = {};
+
+    // when
+    const res = await request(app)
+      .post('/api/v1/relations/')
+      .set('Authorization', `Bearer ${firstUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
   test('POST /api/v1/relations/ - duplicated relations', async () => {
     // given
     const followerId = firstUserId;
@@ -167,6 +220,59 @@ describe('user-relations-api-test', () => {
     expect(deletedRes.status).toBe(200);
   });
 
+  test('DELETE /api/v1/relations/ - incorrect request body format - without followerId', async () => {
+    // given
+    const followingId = secUserId;
+
+    const reqBody = {
+      followingId
+    };
+
+    // when
+    const rea = await request(app)
+      .delete('/api/v1/relations/')
+      .set('Authorization', `Bearer ${firstUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(rea.status).toBe(400);
+  });
+
+  test('DELETE /api/v1/relations/ - incorrect request body format - without followingId', async () => {
+    // given
+    const followerId = firstUserId;
+
+    const reqBody = {
+      followerId
+    };
+
+    // when
+    const rea = await request(app)
+      .delete('/api/v1/relations/')
+      .set('Authorization', `Bearer ${firstUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(rea.status).toBe(400);
+  });
+
+  test('DELETE /api/v1/relations/ - incorrect request body format - empty body', async () => {
+    // given
+    const reqBody = {};
+
+    // when
+    const rea = await request(app)
+      .delete('/api/v1/relations/')
+      .set('Authorization', `Bearer ${firstUserToken}`)
+      .set('Accept', 'application/json')
+      .send(reqBody);
+
+    // expect
+    expect(rea.status).toBe(400);
+  });
+
   test('DELETE /api/v1/relations/ - relation does not exist', async () => {
     // given
     const followerId = firstUserId;
@@ -229,6 +335,20 @@ describe('user-relations-api-test', () => {
     expect(queryRes.body.followers.length).toBe(1);
   });
 
+  test('GET /api/v1/relations/followers - incorrect request query format', async () => {
+    // given
+    const queryReqBody = {};
+
+    // when
+    const res = await request(app)
+      .get('/api/v1/relations/followers')
+      .set('Accept', 'application/json')
+      .send(queryReqBody);
+
+    // expect
+    expect(res.status).toBe(400);
+  });
+
   test('GET /api/v1/relations/followings - succeed', async () => {
     // given
     const followerId = firstUserId;
@@ -263,5 +383,19 @@ describe('user-relations-api-test', () => {
     expect(queryBodyKeys.length).toBe(1);
     expect(queryBodyKeys.includes('followings')).toBe(true);
     expect(queryRes.body.followings.length).toBe(1);
+  });
+
+  test('GET /api/v1/relations/followings - incorrect request query format', async () => {
+    // given
+    const queryReqBody = {};
+
+    // when
+    const res = await request(app)
+      .get('/api/v1/relations/followings')
+      .set('Accept', 'application/json')
+      .send(queryReqBody);
+
+    // expect
+    expect(res.status).toBe(400);
   });
 });
