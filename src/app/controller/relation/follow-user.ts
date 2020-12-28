@@ -48,7 +48,7 @@ export default function makeFollowUser(dependencies: {
 
     await dependencies.updateUserProfileService({
       id: followingUserProfile.getId(),
-      followingNum: followingUserProfile.getFollowingNum() + 1
+      followerNum: followingUserProfile.getFollowerNum() + 1
     });
 
     return Object.freeze({
