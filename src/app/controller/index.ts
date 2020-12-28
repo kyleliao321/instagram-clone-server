@@ -54,7 +54,9 @@ const updateUserProfile = makeUpdateUserProfile({
 
 const followUser = makeFollowUser({
   verifyTokenService,
-  followUserService
+  followUserService,
+  getUserProfileByIdService,
+  updateUserProfileService
 });
 
 const cancelFollowing = makeCancelFollowing({
