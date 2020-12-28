@@ -3,20 +3,22 @@ import { BadRequestError, ForbiddenError } from '../../utilities/http-error';
 import {
   Controller,
   HttpResponse,
+  UpdateAccountService,
   UpdateUserProfileRequestBody,
   UpdateUserProfileResponseBody,
   UpdateUserProfileService,
   VerifyTokenService
 } from '../../utilities/types';
 
-export default function makeUpdateUserProfile(dependency: {
+export default function makeUpdateUserProfile(dependencies: {
   verifyTokenService: VerifyTokenService;
   updateUserProfileService: UpdateUserProfileService;
+  updateAccountService: UpdateAccountService;
 }): Controller<HttpResponse<UpdateUserProfileResponseBody>> {
   return async function updateUserProfile(
     request: Request
   ): Promise<HttpResponse<UpdateUserProfileResponseBody>> {
-    const tokenUserId = dependency.verifyTokenService(
+    const tokenUserId = dependencies.verifyTokenService(
       request.headers.authorization
     );
 
@@ -38,7 +40,14 @@ export default function makeUpdateUserProfile(dependency: {
       );
     }
 
-    const userId = await dependency.updateUserProfileService(data);
+    const userId = await dependencies.updateUserProfileService(data);
+
+    if (data.userName) {
+      await dependencies.updateAccountService({
+        id: data.id,
+        userName: data.userName
+      });
+    }
 
     return Object.freeze({
       headers: {

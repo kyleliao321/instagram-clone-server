@@ -1,5 +1,6 @@
 import {
   addNewAccountService,
+  updateAccountService,
   addNewUserProfileService,
   getUserProfileByIdService,
   getUserProfileListService,
@@ -49,7 +50,8 @@ const searchUserProfiles = makeSearchUserProfiles({
 
 const updateUserProfile = makeUpdateUserProfile({
   verifyTokenService,
-  updateUserProfileService
+  updateUserProfileService,
+  updateAccountService
 });
 
 const followUser = makeFollowUser({

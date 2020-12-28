@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { BadRequestError, ForbiddenError } from '../../utilities/http-error';
 import {
+  UpdateAccountService,
   UpdateUserProfileRequestBody,
   UpdateUserProfileService,
   VerifyTokenService
@@ -42,9 +43,12 @@ describe('update user profile controller', () => {
 
     const mockVerifyTokenService: VerifyTokenService = jest.fn(() => mockId);
 
+    const mockUpdateAccountService: UpdateAccountService = jest.fn();
+
     const updateUserProfile = makeUpdateUserProfile({
       verifyTokenService: mockVerifyTokenService,
-      updateUserProfileService: mockUpdateUserProfileService
+      updateUserProfileService: mockUpdateUserProfileService,
+      updateAccountService: mockUpdateAccountService
     });
 
     // when
@@ -92,9 +96,12 @@ describe('update user profile controller', () => {
 
     const mockVerifyTokenService: VerifyTokenService = jest.fn(() => 'mockId2');
 
+    const mockUpdateAccountService: UpdateAccountService = jest.fn();
+
     const updateUserProfile = makeUpdateUserProfile({
       verifyTokenService: mockVerifyTokenService,
-      updateUserProfileService: mockUpdateUserProfileService
+      updateUserProfileService: mockUpdateUserProfileService,
+      updateAccountService: mockUpdateAccountService
     });
 
     // when
@@ -142,9 +149,12 @@ describe('update user profile controller', () => {
 
     const mockVerifyTokenService: VerifyTokenService = jest.fn(() => mockId);
 
+    const mockUpdateAccountService: UpdateAccountService = jest.fn();
+
     const updateUserProfile = makeUpdateUserProfile({
       verifyTokenService: mockVerifyTokenService,
-      updateUserProfileService: mockUpdateUserProfileService
+      updateUserProfileService: mockUpdateUserProfileService,
+      updateAccountService: mockUpdateAccountService
     });
 
     // when
