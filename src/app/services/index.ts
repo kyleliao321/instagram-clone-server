@@ -1,4 +1,5 @@
 import makeAddNewAccountService from './account/add-new-account';
+import makeUpdateAccountService from './account/update-account';
 import makeAddNewUserProfileService from './user/add-new-user-profile';
 import makeUpdateUserProfileService from './user/update-user-profile';
 import makeGetUserProfileByIdService from './user/get-user-profile-by-id';
@@ -26,6 +27,7 @@ import {
 import { authHandler } from '../infrastructure';
 import {
   buildNewAccount,
+  buildUpdatedAccount,
   buildNewUserProfile,
   buildLoginAccount,
   buildQueryUserProfile,
@@ -36,6 +38,11 @@ import {
 
 const addNewAccountService = makeAddNewAccountService({
   buildNewAccount,
+  accountRepository
+});
+
+const updateAccountService = makeUpdateAccountService({
+  buildUpdatedAccount,
   accountRepository
 });
 
@@ -127,6 +134,7 @@ const getLikedUserListService = makeGetLikedUserListService({
 
 export {
   addNewAccountService,
+  updateAccountService,
   verifyAccountService,
   addNewUserProfileService,
   getUserProfileByIdService,

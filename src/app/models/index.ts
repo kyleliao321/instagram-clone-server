@@ -1,4 +1,5 @@
 import makeBuildNewAccount from './account/new-account';
+import makeBuildUpdatedAccount from './account/updated-account';
 import makeBuildLoginAccount from './account/login-account';
 import makeBuildNewUserProfile from './user/uploaded-user-profile';
 import makeBuildQueryUserProfile from './user/query-user-profile';
@@ -8,6 +9,8 @@ import makeBuildQueryPost from './post/query-post';
 import { idHandler, hashHandler, imageHandler } from '../infrastructure';
 
 const buildNewAccount = makeBuildNewAccount({ idHandler, hashHandler });
+
+const buildUpdatedAccount = makeBuildUpdatedAccount({ hashHandler });
 
 const buildNewUserProfile = makeBuildNewUserProfile({
   idHandler,
@@ -40,6 +43,7 @@ const buildQueryPost = makeBuildQueryPost({
 
 export {
   buildNewAccount,
+  buildUpdatedAccount,
   buildNewUserProfile,
   buildLoginAccount,
   buildQueryUserProfile,
