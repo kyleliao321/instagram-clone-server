@@ -132,7 +132,7 @@ export type AddNewUserProfileService = (
 ) => Promise<string>;
 
 export type UpdateUserProfileService = (
-  updatedUserProfileInfo: UpdatedUserProfileInfo
+  updatedUserProfileInfo: UpdateUserProfileServiceInfo
 ) => Promise<string>;
 
 export type GetUserProfileService = (
@@ -496,7 +496,7 @@ export type LoginRequestBody = LoginAccountInfo;
 
 export type RegisterRequestBody = NewAccountInfo;
 
-export type UpdateUserProfileRequestBody = UpdatedUserProfileInfo;
+export type UpdateUserProfileRequestBody = UpdateUserProfileServiceInfo;
 
 export type FollowUserRequestBody = FollowUserServiceInfo;
 

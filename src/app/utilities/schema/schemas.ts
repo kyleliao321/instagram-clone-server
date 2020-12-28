@@ -24,13 +24,13 @@ export const SearchUserProfilesRequestQuerySchema = Joi.object().keys({
 
 export const UpdateUserProfileRequestBodySchema = Joi.object().keys({
   id: Joi.string().min(1).required(),
-  userName: Joi.string().min(1).required(),
-  alias: Joi.string().min(1).required(),
-  description: Joi.string().required().allow(''), // allow to be blank
+  userName: Joi.string().min(1),
+  alias: Joi.string().min(1),
+  description: Joi.string().allow(''), // allow to be blank
   encodedImage: Joi.string(), // allow to be undefined
-  postNum: Joi.number().min(0).required(),
-  followerNum: Joi.number().min(0).required(),
-  followingNum: Joi.number().min(0).required()
+  postNum: Joi.number().min(0),
+  followerNum: Joi.number().min(0),
+  followingNum: Joi.number().min(0)
 });
 
 export const UpdateUserProfileRequestParamsSchema = Joi.object().keys({

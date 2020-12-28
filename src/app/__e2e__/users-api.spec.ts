@@ -150,12 +150,7 @@ describe('users-api-test', () => {
 
   test('PUT /api/v1/users/:userId - incorrect request body format', async () => {
     // given
-    const reqBody = {
-      id: loginUserId,
-      userName: 'newUserName',
-      alias: 'newAlias',
-      description: 'newDes'
-    }; // lack of postNum, followerNum, followingNum
+    const reqBody = {};
 
     const url = `/api/v1/users/${loginUserId}`;
 

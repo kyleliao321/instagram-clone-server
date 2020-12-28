@@ -1,4 +1,4 @@
-import { UpdatedUserProfileInfo } from '../../types';
+import { UpdateUserProfileServiceInfo } from '../../types';
 import { UpdateUserProfileRequestBodySchema } from '../schemas';
 
 describe('update user profile request schema', () => {
@@ -13,7 +13,7 @@ describe('update user profile request schema', () => {
     const mockFollowerNum = 0;
     const mockFollowingNum = 0;
 
-    const data: UpdatedUserProfileInfo = {
+    const data: UpdateUserProfileServiceInfo = {
       id: mockId,
       userName: mockUserName,
       alias: mockAlias,
@@ -42,7 +42,7 @@ describe('update user profile request schema', () => {
     const mockFollowerNum = 0;
     const mockFollowingNum = 0;
 
-    const data: UpdatedUserProfileInfo = {
+    const data: UpdateUserProfileServiceInfo = {
       id: mockId,
       userName: mockUserName,
       alias: mockAlias,
@@ -71,7 +71,7 @@ describe('update user profile request schema', () => {
     const mockFollowerNum = 0;
     const mockFollowingNum = 0;
 
-    const data: UpdatedUserProfileInfo = {
+    const data: UpdateUserProfileServiceInfo = {
       id: mockId,
       userName: mockUserName,
       alias: mockAlias,
@@ -100,7 +100,7 @@ describe('update user profile request schema', () => {
     const mockFollowerNum = 0;
     const mockFollowingNum = 0;
 
-    const data: UpdatedUserProfileInfo = {
+    const data: UpdateUserProfileServiceInfo = {
       id: mockId,
       userName: mockUserName,
       alias: mockAlias,
@@ -128,7 +128,7 @@ describe('update user profile request schema', () => {
     const mockFollowerNum = 0;
     const mockFollowingNum = 0;
 
-    const data: UpdatedUserProfileInfo = {
+    const data: UpdateUserProfileServiceInfo = {
       id: mockId,
       userName: mockUserName,
       alias: mockAlias,
@@ -136,6 +136,21 @@ describe('update user profile request schema', () => {
       postNum: mockPostNum,
       followerNum: mockFollowerNum,
       followingNum: mockFollowingNum
+    };
+
+    // when
+    const { error } = UpdateUserProfileRequestBodySchema.validate(data);
+
+    // expect
+    expect(error === undefined).toBe(true);
+  });
+
+  test('validation should succed when only id is provided', () => {
+    // given
+    const mockId = 'c';
+
+    const data: UpdateUserProfileServiceInfo = {
+      id: mockId
     };
 
     // when
