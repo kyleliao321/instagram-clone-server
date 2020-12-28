@@ -72,7 +72,12 @@ const getFollowers = makeGetFollowers({ getFollowerListService });
 
 const getFollowings = makeGetFollowings({ getFollowingListService });
 
-const addNewPost = makeAddNewPost({ verifyTokenService, addNewPostService });
+const addNewPost = makeAddNewPost({
+  verifyTokenService,
+  addNewPostService,
+  getUserProfileByIdService,
+  updateUserProfileService
+});
 
 const getPost = makeGetPost({ getPostService });
 

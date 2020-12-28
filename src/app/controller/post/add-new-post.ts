@@ -5,13 +5,17 @@ import {
   HttpResponse,
   VerifyTokenService,
   AddNewPostResponseBody,
-  AddNewPostRequestBody
+  AddNewPostRequestBody,
+  GetUserProfileService,
+  UpdateUserProfileService
 } from '../../utilities/types';
 import { UnauthorizedError } from '../../utilities/http-error';
 
 export default function makeAddNewPost(dependencies: {
   verifyTokenService: VerifyTokenService;
   addNewPostService: AddNewPostService;
+  getUserProfileByIdService: GetUserProfileService;
+  updateUserProfileService: UpdateUserProfileService;
 }): Controller<HttpResponse<AddNewPostResponseBody>> {
   return async function addNewPost(
     req: Request
@@ -29,6 +33,15 @@ export default function makeAddNewPost(dependencies: {
     }
 
     const addedPost = await dependencies.addNewPostService(data);
+
+    const postedUserProfile = await dependencies.getUserProfileByIdService(
+      data.postedUserId
+    );
+
+    await dependencies.updateUserProfileService({
+      id: postedUserProfile.getId(),
+      postNum: postedUserProfile.getPostNum() + 1
+    });
 
     return Object.freeze({
       headers: {

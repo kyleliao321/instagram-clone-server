@@ -3,6 +3,8 @@ import { UnauthorizedError } from '../../utilities/http-error';
 import {
   AddNewPostRequestBody,
   AddNewPostService,
+  GetUserProfileService,
+  UpdateUserProfileService,
   VerifyTokenService
 } from '../../utilities/types';
 import { Request } from 'express';
@@ -36,9 +38,15 @@ describe('add-new-post-controller', () => {
 
     const addNewPostService: AddNewPostService = jest.fn();
 
+    const getUserProfileByIdService: GetUserProfileService = jest.fn();
+
+    const updateUserProfileService: UpdateUserProfileService = jest.fn();
+
     const addNewPost = makeAddNewPost({
       verifyTokenService,
-      addNewPostService
+      addNewPostService,
+      getUserProfileByIdService,
+      updateUserProfileService
     });
 
     // given
@@ -61,6 +69,14 @@ describe('add-new-post-controller', () => {
     const mockEncodedImg = 'mockEncodedImg';
     const mockImgSrc = 'mockImgSrc';
     const mokcPostedUserId = 'mokcPostedUserId';
+
+    const mockUserName = 'mockUserName';
+    const mockAlias = 'mockAlias';
+    const mockDescription = 'mockDescription';
+    const mockImageSrc = 'mockImageSrc';
+    const mockPostNum = 0;
+    const mockFollowerNum = 0;
+    const mockFollowingNum = 0;
 
     const mockReq = ({
       headers: {
@@ -90,9 +106,26 @@ describe('add-new-post-controller', () => {
       })
     );
 
+    const getUserProfileByIdService: GetUserProfileService = jest.fn(() =>
+      Promise.resolve({
+        getId: jest.fn(() => mokcPostedUserId),
+        getUserName: jest.fn(() => mockUserName),
+        getAlias: jest.fn(() => mockAlias),
+        getDescription: jest.fn(() => mockDescription),
+        getImageSrc: jest.fn(() => mockImageSrc),
+        getPostNum: jest.fn(() => mockPostNum),
+        getFollowerNum: jest.fn(() => mockFollowerNum),
+        getFollowingNum: jest.fn(() => mockFollowingNum)
+      })
+    );
+
+    const updateUserProfileService: UpdateUserProfileService = jest.fn();
+
     const addNewPost = makeAddNewPost({
       verifyTokenService,
-      addNewPostService
+      addNewPostService,
+      getUserProfileByIdService,
+      updateUserProfileService
     });
 
     // given
@@ -111,6 +144,9 @@ describe('add-new-post-controller', () => {
       imageSrc: mockImgSrc,
       postedUserId: mokcPostedUserId
     });
+
+    expect(getUserProfileByIdService).toBeCalledTimes(1);
+    expect(updateUserProfileService).toBeCalledTimes(1);
   });
 
   test('should accept unknow as description info', async () => {
@@ -121,6 +157,14 @@ describe('add-new-post-controller', () => {
     const mockEncodedImg = 'mockEncodedImg';
     const mockImgSrc = 'mockImgSrc';
     const mokcPostedUserId = 'mokcPostedUserId';
+
+    const mockUserName = 'mockUserName';
+    const mockAlias = 'mockAlias';
+    const mockDescription = 'mockDescription';
+    const mockImageSrc = 'mockImageSrc';
+    const mockPostNum = 0;
+    const mockFollowerNum = 0;
+    const mockFollowingNum = 0;
 
     const mockReq = ({
       headers: {
@@ -149,9 +193,26 @@ describe('add-new-post-controller', () => {
       })
     );
 
+    const getUserProfileByIdService: GetUserProfileService = jest.fn(() =>
+      Promise.resolve({
+        getId: jest.fn(() => mokcPostedUserId),
+        getUserName: jest.fn(() => mockUserName),
+        getAlias: jest.fn(() => mockAlias),
+        getDescription: jest.fn(() => mockDescription),
+        getImageSrc: jest.fn(() => mockImageSrc),
+        getPostNum: jest.fn(() => mockPostNum),
+        getFollowerNum: jest.fn(() => mockFollowerNum),
+        getFollowingNum: jest.fn(() => mockFollowingNum)
+      })
+    );
+
+    const updateUserProfileService: UpdateUserProfileService = jest.fn();
+
     const addNewPost = makeAddNewPost({
       verifyTokenService,
-      addNewPostService
+      addNewPostService,
+      getUserProfileByIdService,
+      updateUserProfileService
     });
 
     // given
@@ -170,6 +231,9 @@ describe('add-new-post-controller', () => {
       imageSrc: mockImgSrc,
       postedUserId: mokcPostedUserId
     });
+
+    expect(getUserProfileByIdService).toBeCalledTimes(1);
+    expect(updateUserProfileService).toBeCalledTimes(1);
   });
 
   test('should accept unknow as location info', async () => {
@@ -180,6 +244,14 @@ describe('add-new-post-controller', () => {
     const mockEncodedImg = 'mockEncodedImg';
     const mockImgSrc = 'mockImgSrc';
     const mokcPostedUserId = 'mokcPostedUserId';
+
+    const mockUserName = 'mockUserName';
+    const mockAlias = 'mockAlias';
+    const mockDescription = 'mockDescription';
+    const mockImageSrc = 'mockImageSrc';
+    const mockPostNum = 0;
+    const mockFollowerNum = 0;
+    const mockFollowingNum = 0;
 
     const mockReq = ({
       headers: {
@@ -208,9 +280,26 @@ describe('add-new-post-controller', () => {
       })
     );
 
+    const getUserProfileByIdService: GetUserProfileService = jest.fn(() =>
+      Promise.resolve({
+        getId: jest.fn(() => mokcPostedUserId),
+        getUserName: jest.fn(() => mockUserName),
+        getAlias: jest.fn(() => mockAlias),
+        getDescription: jest.fn(() => mockDescription),
+        getImageSrc: jest.fn(() => mockImageSrc),
+        getPostNum: jest.fn(() => mockPostNum),
+        getFollowerNum: jest.fn(() => mockFollowerNum),
+        getFollowingNum: jest.fn(() => mockFollowingNum)
+      })
+    );
+
+    const updateUserProfileService: UpdateUserProfileService = jest.fn();
+
     const addNewPost = makeAddNewPost({
       verifyTokenService,
-      addNewPostService
+      addNewPostService,
+      getUserProfileByIdService,
+      updateUserProfileService
     });
 
     // given
@@ -229,5 +318,8 @@ describe('add-new-post-controller', () => {
       imageSrc: mockImgSrc,
       postedUserId: mokcPostedUserId
     });
+
+    expect(getUserProfileByIdService).toBeCalledTimes(1);
+    expect(updateUserProfileService).toBeCalledTimes(1);
   });
 });
