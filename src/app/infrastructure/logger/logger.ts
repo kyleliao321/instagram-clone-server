@@ -4,9 +4,12 @@ export default function makeLogger(): Logger {
   const logger = createLogger({
     format: format.combine(
       format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-      format.printf(
-        (info) => `${info.timestamp} ${info.level}: ${info.message}`
-      )
+      format.printf((info) => {
+        const { timestamp, level, message, ...args } = info;
+        return `${timestamp} ${level}: ${message} ${
+          Object.keys(args).length ? JSON.stringify(args) : ''
+        }`;
+      })
     )
   });
 

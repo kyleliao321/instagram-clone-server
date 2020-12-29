@@ -15,12 +15,14 @@ export default function makeRouteCallback(controller: GenericController) {
         res.status(httpResponse.status).send(httpResponse.body);
       })
       .catch((e) => {
+        logger.error(
+          `Exception occurs while processong request ${req.method} ${req.path}:
+          ${e.stack}`
+        );
         if (e instanceof HttpError) {
-          logger.error(e.toString());
           res.statusCode = e.getStatus();
           res.send();
         } else {
-          logger.error(e);
           res.statusCode = 500;
           res.send('unknown error');
         }

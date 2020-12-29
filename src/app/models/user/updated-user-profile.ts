@@ -56,7 +56,13 @@ export default function makeBuildUpdatedUserProfile(dependencies: {
       try {
         return await dependencies.imageHandler.exports(encodedImage);
       } catch (e) {
-        logger.error(e);
+        if (e instanceof Error) {
+          logger.warn(`Cannot export encoded image as file: ${e.stack}`);
+        } else {
+          logger.warn(
+            `Cannot export encoded image as file ${JSON.stringify(e)}`
+          );
+        }
         return null;
       }
     }

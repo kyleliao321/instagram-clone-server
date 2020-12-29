@@ -12,7 +12,11 @@ async function initializeDatabase(): Promise<void> {
       logger.info('Database is ready...');
     })
     .catch((e) => {
-      logger.error(e);
+      if (e instanceof Error) {
+        logger.error(`Exception occurs while setting up database: ${e.stack}`);
+      } else {
+        logger.error(`Exception occurs while setting up database: ${e.stack}`);
+      }
       process.exit();
     });
 }

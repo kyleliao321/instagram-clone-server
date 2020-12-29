@@ -1,19 +1,18 @@
-class HttpError {
-  protected readonly message?: string;
-
+class HttpError extends Error {
   protected status = 500;
 
   constructor(message?: string) {
-    this.message = message;
+    super(message);
+    this.name = this.constructor.name;
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, this.constructor);
+    } else {
+      this.stack = new Error(message).stack;
+    }
   }
 
   getStatus(): number {
     return this.status;
-  }
-
-  toString(): string {
-    const printedMessage = this.message ?? 'unknonw';
-    return `HttpError.${this.constructor.name}: ${printedMessage}`;
   }
 }
 

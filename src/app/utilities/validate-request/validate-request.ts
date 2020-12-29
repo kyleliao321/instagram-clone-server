@@ -16,7 +16,10 @@ export default function makeValidateRequest(dependency: {
     const { error } = dependency.schema.validate(req[dependency.key]);
 
     if (error) {
-      logger.error(error);
+      logger.error(
+        `Exception occurs while validate request format ${req.method} ${req.path}:
+        ${error.stack}`
+      );
       res.sendStatus(BadRequestError.STATUS_CODE);
     } else {
       next();
