@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon",
+    "dev": "nodemon",
     "serve": "node dist/index.js",
-    "dev": "node -r dotenv/config dist/index.js",
     "build": "tsc && babel src --out-dir dist --extensions \".ts, .tsx\" --source-maps inline",
     "rebuild": "npm run clean && npm run build",
     "test:unit": "jest",

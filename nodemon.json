@@ -8,5 +8,5 @@
         "dist",
         "node_modules"
     ],
-    "exec": "npm run rebuild && npm run dev"
+    "exec": "npm run rebuild && npm run serve"
 }
