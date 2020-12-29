@@ -17,7 +17,7 @@ export default function makeValidateRequest(dependency: {
 
     if (error) {
       logger.error(
-        `Exception occurs while validate request format ${req.method} ${req.path}:
+        `Exception occurs while validate request format ${req.method} ${req.originalUrl}:
         ${error.stack}`
       );
       res.sendStatus(BadRequestError.STATUS_CODE);
