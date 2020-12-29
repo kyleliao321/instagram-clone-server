@@ -13,9 +13,12 @@ const app = express();
 app.use(bodyParser.json({ limit: '1mb' }));
 
 app.use(
-  morgan(':method :url :status :res[content-length] - :response-time ms', {
-    stream: { write: (message) => logger.info(message) }
-  })
+  morgan(
+    ':remote-addr :method :url :status :res[content-length] - :response-time ms',
+    {
+      stream: { write: (message) => logger.info(message) }
+    }
+  )
 );
 
 app.use('/api/v1/accounts', accountRouter);
