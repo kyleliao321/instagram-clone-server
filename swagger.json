@@ -1,117 +1,288 @@
 {
-    "swagger": "2.0",
+    "openapi": "3.0.0",
     "info": {
-        "version": "1.0.0", 
-        "title": "instagram clone server",
-        "description": "A clone server for instagram",
-        "license": {
+      "description": "A clone server for instagram",
+      "version": "1.0.0",
+      "title": "instagram clone server",
+      "license": {
         "name": "MIT",
         "url": "https://opensource.org/licenses/MIT"
-    }
+      }
     },
-    "host": "localhost:8080",
-    "basePath": "/",
+    "servers": [
+      {
+        "url": "http://localhost:8080"
+      }
+    ],
     "tags": [
-        {
-            "name": "Accounts",
-            "description": "account management"
-        },
-        {
-            "name": "Users",
-            "description": "user profile management"
-        },
-        {
-            "name": "Posts",
-            "description": "user posts management"
-        }
-    ],
-    "schemes": [
-        "http"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
+      {
+        "name": "Accounts",
+        "description": "account managment"
+      },
+      {
+        "name": "Users",
+        "description": "user management"
+      },
+      {
+        "name": "Posts",
+        "description": "post management"
+      }
     ],
     "paths": {
-        "/api/v1/accounts/register": {
-            "post": {
-                "tags": [
-                    "Accounts"
-                ],
-                "summary": "Register a new account",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "account information",
-                        "schema": {
-                            "$ref": "#/definitions/New-Account-Input"
-                        }
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "Created"
-                    }
+      "/api/v1/accounts/register": {
+        "post": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "create a new account",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/New-Account-Request-Body"
                 }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Created"
             }
-        },
-        "/api/v1/accounts/login": {
-            "post": {
-                "tags": [
-                    "Accounts"
-                ],
-                "summary": "login with existing account",
-                "parameters": [
-                    {
-                        "name": "body",
-                        "in": "body",
-                        "description": "account information",
-                        "schema": {
-                            "$ref": "#/definitions/New-Account-Input"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "schema": {
-                            "$ref": "#/definitions/Login-Sucess-Response"
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid account information"
-                    }
-                }
-            }
+          }
         }
+      },
+      "/api/v1/accounts/login": {
+        "post": {
+          "tags": [
+            "Accounts"
+          ],
+          "summary": "login with existing account",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/New-Account-Request-Body"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Login-Success-Response-Body"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Invalid account"
+            }
+          }
+        }
+      },
+      "/api/v1/users/": {
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "get user profiles with matched keyword",
+          "parameters": [
+            {
+              "name": "userName",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User-Profiles"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/users/{userId}": {
+        "put": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "update user profile",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Update-User-Profile-Request-Body"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Update-User-Profile-Response-Body"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
-    "definitions": {
-        "New-Account-Input": {
-            "required": [
-                "userName",
-                "password"
-            ],
+    "components": {
+      "schemas": {
+        "New-Account-Request-Body": {
+          "type": "object",
+          "properties": {
+            "userName": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "userName": "user1",
+            "password": "password1"
+          }
+        },
+        "Update-User-Profile-Request-Body": {
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "alias": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "encodedImage": {
+              "type": "string",
+              "format": "byte"
+            },
+            "postNum": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "followerNum": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "followingNum": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        },
+        "Login-Success-Response-Body": {
+          "type": "object",
+          "properties": {
+            "jwt": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "Update-User-Profile-Response-Body": {
+            "type": "object",
             "properties": {
-                "userName": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
+                "userId": {
+                    "type": "string",
+                    "format": "uuid"
                 }
             }
         },
-        "Login-Sucess-Response": {
-            "properties": {
-                "jwt": {
-                    "type": "string"
-                },
-                "userId": {
-                    "type": "string"
-                }
+        "User-Profile": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "alias": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "imageSrc": {
+              "type": "string"
+            },
+            "postNum": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "followerNum": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "followingNum": {
+              "type": "integer",
+              "format": "int64"
             }
+          }
+        },
+        "User-Profiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/User-Profile"
+          }
         }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
     }
-}
+  }
