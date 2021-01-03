@@ -160,6 +160,68 @@
             }
           }
         }
+			},
+      "/api/v1/posts/": {
+				"post": {
+					"tags": [
+						"Posts"
+					],
+					"security": [
+						{
+							"bearerAuth": []	
+						}
+					],
+					"requestBody": {
+						"required": true,
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/New-Post-Request-Body"
+								}
+							}
+						}
+					},
+					"responses": {
+						"201": {
+							"description": "Created",
+							"content": {
+								"application/json": {
+									"schema": {
+										"$ref": "#/components/schemas/Post"
+									}
+								}
+							}
+						}
+					}
+				},
+				"get": {
+					"tags": [
+						"Posts"
+					],
+					"parameters": [
+						{
+							"name": "userId",
+							"in": "query",
+							"required": true,
+							"schema": {
+								"type": "string",
+								"format": "uuid"
+							}
+						}
+					],
+					"responses": {
+						"200": {
+							"description": "Success",
+							"content": {
+								"application/json": { 
+									"schema": {
+										"$ref": "#/components/schemas/Posts"
+									}
+								}
+							}
+						}
+					}
+				}
       }
     },
     "components": {
@@ -215,7 +277,34 @@
               "format": "int64"
             }
           }
-        },
+				},
+				"New-Post-Request-Body": {
+					"type": "object",
+					"required": [
+						"timestamp",
+						"encodedImage",
+						"postedUserId"
+					],
+					"properties": {
+						"description": {
+							"type": "string"
+						},
+						"location": {
+							"type": "string"
+						},
+						"timestamp": {
+							"type": "string"
+						},
+						"encodedImage": {
+							"type": "string",
+							"format": "byte"
+						},
+						"postedUserId": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				},
         "Login-Success-Response-Body": {
           "type": "object",
           "properties": {
@@ -275,7 +364,39 @@
           "items": {
             "$ref": "#/components/schemas/User-Profile"
           }
-        }
+				},
+				"Post": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"description": {
+							"type": "string"
+						},
+						"location": {
+							"type": "string"
+						},
+						"timestamp": {
+							"type": "string"
+						},
+						"encodedImage": {
+							"type": "string",
+							"format": "byte"
+						},
+						"postedUserId": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				},
+				"Posts": {
+					"type": "array",
+					"items": {
+						"$ref": "#/components/schemas/Post"
+					}
+				}
       },
       "securitySchemes": {
         "bearerAuth": {
