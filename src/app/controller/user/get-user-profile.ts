@@ -2,11 +2,9 @@ import { Request } from 'express';
 import {
   Controller,
   GetUserProfileReponseBody,
-  GetUserProfileRequestBody,
   GetUserProfileService,
   HttpResponse
 } from '../../utilities/types';
-import { BadRequestError } from '../../utilities/http-error';
 
 export default function makeGetUserProfile(dependency: {
   getUserProfileByIdService: GetUserProfileService;

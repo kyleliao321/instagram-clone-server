@@ -28,9 +28,7 @@ describe('users-api-test', () => {
     const url = `/api/v1/users/${loginUserId}`;
 
     // when
-    const res = await request(app)
-      .get(url)
-      .set('Accept', 'application/json');
+    const res = await request(app).get(url).set('Accept', 'application/json');
 
     const keys = Object.keys(res.body);
 
@@ -54,9 +52,7 @@ describe('users-api-test', () => {
     const url = `/api/v1/users/${mockId}`;
 
     // when
-    const res = await request(app)
-      .get(url)
-      .set('Accept', 'application/json');
+    const res = await request(app).get(url).set('Accept', 'application/json');
 
     // expect
     expect(res.status).toBe(404);

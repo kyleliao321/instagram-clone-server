@@ -3,7 +3,6 @@ import makeRouteCallback from '../utilities/route-callback';
 import makeValidateRequest from '../utilities/validate-request';
 import {
   SearchUserProfilesRequestQuerySchema,
-  GetUserProfileRequestBodySchema,
   GetUserProfileRequestParamsSchema,
   UpdateUserProfileRequestBodySchema,
   UpdateUserProfileRequestParamsSchema

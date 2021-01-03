@@ -3,7 +3,6 @@ import makeRouteCallback from '../utilities/route-callback';
 import makeValidateRequest from '../utilities/validate-request';
 import {
   AddNewPostBodySchema,
-  GetPostBodySchema,
   GetPostParamsSchema,
   GetPostsQuerySchema
 } from '../utilities/schema';
@@ -27,10 +26,6 @@ postRouter.get(
     makeValidateRequest({
       schema: GetPostParamsSchema,
       key: RequestKeys.PARAMS
-    }),
-    makeValidateRequest({
-      schema: GetPostBodySchema,
-      key: RequestKeys.BODY
     })
   ],
   makeRouteCallback(getPost)

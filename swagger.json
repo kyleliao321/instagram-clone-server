@@ -200,7 +200,38 @@
 						}
           }
         }
-			},
+      },
+      "/api/v1/posts/{postId}": {
+        "get": {
+          "tags": [
+            "Posts"
+          ],
+          "summary": "get post by post id",
+          "parameters": [
+            {
+              "name": "postId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/api/v1/posts/": {
 				"post": {
 					"tags": [

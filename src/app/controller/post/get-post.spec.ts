@@ -5,34 +5,6 @@ import { string } from 'joi';
 import { BadRequestError } from '../../utilities/http-error';
 
 describe('get-post-controller', () => {
-  test('should throw a BadRequestError when post-id in params is not compatible with post-id in body', async () => {
-    // given
-    const shouldNotBeCalled = jest.fn();
-
-    const mockReq = ({
-      params: {
-        postId: 'mockParamPostId'
-      },
-      body: {
-        postId: 'mockBodyPostId'
-      } as GetPostRequestBody
-    } as unknown) as Request;
-
-    const getPostService: GetPostService = jest.fn();
-
-    const getPost = makeGetPost({ getPostService });
-
-    // when
-    try {
-      await getPost(mockReq);
-      shouldNotBeCalled();
-    } catch (e) {
-      expect(e).toBeInstanceOf(BadRequestError);
-    } finally {
-      expect(shouldNotBeCalled).not.toBeCalled();
-    }
-  });
-
   test('should trigger dependecies.getPostService and return correct result when invoke successfully', async () => {
     // given
     const mockId = 'mockId';
@@ -45,10 +17,7 @@ describe('get-post-controller', () => {
     const mockReq = ({
       params: {
         postId: mockId
-      },
-      body: {
-        postId: mockId
-      } as GetPostRequestBody
+      }
     } as unknown) as Request;
 
     const getPostService: GetPostService = jest.fn(() =>
