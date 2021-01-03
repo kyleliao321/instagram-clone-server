@@ -4,8 +4,8 @@ import makeValidateRequest from '../utilities/validate-request';
 import {
   FollowUserBodySchema,
   CancelFollowingParamSchema,
-  GetFollowersBodySchema,
-  GetFollowingsBodySchema
+  GetFollowersParamSchema,
+  GetFollowingsParamSchema
 } from '../utilities/schema';
 import { RequestKeys } from '../utilities/constants';
 import {
@@ -36,19 +36,19 @@ relationRouter.delete(
 );
 
 relationRouter.get(
-  '/followers',
+  '/followers/:userId',
   makeValidateRequest({
-    schema: GetFollowersBodySchema,
-    key: RequestKeys.BODY
+    schema: GetFollowersParamSchema,
+    key: RequestKeys.PARAMS
   }),
   makeRouteCallback(getFollowers)
 );
 
 relationRouter.get(
-  '/followings',
+  '/followings/:userId',
   makeValidateRequest({
-    schema: GetFollowingsBodySchema,
-    key: RequestKeys.BODY
+    schema: GetFollowingsParamSchema,
+    key: RequestKeys.PARAMS
   }),
   makeRouteCallback(getFollowings)
 );

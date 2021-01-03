@@ -3,8 +3,7 @@ import {
   GetFollowerListService,
   Controller,
   HttpResponse,
-  GetFollowersResponseBody,
-  GetFollowersRequestBody
+  GetFollowersResponseBody
 } from '../../utilities/types';
 
 export default function makeGetFollowers(dependencies: {
@@ -13,9 +12,9 @@ export default function makeGetFollowers(dependencies: {
   return async function getFollowers(
     req: Request
   ): Promise<HttpResponse<GetFollowersResponseBody>> {
-    const data: GetFollowersRequestBody = req.body;
+    const userId = req.params.userId;
 
-    const followers = await dependencies.getFollowerListService(data.userId);
+    const followers = await dependencies.getFollowerListService(userId);
 
     return Object.freeze({
       headers: {

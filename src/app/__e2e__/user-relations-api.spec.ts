@@ -243,7 +243,7 @@ describe('user-relations-api-test', () => {
     expect(res.body.followings.length).toBe(0);
   });
 
-  test('GET /api/v1/relations/followers - succeed', async () => {
+  test('GET /api/v1/relations/followers/:userId - succeed', async () => {
     // given
     const followerId = firstUserId;
     const followingId = secUserId;
@@ -251,10 +251,6 @@ describe('user-relations-api-test', () => {
     const insertReqBody = {
       followerId,
       followingId
-    };
-
-    const queryReqBody = {
-      userId: followingId
     };
 
     // when
@@ -265,9 +261,8 @@ describe('user-relations-api-test', () => {
       .send(insertReqBody);
 
     const queryRes = await request(app)
-      .get('/api/v1/relations/followers')
-      .set('Accept', 'application/json')
-      .send(queryReqBody);
+      .get(`/api/v1/relations/followers/${followingId}`)
+      .set('Accept', 'application/json');
 
     const queryBodyKeys = Object.keys(queryRes.body);
 
@@ -277,20 +272,6 @@ describe('user-relations-api-test', () => {
     expect(queryBodyKeys.length).toBe(1);
     expect(queryBodyKeys.includes('followers')).toBe(true);
     expect(queryRes.body.followers.length).toBe(1);
-  });
-
-  test('GET /api/v1/relations/followers - incorrect request query format', async () => {
-    // given
-    const queryReqBody = {};
-
-    // when
-    const res = await request(app)
-      .get('/api/v1/relations/followers')
-      .set('Accept', 'application/json')
-      .send(queryReqBody);
-
-    // expect
-    expect(res.status).toBe(400);
   });
 
   test('GET /api/v1/relations/followings - succeed', async () => {
@@ -303,10 +284,6 @@ describe('user-relations-api-test', () => {
       followingId
     };
 
-    const queryReqBody = {
-      userId: followerId
-    };
-
     // when
     const createdRes = await request(app)
       .post('/api/v1/relations/')
@@ -315,9 +292,8 @@ describe('user-relations-api-test', () => {
       .send(insertReqBody);
 
     const queryRes = await request(app)
-      .get('/api/v1/relations/followings')
-      .set('Accept', 'application/json')
-      .send(queryReqBody);
+      .get(`/api/v1/relations/followings/${followerId}`)
+      .set('Accept', 'application/json');
 
     const queryBodyKeys = Object.keys(queryRes.body);
 
@@ -327,19 +303,5 @@ describe('user-relations-api-test', () => {
     expect(queryBodyKeys.length).toBe(1);
     expect(queryBodyKeys.includes('followings')).toBe(true);
     expect(queryRes.body.followings.length).toBe(1);
-  });
-
-  test('GET /api/v1/relations/followings - incorrect request query format', async () => {
-    // given
-    const queryReqBody = {};
-
-    // when
-    const res = await request(app)
-      .get('/api/v1/relations/followings')
-      .set('Accept', 'application/json')
-      .send(queryReqBody);
-
-    // expect
-    expect(res.status).toBe(400);
   });
 });

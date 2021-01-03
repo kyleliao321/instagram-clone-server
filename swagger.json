@@ -335,6 +335,68 @@
 					}
 				}
       },
+      "/api/v1/relations/followers/{userId}": {
+        "get": {
+          "tags": [
+            "Relations"
+          ],
+          "summary": "get followers by user id",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User-Profiles"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/relations/followings/{userId}": {
+        "get": {
+          "tags": [
+            "Relations"
+          ],
+          "summary": "get followings by user id",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User-Profiles"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/api/v1/relations/follower/{followerId}/following/{followingId}": {
         "delete": {
           "tags": [
