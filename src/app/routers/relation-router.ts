@@ -3,7 +3,7 @@ import makeRouteCallback from '../utilities/route-callback';
 import makeValidateRequest from '../utilities/validate-request';
 import {
   FollowUserBodySchema,
-  CancelFollowingBodySchema,
+  CancelFollowingParamSchema,
   GetFollowersBodySchema,
   GetFollowingsBodySchema
 } from '../utilities/schema';
@@ -27,10 +27,10 @@ relationRouter.post(
 );
 
 relationRouter.delete(
-  '/',
+  '/follower/:followerId/following/:followingId',
   makeValidateRequest({
-    schema: CancelFollowingBodySchema,
-    key: RequestKeys.BODY
+    schema: CancelFollowingParamSchema,
+    key: RequestKeys.PARAMS
   }),
   makeRouteCallback(cancelFollowing)
 );

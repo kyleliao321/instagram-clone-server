@@ -192,7 +192,7 @@ describe('user-relations-api-test', () => {
     expect(res.status).toBe(403);
   });
 
-  test('DELETE /api/v1/relations/ - succeed', async () => {
+  test('DELETE /api/v1/relations/follower/:followerId/following/:followingId - succeed', async () => {
     // given
     const followerId = firstUserId;
     const followingId = secUserId;
@@ -210,67 +210,15 @@ describe('user-relations-api-test', () => {
       .send(reqBody);
 
     const deletedRes = await request(app)
-      .delete('/api/v1/relations/')
+      .delete(
+        `/api/v1/relations/follower/${followerId}/following/${followingId}`
+      )
       .set('Authorization', `Bearer ${firstUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
+      .set('Accept', 'application/json');
 
     // expect
     expect(createdRes.status).toBe(201);
     expect(deletedRes.status).toBe(200);
-  });
-
-  test('DELETE /api/v1/relations/ - incorrect request body format - without followerId', async () => {
-    // given
-    const followingId = secUserId;
-
-    const reqBody = {
-      followingId
-    };
-
-    // when
-    const rea = await request(app)
-      .delete('/api/v1/relations/')
-      .set('Authorization', `Bearer ${firstUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
-
-    // expect
-    expect(rea.status).toBe(400);
-  });
-
-  test('DELETE /api/v1/relations/ - incorrect request body format - without followingId', async () => {
-    // given
-    const followerId = firstUserId;
-
-    const reqBody = {
-      followerId
-    };
-
-    // when
-    const rea = await request(app)
-      .delete('/api/v1/relations/')
-      .set('Authorization', `Bearer ${firstUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
-
-    // expect
-    expect(rea.status).toBe(400);
-  });
-
-  test('DELETE /api/v1/relations/ - incorrect request body format - empty body', async () => {
-    // given
-    const reqBody = {};
-
-    // when
-    const rea = await request(app)
-      .delete('/api/v1/relations/')
-      .set('Authorization', `Bearer ${firstUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
-
-    // expect
-    expect(rea.status).toBe(400);
   });
 
   test('DELETE /api/v1/relations/ - relation does not exist', async () => {
@@ -278,17 +226,13 @@ describe('user-relations-api-test', () => {
     const followerId = firstUserId;
     const followingId = secUserId;
 
-    const reqBody = {
-      followerId,
-      followingId
-    };
-
     // when
     const res = await request(app)
-      .delete('/api/v1/relations/')
+      .delete(
+        `/api/v1/relations/follower/${followerId}/following/${followingId}`
+      )
       .set('Authorization', `Bearer ${firstUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
+      .set('Accept', 'application/json');
 
     const keys = Object.keys(res.body);
 

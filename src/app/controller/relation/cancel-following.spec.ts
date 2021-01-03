@@ -35,10 +35,10 @@ describe('cancel-following-controller', () => {
       headers: {
         authorization: 'mockAuth'
       },
-      body: {
+      params: {
         followerId: mockFollowerId,
         followingId: mockFollowingId
-      } as CancelFollowingRequestBody
+      }
     } as unknown) as Request;
 
     const mockTokenId = 'mockTokenId';
@@ -73,10 +73,10 @@ describe('cancel-following-controller', () => {
       headers: {
         authorization: 'mockAuth'
       },
-      body: {
+      params: {
         followerId: mockFollowerId,
         followingId: mockFollowingId
-      } as CancelFollowingRequestBody
+      }
     } as unknown) as Request;
 
     const mockTokenId = 'mockFollowerId';

@@ -334,7 +334,52 @@
 						}
 					}
 				}
-			},
+      },
+      "/api/v1/relations/follower/{followerId}/following/{followingId}": {
+        "delete": {
+          "tags": [
+            "Relations"
+          ],
+          "summary": "delete user following relation",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "followerId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            {
+              "name": "followingId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User-Profiles"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
 			"/api/v1/likes/": {
 				"post": {
 					"tags": [

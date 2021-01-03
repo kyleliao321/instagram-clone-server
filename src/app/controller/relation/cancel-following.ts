@@ -1,7 +1,6 @@
 import { Request } from 'express';
 import {
   CacnelFollowingService,
-  CancelFollowingRequestBody,
   CancelFollowingResponseBody,
   Controller,
   GetUserProfileService,
@@ -24,21 +23,25 @@ export default function makeCancelFollowing(dependencies: {
       req.headers.authorization
     );
 
-    const data: CancelFollowingRequestBody = req.body;
+    const followerId = req.params.followerId;
+    const followingId = req.params.followingId;
 
-    if (tokenUserId !== data.followerId) {
+    if (tokenUserId !== followerId) {
       throw new UnauthorizedError(
-        `${tokenUserId}(user-id) is trying to act as ${data.followerId}(user-id) to cancel following relationship with ${data.followingId}(user-id).`
+        `${tokenUserId}(user-id) is trying to act as ${followerId}(user-id) to cancel following relationship with ${followingId}(user-id).`
       );
     }
 
-    const updatedFollowings = await dependencies.cancelFollowingService(data);
+    const updatedFollowings = await dependencies.cancelFollowingService({
+      followerId,
+      followingId
+    });
 
     const followerUserProfile = await dependencies.getUserProfileByIdService(
-      data.followerId
+      followerId
     );
     const followingUserProfile = await dependencies.getUserProfileByIdService(
-      data.followingId
+      followingId
     );
 
     await dependencies.updateUserProfileService({
