@@ -4,39 +4,6 @@ import { GetUserProfileService, QueryUserProfile } from '../../utilities/types';
 import makeGetUserProfile from './get-user-profile';
 
 describe('get user profile controller', () => {
-  test('should throw BadRequestError when id params are not compatible between path and body', async () => {
-    // given
-    const shouldNotToBeCalled = jest.fn();
-
-    const mockPathId = 'mockPathId';
-    const mockBodyId = 'mockBodyId';
-
-    const mockRequest = ({
-      params: {
-        userId: mockPathId
-      },
-      body: {
-        userId: mockBodyId
-      }
-    } as unknown) as Request;
-
-    const mockGetUserProfileByIdService: GetUserProfileService = jest.fn();
-
-    const getUserProfile = makeGetUserProfile({
-      getUserProfileByIdService: mockGetUserProfileByIdService
-    });
-
-    // when
-    try {
-      await getUserProfile(mockRequest);
-      shouldNotToBeCalled();
-    } catch (e) {
-      expect(e).toBeInstanceOf(BadRequestError);
-    } finally {
-      expect(shouldNotToBeCalled).not.toBeCalled();
-    }
-  });
-
   test('should response with correct status and body when getUserProfileById invoke successfully', async () => {
     // given
     const mockUserId = 'mockUserId';

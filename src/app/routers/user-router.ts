@@ -30,10 +30,6 @@ userRouter.get(
   '/:userId',
   [
     makeValidateRequest({
-      schema: GetUserProfileRequestBodySchema,
-      key: RequestKeys.BODY
-    }),
-    makeValidateRequest({
       schema: GetUserProfileRequestParamsSchema,
       key: RequestKeys.PARAMS
     })

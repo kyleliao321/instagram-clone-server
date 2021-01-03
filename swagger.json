@@ -124,6 +124,35 @@
         }
       },
       "/api/v1/users/{userId}": {
+        "get": {
+          "tags": [
+            "Users"
+          ],
+          "summary": "get user profile by user id",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User-Profile"
+                  }
+                }
+              }
+            }
+          }
+        },
         "put": {
           "tags": [
             "Users"

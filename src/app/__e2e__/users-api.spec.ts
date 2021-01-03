@@ -25,16 +25,11 @@ describe('users-api-test', () => {
 
   test('GET /api/v1/users/:userId - succeed', async () => {
     // given
-    const reqBody = {
-      userId: loginUserId
-    };
-
     const url = `/api/v1/users/${loginUserId}`;
 
     // when
     const res = await request(app)
       .get(url)
-      .send(reqBody)
       .set('Accept', 'application/json');
 
     const keys = Object.keys(res.body);
@@ -52,62 +47,19 @@ describe('users-api-test', () => {
     expect(keys.includes('followingNum')).toBe(true);
   });
 
-  test('GET /api/v1/users/:userId - incorrect request body format', async () => {
-    // given
-    const reqBody = {}; // without userId
-
-    const url = `/api/v1/users/${loginUserId}`;
-
-    // when
-    const res = await request(app)
-      .get(url)
-      .send(reqBody)
-      .set('Accept', 'application/json');
-
-    const keys = Object.keys(res.body);
-
-    // expect
-    expect(res.status).toBe(400);
-  });
-
   test('GET /api/v1/users/:userId - user does not exist', async () => {
     // given
     const mockId = 'a7254a46-e26e-4577-82a0-1bbd35cb6831';
 
-    const reqBody = {
-      userId: mockId
-    };
-
     const url = `/api/v1/users/${mockId}`;
 
     // when
     const res = await request(app)
       .get(url)
-      .send(reqBody)
       .set('Accept', 'application/json');
 
     // expect
     expect(res.status).toBe(404);
-  });
-
-  test('GET /api/v1/users/:userId - path user id is not the same as body user id', async () => {
-    // given
-    const mockId = 'a7254a46-e26e-4577-82a0-1bbd35cb6831';
-
-    const reqBody = {
-      userId: loginUserToken
-    };
-
-    const url = `/api/v1/users/${mockId}`;
-
-    // when
-    const res = await request(app)
-      .get(url)
-      .send(reqBody)
-      .set('Accept', 'application/json');
-
-    // expect
-    expect(res.status).toBe(400);
   });
 
   test('GET /api/v1/users/ - filter by user name succeed', async () => {

@@ -14,19 +14,9 @@ export default function makeGetUserProfile(dependency: {
   return async function getUserProfile(
     request: Request
   ): Promise<HttpResponse<GetUserProfileReponseBody>> {
-    const data: GetUserProfileRequestBody = request.body;
-
     const pathUserId = request.params.userId;
 
-    const bodyUserId = data.userId;
-
-    if (pathUserId !== bodyUserId) {
-      throw new BadRequestError(
-        `path id - ${pathUserId} is not compatible with body id - ${bodyUserId}`
-      );
-    }
-
-    const userProfile = await dependency.getUserProfileByIdService(bodyUserId);
+    const userProfile = await dependency.getUserProfileByIdService(pathUserId);
 
     return Object.freeze({
       headers: {
