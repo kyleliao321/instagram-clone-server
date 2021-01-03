@@ -3,7 +3,7 @@ import makeRouteCallback from '../utilities/route-callback';
 import makeValidateRequest from '../utilities/validate-request';
 import {
   LikePostBodySchema,
-  DislikePostBodySchema,
+  DislikePostParamSchema,
   GetLikedUsersQuerySchema
 } from '../utilities/schema';
 import { RequestKeys } from '../utilities/constants';
@@ -21,10 +21,10 @@ likeRouter.post(
 );
 
 likeRouter.delete(
-  '/',
+  '/user/:userId/post/:postId',
   makeValidateRequest({
-    schema: DislikePostBodySchema,
-    key: RequestKeys.BODY
+    schema: DislikePostParamSchema,
+    key: RequestKeys.PARAMS
   }),
   makeRouteCallback(dislikePost)
 );

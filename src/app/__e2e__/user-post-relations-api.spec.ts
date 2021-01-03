@@ -165,17 +165,11 @@ describe('user-post-relations-api-test', () => {
     const userId = secondLoginUserId;
     const postId = validPostId;
 
-    const reqBody = {
-      userId,
-      postId
-    };
-
     // when
     const res = await request(app)
-      .delete('/api/v1/likes/')
+      .delete(`/api/v1/likes/user/${userId}/post/${postId}`)
       .set('Authorization', `Bearer ${secondLoginUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
+      .set('Accept', 'application/json');
 
     const keys = Object.keys(res.body);
 
@@ -186,75 +180,16 @@ describe('user-post-relations-api-test', () => {
     expect(res.body.likedUsers.length).toBe(0);
   });
 
-  test('DELETE /api/v1/liles/ - incorrect request format - without userId', async () => {
-    // given
-    const postId = validPostId;
-
-    const reqBody = {
-      postId
-    };
-
-    // when
-    const res = await request(app)
-      .delete('/api/v1/likes/')
-      .set('Authorization', `Bearer ${secondLoginUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
-
-    // expect
-    expect(res.status).toBe(400);
-  });
-
-  test('DELETE /api/v1/liles/ - incorrect request format - without postId', async () => {
-    // given
-    const userId = secondLoginUserId;
-
-    const reqBody = {
-      userId
-    };
-
-    // when
-    const res = await request(app)
-      .delete('/api/v1/likes/')
-      .set('Authorization', `Bearer ${secondLoginUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
-
-    // expect
-    expect(res.status).toBe(400);
-  });
-
-  test('DELETE /api/v1/liles/ - incorrect request format - empty body', async () => {
-    // given
-    const reqBody = {};
-
-    // when
-    const res = await request(app)
-      .delete('/api/v1/likes/')
-      .set('Authorization', `Bearer ${secondLoginUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
-
-    // expect
-    expect(res.status).toBe(400);
-  });
-
   test('DELETE /api/v1/likes/ - forbidden access', async () => {
     // given
     const userId = secondLoginUserId;
     const postId = validPostId;
 
-    const reqBody = {
-      userId,
-      postId
-    };
-
     // when
     const res = await request(app)
-      .delete('/api/v1/likes/')
+      .delete(`/api/v1/likes/user/${userId}/post/${postId}`)
       .set('Authorization', `Bearer ${firstLoginUserToken}`)
-      .set('Accept', 'application/json')
-      .send(reqBody);
+      .set('Accept', 'application/json');
 
     // expect
     expect(res.status).toBe(403);
@@ -265,16 +200,10 @@ describe('user-post-relations-api-test', () => {
     const userId = secondLoginUserId;
     const postId = validPostId;
 
-    const reqBody = {
-      userId,
-      postId
-    };
-
     // when
     const res = await request(app)
-      .delete('/api/v1/likes/')
-      .set('Accept', 'application/json')
-      .send(reqBody);
+      .delete(`/api/v1/likes/user/${userId}/post/${postId}`)
+      .set('Accept', 'application/json');
 
     // expect
     expect(res.status).toBe(401);

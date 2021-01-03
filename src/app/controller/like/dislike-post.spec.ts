@@ -9,7 +9,7 @@ import {
 import { ForbiddenError } from '../../utilities/http-error';
 
 describe('dislike-post-controller', () => {
-  test('should throw an UnauthorizedError when tokenUserId is not compatible with userId in req.body', async () => {
+  test('should throw an UnauthorizedError when tokenUserId is not compatible with userId in params', async () => {
     // given
     const shouldNotBeCalled = jest.fn();
 
@@ -17,10 +17,10 @@ describe('dislike-post-controller', () => {
       headers: {
         authorization: 'mockAuth'
       },
-      body: {
+      params: {
         userId: 'mockBodyUserId',
         postId: 'mockPostId'
-      } as DislikePostRequestBody
+      }
     } as unknown) as Request;
 
     const verifyTokenService: VerifyTokenService = jest.fn(() => 'mockTokenId');
@@ -45,8 +45,6 @@ describe('dislike-post-controller', () => {
 
   test('should trigger dislikePostService and return correct result when invoke successfully', async () => {
     // given
-    const shouldNotBeCalled = jest.fn();
-
     const mockUserId = 'mockUserId';
     const mockPostId = 'mockPostId';
     const mockUserName = 'mockUserName';
@@ -61,10 +59,10 @@ describe('dislike-post-controller', () => {
       headers: {
         authorization: 'mockAuth'
       },
-      body: {
+      params: {
         userId: mockUserId,
         postId: mockPostId
-      } as DislikePostRequestBody
+      }
     } as unknown) as Request;
 
     const verifyTokenService: VerifyTokenService = jest.fn(() => mockUserId);

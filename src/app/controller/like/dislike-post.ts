@@ -3,7 +3,6 @@ import { ForbiddenError } from '../../utilities/http-error';
 import {
   Controller,
   HttpResponse,
-  DislikePostRequestBody,
   DislikePostResponseBody,
   DislikePostService,
   VerifyTokenService
@@ -20,15 +19,19 @@ export default function makeDislikePost(dependencies: {
       req.headers.authorization
     );
 
-    const data: DislikePostRequestBody = req.body;
+    const userId = req.params.userId;
+    const postId = req.params.postId;
 
-    if (tokenUserId !== data.userId) {
+    if (tokenUserId !== userId) {
       throw new ForbiddenError(
-        `${tokenUserId}(user-id) is trying to act as ${data.userId}(user-id) to dislike post - ${data.postId}.`
+        `${tokenUserId}(user-id) is trying to act as ${userId}(user-id) to dislike post - ${postId}.`
       );
     }
 
-    const updatedLikedUsers = await dependencies.dislikePostService(data);
+    const updatedLikedUsers = await dependencies.dislikePostService({
+      userId,
+      postId
+    });
 
     return Object.freeze({
       headers: {

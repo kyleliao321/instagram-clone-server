@@ -15,6 +15,7 @@ import {
   GetPostsQuerySchema,
   GetPostParamsSchema,
   LikePostBodySchema,
+  DislikePostParamSchema,
   DislikePostBodySchema,
   GetLikedUsersQuerySchema
 } from './schemas';
@@ -36,6 +37,7 @@ export {
   GetPostsQuerySchema,
   GetPostParamsSchema,
   LikePostBodySchema,
+  DislikePostParamSchema,
   DislikePostBodySchema,
   GetLikedUsersQuerySchema
 };
