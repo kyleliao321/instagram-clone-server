@@ -237,6 +237,11 @@
 						"Relations"
 					],
 					"summary": "follow another user",
+					"security": [
+						{
+							"bearerAuth": []
+						}
+					],
 					"requestBody": {
 						"required": true,
 						"content": {
@@ -254,6 +259,41 @@
 								"application/json": {
 									"schema": {
 										"$ref": "#/components/schemas/User-Profiles"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"/api/v1/likes/": {
+				"post": {
+					"tags": [
+						"Likes"
+					],
+					"summary": "like new post",
+					"security": [
+						{
+							"bearerAuth": []
+						}
+					],
+					"requestBody": {
+						"required": true,
+						"content": {
+							"applicaton/json": {
+								"schema": {
+									"$ref": "#/components/schemas/Like-Post-Request-Body"
+								}
+							}
+						}
+					},
+					"responses": {
+						"201": {
+							"description": "Created",
+							"content": {
+								"application/json": {
+									"schema": {
+										"$ref": "#/components/schemas/Posts"
 									}
 								}
 							}
@@ -355,6 +395,23 @@
 							"format": "uuid"
 						},
 						"followingId": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				},
+				"Like-Post-Request-Body": {
+					"type": "object",
+					"required": [
+						"userId",
+						"postId"
+					],
+					"properties": {
+						"userId": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"postId": {
 							"type": "string",
 							"format": "uuid"
 						}
