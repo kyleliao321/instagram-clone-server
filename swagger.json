@@ -26,7 +26,15 @@
       {
         "name": "Posts",
         "description": "post management"
-      }
+			},
+			{
+				"name": "Likes",
+				"description": "User-Post relation management"
+			},
+			{
+				"name": "Relations",
+				"description": "User following relation management"
+			}
     ],
     "paths": {
       "/api/v1/accounts/register": {
@@ -222,7 +230,37 @@
 						}
 					}
 				}
-      }
+			},
+			"/api/v1/relations/": {
+				"post": {
+					"tags": [
+						"Relations"
+					],
+					"summary": "follow another user",
+					"requestBody": {
+						"required": true,
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/New-User-Relation-Request-Body"
+								}
+							}
+						}
+					},
+					"responses": {
+						"201": {
+							"description": "Created",
+							"content": {
+								"application/json": {
+									"schema": {
+										"$ref": "#/components/schemas/User-Profiles"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
     },
     "components": {
       "schemas": {
@@ -300,6 +338,23 @@
 							"format": "byte"
 						},
 						"postedUserId": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				},
+				"New-User-Relation-Request-Body": {
+					"type": "object",
+					"required": [
+						"followerId",
+						"followingId"
+					],
+					"properties": {
+						"followerId": {
+							"type": "string",
+							"format": "uuid"
+						},
+						"followingId": {
 							"type": "string",
 							"format": "uuid"
 						}
