@@ -1,0 +1,117 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0", 
+        "title": "instagram clone server",
+        "description": "A clone server for instagram",
+        "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+    }
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Accounts",
+            "description": "account management"
+        },
+        {
+            "name": "Users",
+            "description": "user profile management"
+        },
+        {
+            "name": "Posts",
+            "description": "user posts management"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/v1/accounts/register": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "Register a new account",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "account information",
+                        "schema": {
+                            "$ref": "#/definitions/New-Account-Input"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/api/v1/accounts/login": {
+            "post": {
+                "tags": [
+                    "Accounts"
+                ],
+                "summary": "login with existing account",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "account information",
+                        "schema": {
+                            "$ref": "#/definitions/New-Account-Input"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "$ref": "#/definitions/Login-Sucess-Response"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid account information"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "New-Account-Input": {
+            "required": [
+                "userName",
+                "password"
+            ],
+            "properties": {
+                "userName": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Login-Sucess-Response": {
+            "properties": {
+                "jwt": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

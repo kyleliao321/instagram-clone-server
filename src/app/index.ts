@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import swaggerUi from 'swagger-ui-express';
 import accountRouter from './routers/account-router';
 import userRouter from './routers/user-router';
 import postRouter from './routers/post-router';
@@ -9,6 +10,10 @@ import likeRouter from './routers/like-router';
 import { logger } from './infrastructure';
 
 const app = express();
+
+const swaggerDoc = require('../../swagger.json');
+
+app.use('/api/v1/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use(bodyParser.json({ limit: '1mb' }));
 

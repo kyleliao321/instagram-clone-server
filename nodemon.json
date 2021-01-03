@@ -1,6 +1,7 @@
 {
     "watch": [
-        "src"
+        "src",
+        "swagger.json"
     ],
     "ext": "ts",
     "ignore": [
@@ -8,5 +9,5 @@
         "dist",
         "node_modules"
     ],
-    "exec": "npm run rebuild && npm run serve"
+    "exec": "npm run build && npm run serve"
 }
