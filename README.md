@@ -47,3 +47,6 @@ docker-compose stop
 ```bash
 docker-compose down
 ```
+
+## API document
+API endpoins are documented with swagger-ui-express. Check on documents by starting the service and connect to `http://localhost:8080/api/v1/docs`. 
