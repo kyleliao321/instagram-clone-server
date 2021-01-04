@@ -22,7 +22,15 @@ export default function makeUpdateUserProfile(dependencies: {
       request.headers.authorization
     );
 
-    const data: UpdateUserProfileRequestBody = request.body;
+    const fileBuffer =
+      request.file === undefined ? undefined : request.file.buffer;
+    const encodedImage =
+      fileBuffer === undefined ? undefined : fileBuffer.toString('base64');
+
+    const data: UpdateUserProfileRequestBody = {
+      ...request.body,
+      encodedImage
+    };
 
     const pathUserId = request.params.userId;
 

@@ -179,9 +179,9 @@
           ],
           "requestBody": {
             "content": {
-              "application/json": {
+              "multipart/form-data": {
                 "schema": {
-                  "$ref": "#/components/schemas/Update-User-Profile-Request-Body"
+                  "$ref": "#/components/schemas/Update-User-Profile-Request-Form"
                 }
               }
             },
@@ -575,7 +575,7 @@
             "password": "password1"
           }
         },
-        "Update-User-Profile-Request-Body": {
+        "Update-User-Profile-Request-Form": {
           "type": "object",
           "required": [
             "id"
@@ -594,9 +594,9 @@
             "description": {
               "type": "string"
             },
-            "encodedImage": {
+            "userImage": {
               "type": "string",
-              "format": "byte"
+              "format": "binary"
             },
             "postNum": {
               "type": "integer",
@@ -611,33 +611,6 @@
               "format": "int64"
             }
           }
-				},
-				"New-Post-Request-Body": {
-					"type": "object",
-					"required": [
-						"timestamp",
-						"encodedImage",
-						"postedUserId"
-					],
-					"properties": {
-						"description": {
-							"type": "string"
-						},
-						"location": {
-							"type": "string"
-						},
-						"timestamp": {
-							"type": "string"
-						},
-						"encodedImage": {
-							"type": "string",
-							"format": "byte"
-						},
-						"postedUserId": {
-							"type": "string",
-							"format": "uuid"
-						}
-					}
         },
         "New-Post-Request-Form": {
           "type": "object",

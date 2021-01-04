@@ -13,6 +13,7 @@ import {
   getUserProfile,
   updateUserProfile
 } from '../controller';
+import makeExportImage from '../utilities/export-image';
 
 const userRouter = express.Router();
 
@@ -39,6 +40,7 @@ userRouter.get(
 userRouter.put(
   '/:userId',
   [
+    makeExportImage('userImage'),
     makeValidateRequest({
       schema: UpdateUserProfileRequestBodySchema,
       key: RequestKeys.BODY
