@@ -248,11 +248,11 @@
 					"requestBody": {
 						"required": true,
 						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/New-Post-Request-Body"
-								}
-							}
+							"multipart/form-data": {
+                "schema": {
+                  "$ref": "#/components/schemas/New-Post-Request-Form"
+                }
+              }
 						}
 					},
 					"responses": {
@@ -638,7 +638,34 @@
 							"format": "uuid"
 						}
 					}
-				},
+        },
+        "New-Post-Request-Form": {
+          "type": "object",
+          "required": [
+            "timestamp",
+						"postImage",
+						"postedUserId"
+          ],
+          "properties": {
+            "description": {
+							"type": "string"
+						},
+						"location": {
+							"type": "string"
+						},
+						"timestamp": {
+							"type": "string"
+						},
+						"postedUserId": {
+							"type": "string",
+							"format": "uuid"
+						},
+            "postImage": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        },
 				"New-User-Relation-Request-Body": {
 					"type": "object",
 					"required": [

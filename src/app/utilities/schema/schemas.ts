@@ -70,7 +70,7 @@ export const GetFollowingsParamSchema = Joi.object().keys({
 
 export const AddNewPostBodySchema = Joi.object().keys({
   description: Joi.string().allow(''),
-  location: Joi.string(),
+  location: Joi.string().allow(''),
   timestamp: Joi.string().required(),
   postedUserId: Joi.string().required()
 });
