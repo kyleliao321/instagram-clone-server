@@ -13,21 +13,21 @@ const postRouter = express.Router();
 
 postRouter.post(
   '/',
-  makeValidateRequest({
-    schema: AddNewPostBodySchema,
-    key: RequestKeys.BODY
-  }),
+  [
+    makeValidateRequest({
+      schema: AddNewPostBodySchema,
+      key: RequestKeys.BODY
+    })
+  ],
   makeRouteCallback(addNewPost)
 );
 
 postRouter.get(
   '/:postId',
-  [
-    makeValidateRequest({
-      schema: GetPostParamsSchema,
-      key: RequestKeys.PARAMS
-    })
-  ],
+  makeValidateRequest({
+    schema: GetPostParamsSchema,
+    key: RequestKeys.PARAMS
+  }),
   makeRouteCallback(getPost)
 );
 
