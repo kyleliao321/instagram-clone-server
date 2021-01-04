@@ -24,7 +24,14 @@ export default function makeAddNewPost(dependencies: {
       req.headers.authorization
     );
 
-    const data: AddNewPostRequestBody = req.body;
+    const fileBuffer = req.file.buffer;
+
+    const encodedImage = fileBuffer.toString('base64');
+
+    const data: AddNewPostRequestBody = {
+      ...req.body,
+      encodedImage
+    };
 
     if (tokenUserId !== data.postedUserId) {
       throw new UnauthorizedError(

@@ -72,8 +72,20 @@ export const AddNewPostBodySchema = Joi.object().keys({
   description: Joi.string().allow(''),
   location: Joi.string(),
   timestamp: Joi.string().required(),
-  encodedImage: Joi.string().required(),
   postedUserId: Joi.string().required()
+});
+
+export const AddNewPostFileSchmea = Joi.object().keys({
+  fieldname: Joi.string(),
+  originalname: Joi.string(),
+  encoding: Joi.string(),
+  mimetype: Joi.string(),
+  size: Joi.number(),
+  stream: Joi.any(),
+  destination: Joi.string(),
+  filename: Joi.string(),
+  path: Joi.string(),
+  buffer: Joi.any().required()
 });
 
 export const GetPostBodySchema = Joi.object().keys({

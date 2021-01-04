@@ -18,7 +18,7 @@ describe('add-new-post-controller', () => {
     const mockDes = 'mockDes';
     const mockLoc = 'mockLoc';
     const mockTis = 'mockTis';
-    const mockEncodedImg = 'mockEncodedImg';
+    const mockFileBuffer = Buffer.from('mockBuffer');
     const mokcPostedUserId = 'mokcPostedUserId';
 
     const mockReq = ({
@@ -29,9 +29,11 @@ describe('add-new-post-controller', () => {
         description: mockDes,
         location: mockLoc,
         timestamp: mockTis,
-        encodedImage: mockEncodedImg,
         postedUserId: mokcPostedUserId
-      } as AddNewPostRequestBody
+      },
+      file: {
+        buffer: mockFileBuffer
+      }
     } as unknown) as Request;
 
     const verifyTokenService: VerifyTokenService = jest.fn(() => 'tokenId');
@@ -66,7 +68,7 @@ describe('add-new-post-controller', () => {
     const mockDes = 'mockDes';
     const mockLoc = 'mockLoc';
     const mockTis = 'mockTis';
-    const mockEncodedImg = 'mockEncodedImg';
+    const mockFileBuffer = Buffer.from('mockBuffer');
     const mockImgSrc = 'mockImgSrc';
     const mokcPostedUserId = 'mokcPostedUserId';
 
@@ -86,9 +88,11 @@ describe('add-new-post-controller', () => {
         description: mockDes,
         location: mockLoc,
         timestamp: mockTis,
-        encodedImage: mockEncodedImg,
         postedUserId: mokcPostedUserId
-      } as AddNewPostRequestBody
+      },
+      file: {
+        buffer: mockFileBuffer
+      }
     } as unknown) as Request;
 
     const verifyTokenService: VerifyTokenService = jest.fn(
@@ -154,7 +158,7 @@ describe('add-new-post-controller', () => {
     const mockId = 'mockId';
     const mockLoc = 'mockLoc';
     const mockTis = 'mockTis';
-    const mockEncodedImg = 'mockEncodedImg';
+    const mockFileBuffer = Buffer.from('mockBuffer');
     const mockImgSrc = 'mockImgSrc';
     const mokcPostedUserId = 'mokcPostedUserId';
 
@@ -173,9 +177,11 @@ describe('add-new-post-controller', () => {
       body: {
         location: mockLoc,
         timestamp: mockTis,
-        encodedImage: mockEncodedImg,
         postedUserId: mokcPostedUserId
-      } as AddNewPostRequestBody
+      },
+      file: {
+        buffer: mockFileBuffer
+      }
     } as unknown) as Request;
 
     const verifyTokenService: VerifyTokenService = jest.fn(
@@ -241,7 +247,7 @@ describe('add-new-post-controller', () => {
     const mockId = 'mockId';
     const mockDes = 'mockDes';
     const mockTis = 'mockTis';
-    const mockEncodedImg = 'mockEncodedImg';
+    const mockFileBuffer = Buffer.from('mockBuffer');
     const mockImgSrc = 'mockImgSrc';
     const mokcPostedUserId = 'mokcPostedUserId';
 
@@ -260,9 +266,11 @@ describe('add-new-post-controller', () => {
       body: {
         description: mockDes,
         timestamp: mockTis,
-        encodedImage: mockEncodedImg,
         postedUserId: mokcPostedUserId
-      } as AddNewPostRequestBody
+      },
+      file: {
+        buffer: mockFileBuffer
+      }
     } as unknown) as Request;
 
     const verifyTokenService: VerifyTokenService = jest.fn(

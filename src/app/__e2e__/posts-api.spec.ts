@@ -125,20 +125,18 @@ describe('posts-api-test', () => {
 
   test('POST /api/v1/posts/ - succeed', async () => {
     // given
-    const encodedImage = await fse.readFile(mockEncodedImageFilePath, 'utf8');
-
-    const reqBody = {
-      timestamp: '1999-01-07T20:05:06.000Z',
-      encodedImage,
-      postedUserId: loginUserId
-    };
+    const timestamp = '1999-01-07T20:05:06.000Z';
+    const postedUserId = loginUserId;
 
     // when
     const res = await request(app)
       .post('/api/v1/posts/')
+      .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${loginUserToken}`)
       .set('Accept', 'application/json')
-      .send(reqBody);
+      .field('timestamp', timestamp)
+      .field('postedUserId', postedUserId)
+      .attach('postImage', imageSrcPath);
 
     const keys = Object.keys(res.body);
 
@@ -154,15 +152,13 @@ describe('posts-api-test', () => {
   });
 
   test('POST /api/v1/posts/ - incorrect request format', async () => {
-    // given
-    const reqBody = {};
-
     // when
     const res = await request(app)
       .post('/api/v1/posts/')
+      .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${loginUserToken}`)
       .set('Accept', 'application/json')
-      .send(reqBody);
+      .attach('postImage', imageSrcPath);
 
     const keys = Object.keys(res.body);
 
@@ -172,21 +168,18 @@ describe('posts-api-test', () => {
 
   test('POST /api/v1/posts/ - unauthorized access', async () => {
     // given
-    const secondUserId = 'a471fe7c-f728-4e31-801e-1776e854fb2d';
-    const encodedImage = await fse.readFile(mockEncodedImageFilePath, 'utf8');
-
-    const reqBody = {
-      timestamp: '1999-01-07T20:05:06.000Z',
-      encodedImage,
-      postedUserId: secondUserId
-    };
+    const timestamp = '1999-01-07T20:05:06.000Z';
+    const postedUserId = 'a471fe7c-f728-4e31-801e-1776e854fb2d';
 
     // when
     const res = await request(app)
       .post('/api/v1/posts/')
+      .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${loginUserToken}`)
       .set('Accept', 'application/json')
-      .send(reqBody);
+      .field('timestamp', timestamp)
+      .field('postedUserId', postedUserId)
+      .attach('postImage', imageSrcPath);
 
     // expect
     expect(res.status).toBe(401);
@@ -194,18 +187,17 @@ describe('posts-api-test', () => {
 
   test('POST /api/v1/posts/ - request without encodedImage', async () => {
     // given
-
-    const reqBody = {
-      timestamp: '1999-01-07T20:05:06.000Z',
-      postedUserId: loginUserId
-    };
+    const timestamp = '1999-01-07T20:05:06.000Z';
+    const postedUserId = 'a471fe7c-f728-4e31-801e-1776e854fb2d';
 
     // when
     const res = await request(app)
       .post('/api/v1/posts/')
+      .set('Content-Type', 'multipart/form-data')
       .set('Authorization', `Bearer ${loginUserToken}`)
       .set('Accept', 'application/json')
-      .send(reqBody);
+      .field('timestamp', timestamp)
+      .field('postedUserId', postedUserId);
 
     // expect
     expect(res.status).toBe(400);

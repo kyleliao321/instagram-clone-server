@@ -6,7 +6,9 @@ import { RequestKeys } from '../constants';
 describe('validate request', () => {
   test('should trigger next function when schema validation succeed', () => {
     // given
-    const mockRequest = {} as Request;
+    const mockRequest = {
+      body: {}
+    } as Request;
 
     const mockResponse = {} as Response;
 
@@ -36,7 +38,9 @@ describe('validate request', () => {
 
   test('should not trigger next function when schema validation failed', () => {
     // given
-    const mockRequest = {} as Request;
+    const mockRequest = {
+      body: {}
+    } as Request;
 
     const mockResponse = {
       sendStatus: (code: number) => {},

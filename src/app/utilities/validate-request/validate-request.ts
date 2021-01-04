@@ -4,7 +4,7 @@ import { logger } from '../../infrastructure';
 import { RequestKeys } from '../constants';
 import { BadRequestError } from '../http-error';
 
-export default function makeValidateRequest(dependency: {
+export default function makeValidateRequest(dependencies: {
   schema: Schema;
   key: RequestKeys;
 }) {
@@ -13,11 +13,20 @@ export default function makeValidateRequest(dependency: {
     res: Response,
     next: NextFunction
   ): void {
-    const { error } = dependency.schema.validate(req[dependency.key]);
+    if (req[dependencies.key] === undefined) {
+      logger.error(
+        `Exception occurs while validate request.${dependencies.key} ${req.method} ${req.originalUrl}:
+         request does not have property - ${dependencies.key}`
+      );
+      res.sendStatus(BadRequestError.STATUS_CODE);
+      return;
+    }
+
+    const { error } = dependencies.schema.validate(req[dependencies.key]);
 
     if (error) {
       logger.error(
-        `Exception occurs while validate request format ${req.method} ${req.originalUrl}:
+        `Exception occurs while validate request.${dependencies.key} ${req.method} ${req.originalUrl}:
         ${error.stack}`
       );
       res.sendStatus(BadRequestError.STATUS_CODE);
