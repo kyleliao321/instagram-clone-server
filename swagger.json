@@ -56,6 +56,9 @@
           "responses": {
             "201": {
               "description": "Created"
+            },
+            "409": {
+              "description": "Conflicted username"
             }
           }
         }

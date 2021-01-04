@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import { UnauthorizedError } from '../../utilities/http-error';
+import { ConflictError, UnauthorizedError } from '../../utilities/http-error';
 import {
   AccountDao,
   LoginAccount,
@@ -16,13 +16,19 @@ export default function makeBuildAccountDao(dependencies: { db: Knex }) {
     });
 
     async function insert(newAccount: NewAccount): Promise<string> {
-      await dependencies.db('accounts_table').insert({
-        user_id: newAccount.getId(),
-        user_name: newAccount.getUserName(),
-        hashed_password: newAccount.getHashedPassword()
-      });
-
-      return newAccount.getId();
+      try {
+        await dependencies.db('accounts_table').insert({
+          user_id: newAccount.getId(),
+          user_name: newAccount.getUserName(),
+          hashed_password: newAccount.getHashedPassword()
+        });
+        return newAccount.getId();
+      } catch (e) {
+        if (e instanceof Error && e.message.includes('duplicate key value')) {
+          throw new ConflictError('username is already existed.');
+        }
+        throw e;
+      }
     }
 
     async function verify(loginAccount: LoginAccount): Promise<string> {

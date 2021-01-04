@@ -20,7 +20,7 @@ export default function makeRouteCallback(controller: GenericController) {
         );
         if (e instanceof HttpError) {
           res.statusCode = e.getStatus();
-          res.send();
+          res.send(e.message);
         } else {
           res.statusCode = 500;
           res.send('unknown error');

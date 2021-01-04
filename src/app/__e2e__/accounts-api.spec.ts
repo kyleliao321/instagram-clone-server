@@ -59,7 +59,7 @@ describe('accounts-api-test', () => {
       .set('Accept', 'application/json');
 
     // expect
-    expect(res.status).toBe(500); // UserName conflict
+    expect(res.status).toBe(409); // UserName conflict
   });
 
   test('POST /api/v1/accounts/login - succeed', async () => {
