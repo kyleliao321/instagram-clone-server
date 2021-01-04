@@ -50,3 +50,36 @@ docker-compose down
 
 ## API document
 API endpoins are documented with swagger-ui-express. Check on documents by starting the service and connect to `http://localhost:8080/api/v1/docs`. 
+
+## Test
+
+### Unit Test
+Since unit test does not have any dependencies on database, you can run it directly with:
+```bash
+npm run test:unit
+```
+
+### Integration Test
+DAOs need to access database to run integration test. Therefore, remember to start the docker-compose before run integration test:
+```bash
+docker-compose start ## if services is not started yet
+
+npm run test:integration
+```
+
+### E2E Test
+E2E test required database to run. Therefore, remember to start the docker-comose before run e2e test:
+```bash
+docker-compose start ## if services is not started yet
+
+npm run test:e2e
+```
+### Postman
+Testing collection and environment for Postman are provided in `/__test__/postman`. You can import them manually into Postman and run with Collection Runner or run with newman-cli:
+```bash
+## install newman globally if not installed yet
+npm install -g newman
+
+## run test
+newman run ./__test__/postman/instagram-clone-server-story-test.postman_collection.json -e ./__test__/postman/instagram-clone-server-env.postman_environment.json --bail
+```

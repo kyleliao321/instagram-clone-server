@@ -1,0 +1,1428 @@
+{
+	"info": {
+		"_postman_id": "334effb6-4981-4d6f-bb1e-64cde974ead2",
+		"name": "instagram-clone-server-story-test",
+		"description": "User story testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. first user register a valid user account",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const currentDate = Date.now();\r",
+							"const userName = 'my-username-' + currentDate;\r",
+							"pm.environment.set('userName-1', userName);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('register should succeed when provide valid and unconflicted username', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName-1}}\",\r\n    \"password\": \"{{password-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/accounts/register",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. first user register a conflict user account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('register should fail when provided username is already in database', () => {\r",
+							"    pm.response.to.have.status(409);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName-1}}\",\r\n    \"password\": \"{{password-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/accounts/register",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. first user login with correct account",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('login should succeed when provided username and password are correct', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"successful login should respnse with jwt and userId in json body\",  () => {\r",
+							"    const data = pm.response.json();\r",
+							"    pm.expect('jwt' in data).to.eql(true);\r",
+							"    pm.expect('userId' in data).to.eql(true);\r",
+							"\r",
+							"    const { jwt, userId } = data;\r",
+							"\r",
+							"    pm.environment.set('userId-1', userId);\r",
+							"    pm.environment.set('jwt-1', jwt);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName-1}}\",\r\n    \"password\": \"{{password-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/accounts/login",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. first user login with correct username but incorrect password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('login should fail when provided password is not correct', () => {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName-1}}\",\r\n    \"password\": \"incorrect{{password-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/accounts/login",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. second user register with a valid account",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const currentDate = Date.now();\r",
+							"const userName = 'my-username-' + currentDate;\r",
+							"\r",
+							"pm.environment.set('userName-2', userName);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('register should succeed when provided account information is valid', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName-2}}\",\r\n    \"password\": \"{{password-2}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/accounts/register",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. second user login with correct account info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('login should succeed when provided username and password are correct', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"successful login should respnse with jwt and userId in json body\",  () => {\r",
+							"    const data = pm.response.json();\r",
+							"    pm.expect('jwt' in data).to.eql(true);\r",
+							"    pm.expect('userId' in data).to.eql(true);\r",
+							"\r",
+							"    const { jwt, userId } = data;\r",
+							"\r",
+							"    pm.environment.set('userId-2', userId);\r",
+							"    pm.environment.set('jwt-2', jwt);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName-2}}\",\r\n    \"password\": \"{{password-2}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/accounts/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"accounts",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. first user update his profile without authorization header",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const currentDate = Date.now();\r",
+							"\r",
+							"const updatedUserName = 'my-username-' + currentDate;\r",
+							"\r",
+							"const updatedAlias = 'my-alias-' + currentDate;\r",
+							"\r",
+							"pm.environment.set('updatedUserName-1', updatedUserName);\r",
+							"pm.environment.set('updatedAlias-1', updatedAlias);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('update requset should fail when it does not provided with authorization header', () => {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "{{userId-1}}",
+							"type": "text"
+						},
+						{
+							"key": "userName",
+							"value": "{{updatedUserName-1}}",
+							"type": "text"
+						},
+						{
+							"key": "alias",
+							"value": "{{updatedAlias-1}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{userId-1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. first user update his profile with authorization header",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('update requset should succeed when it provided with authorization header', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('update request should response with correct userId in json body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    pm.expect('userId' in data).to.eql(true);\r",
+							"\r",
+							"    const { userId } = data;\r",
+							"\r",
+							"    pm.expect(userId).to.eql(pm.environment.get(\"userId-1\"));\r",
+							"\r",
+							"    pm.environment.set('userName-1', pm.environment.get('updatedUserName-1'));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "{{userId-1}}",
+							"type": "text"
+						},
+						{
+							"key": "userName",
+							"value": "{{updatedUserName-1}}",
+							"type": "text"
+						},
+						{
+							"key": "alias",
+							"value": "{{updatedAlias-1}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{userId-1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9. second user search first user with his username",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('search request should succeed when username is provided in query', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('search request should return mathced users in json body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    pm.expect('users' in data).to.eql(true);\r",
+							"\r",
+							"    const { users } = data;\r",
+							"\r",
+							"    // there should be only one user with given username\r",
+							"    pm.expect(users.length).to.eql(1);\r",
+							"\r",
+							"    // basic schema check\r",
+							"    const user = users[0];\r",
+							"    pm.expect('id' in user).to.eql(true);\r",
+							"    pm.expect('userName' in user).to.eql(true);\r",
+							"    pm.expect('alias' in user).to.eql(true);\r",
+							"    pm.expect('description' in user).to.eql(true);\r",
+							"    pm.expect('imageSrc' in user).to.eql(true);\r",
+							"    pm.expect('postNum' in user).to.eql(true);\r",
+							"    pm.expect('followerNum' in user).to.eql(true);\r",
+							"    pm.expect('followingNum' in user).to.eql(true);\r",
+							"\r",
+							"    // store given user in envrionment variable\r",
+							"    pm.environment.set('searched-user-id', users[0].id);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/?userName={{userName-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "userName",
+							"value": "{{userName-1}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. second user send a request to get searched user profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return successfully when provided userId is existed', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('response should contains correct details abount given user', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate the strcture of response body\r",
+							"    pm.expect('id' in data).to.eql(true);\r",
+							"    pm.expect('userName' in data).to.eql(true);\r",
+							"    pm.expect('alias' in data).to.eql(true);\r",
+							"    pm.expect('description' in data).to.eql(true);\r",
+							"    pm.expect('imageSrc' in data).to.eql(true);\r",
+							"    pm.expect('postNum' in data).to.eql(true);\r",
+							"    pm.expect('followerNum' in data).to.eql(true);\r",
+							"    pm.expect('followingNum' in data).to.eql(true);\r",
+							"\r",
+							"    // validate the value of response body\r",
+							"    pm.expect(data.id).to.eql(pm.environment.get('searched-user-id'));\r",
+							"    pm.expect(data.userName).to.eql(pm.environment.get('userName-1'));\r",
+							"    pm.expect(data.alias).to.eql(pm.environment.get('updatedAlias-1'));\r",
+							"    pm.expect(data.description).to.eql('');\r",
+							"    pm.expect(data.imageSrc).to.eql(null);\r",
+							"    pm.expect(data.postNum).to.eql(0);\r",
+							"    pm.expect(data.followerNum).to.eql(0);\r",
+							"    pm.expect(data.followingNum).to.eql(0);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{searched-user-id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{searched-user-id}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{searched-user-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11. second user follow first user without authorization header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('follow request should fail when the authorization header is not provided', () => {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"followerId\": \"{{userId-2}}\",\r\n    \"followingId\": \"{{userId-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/relations/",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"relations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12. second user follow first user with authorization header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('follow request should succeed when the authorization header is provided', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})\r",
+							"\r",
+							"pm.test('follow request should response with correct body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate the structure of response body\r",
+							"    pm.expect('followings' in data).to.eql(true);\r",
+							"\r",
+							"    // validate the value of response body\r",
+							"    const followings = data.followings;\r",
+							"    pm.expect(followings.length).to.eql(1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"followerId\": \"{{userId-2}}\",\r\n    \"followingId\": \"{{userId-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/relations/",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"relations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "13. first user send a request to check his own profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('profile fetch request should succeed when provided user id is existed in database', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('profile fetch request should return correct response body after followed', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate response body values\r",
+							"    pm.expect(data.id).to.eql(pm.environment.get('userId-1'));\r",
+							"    pm.expect(data.followerNum).to.eql(1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{userId-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{userId-1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "14. second user send a request to check his own profile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('profile fetch request should succeed when provided user id is existed in database', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('profile fetch request should return correct response body after followed', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate response body values\r",
+							"    pm.expect(data.id).to.eql(pm.environment.get('userId-2'));\r",
+							"    pm.expect(data.followingNum).to.eql(1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{userId-2}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{userId-2}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{userId-2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "15. first user posts a new post without encodedImage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('post request should faild when encoded image is not provided', () => {\r",
+							"    pm.response.to.have.status(400);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "description",
+							"value": "{{postDescription}}",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": "{{location}}",
+							"type": "text"
+						},
+						{
+							"key": "postedUserId",
+							"value": "{{userId-1}}",
+							"type": "text"
+						},
+						{
+							"key": "timestamp",
+							"value": "{{timestamp}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/posts/",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "16. first user posts a new post with encoded image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('should return successfully when data is provided with form', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test('should return correct resultwhen return successfully', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate structure\r",
+							"    pm.expect('id' in data).to.eql(true);\r",
+							"    pm.expect('description' in data).to.eql(true);\r",
+							"    pm.expect('location' in data).to.eql(true);\r",
+							"    pm.expect('timestamp' in data).to.eql(true);\r",
+							"    pm.expect('imageSrc' in data).to.eql(true);\r",
+							"    pm.expect('postedUserId' in data).to.eql(true);\r",
+							"\r",
+							"    // validate value\r",
+							"    pm.expect(data.postedUserId).to.eql(pm.environment.get('userId-1'));\r",
+							"    pm.expect(data.description).to.eql(pm.environment.get('postDescription'));\r",
+							"    pm.expect(data.location).to.eql(pm.environment.get('location'));\r",
+							"    pm.expect(data.timestamp).to.eql(pm.environment.get('timestamp'));\r",
+							"}) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "description",
+							"value": "{{postDescription}}",
+							"type": "text"
+						},
+						{
+							"key": "location",
+							"value": "{{location}}",
+							"type": "text"
+						},
+						{
+							"key": "postedUserId",
+							"value": "{{userId-1}}",
+							"type": "text"
+						},
+						{
+							"key": "postImage",
+							"type": "file",
+							"src": "./__test__/fixtures/mock-image.jpg"
+						},
+						{
+							"key": "timestamp",
+							"value": "{{timestamp}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/posts/",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "17. second user check all first user's post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('search request should succeed when user id is provided in query', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('search request should return with correct data in response body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate the structure of reponse body\r",
+							"    pm.expect('posts' in data).to.eql(true);\r",
+							"\r",
+							"    // validate values in response body\r",
+							"    const posts = data.posts;\r",
+							"    pm.expect(posts.length).to.eql(1);\r",
+							"\r",
+							"    const postId = posts[0].id;\r",
+							"    pm.environment.set('searched-post-id', postId);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domainName}}/api/v1/posts/?userId={{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						""
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "{{userId-1}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "18. second user send a request to get a specific post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('fetch request should succeed when searched-post-id is provided both in param and body', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"}) \r",
+							"\r",
+							"pm.test('fetch request should return correct value in response body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate the structure of response body\r",
+							"    pm.expect('id' in data).to.eql(true);\r",
+							"    pm.expect('description' in data).to.eql(true);\r",
+							"    pm.expect('location' in data).to.eql(true);\r",
+							"    pm.expect('timestamp' in data).to.eql(true);\r",
+							"    pm.expect('imageSrc' in data).to.eql(true);\r",
+							"    pm.expect('postedUserId' in data).to.eql(true);\r",
+							"\r",
+							"    // validate the value of response body\r",
+							"    pm.expect(data.id).to.eql(pm.environment.get('searched-post-id'));\r",
+							"    pm.expect(data.description).to.eql(pm.environment.get('postDescription'));\r",
+							"    pm.expect(data.location).to.eql(pm.environment.get('location'));\r",
+							"    pm.expect(data.timestamp).to.eql(pm.environment.get('timestamp'));\r",
+							"    pm.expect(data.postedUserId).to.eql(pm.environment.get('userId-1'));\r",
+							"}) "
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"postId\": \"{{searched-post-id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/posts/{{searched-post-id}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"posts",
+						"{{searched-post-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "19. second user sends a request to mark like on given post without authorization header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('like request should fail when authorization header is not provided', () => {\r",
+							"    pm.response.to.have.status(401);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{userId-2}}\",\r\n    \"postId\": \"{{searched-post-id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/likes/",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"likes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "20. second user sends a request to mark like on given post with authorization header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('like request should succeed when authorization header is provided and request format is correct', () => {\r",
+							"    pm.response.to.have.status(201);\r",
+							"})\r",
+							"\r",
+							"pm.test('like request should return correct result in response body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate structure of respones body\r",
+							"    pm.expect('likedUsers' in data).to.eql(true);\r",
+							"    \r",
+							"    // validate value of response body\r",
+							"    const likedUsers = data.likedUsers;\r",
+							"    pm.expect(likedUsers.length).to.eql(1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{userId-2}}\",\r\n    \"postId\": \"{{searched-post-id}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/likes/",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"likes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "21. first user check its own user profile after posted new post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('fetch request should succeed when user id is provided both in param and body', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('fetch request after posted a new post should contains correct number of posts', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // valdiate value\r",
+							"    pm.expect(data.postNum).to.eql(1);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{userId-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{userId-1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "22. second user send a request to remove like mark on the post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('delete like mark request should succeed when given relation is existed and information is provided in body', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('delete like mark request should return correct response body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // valdiate structure of response body\r",
+							"    pm.expect('likedUsers' in data).to.eql(true);\r",
+							"\r",
+							"    // validate value of response body\r",
+							"    const likedUsers = data.likedUsers;\r",
+							"    pm.expect(likedUsers.length).to.eql(0);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{domainName}}/api/v1/likes/user/{{userId-2}}/post/{{searched-post-id}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"likes",
+						"user",
+						"{{userId-2}}",
+						"post",
+						"{{searched-post-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "23. second user send a request to cancel following first user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('delete relations should succeed when given relation is existed in database and the information is provided in body', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('delete relations should return correct response body', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate structure of response body\r",
+							"    pm.expect('followings' in data).to.eql(true);\r",
+							"\r",
+							"    // valdiate value of response body\r",
+							"    const followings = data.followings;\r",
+							"    pm.expect(followings.length).to.eql(0);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt-2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{domainName}}/api/v1/relations/follower/{{userId-2}}/following/{{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"relations",
+						"follower",
+						"{{userId-2}}",
+						"following",
+						"{{userId-1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "24. first user check it own profile after being unfollowed",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('fetch request should succed when user id is provided in param and body', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							"\r",
+							"pm.test('fetch request should return correct number of followers after being unfollowed', () => {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    // validate nubmer of followers;\r",
+							"    pm.expect(data.followerNum).to.eql(0);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"{{userId-1}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domainName}}/api/v1/users/{{userId-1}}",
+					"host": [
+						"{{domainName}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"{{userId-1}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
