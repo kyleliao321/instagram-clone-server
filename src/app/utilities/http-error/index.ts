@@ -4,7 +4,8 @@ import {
   NoContentError,
   BadRequestError,
   ForbiddenError,
-  NotFoundError
+  NotFoundError,
+  ConflictError
 } from './http-errors';
 
 export {
@@ -13,5 +14,6 @@ export {
   NoContentError,
   BadRequestError,
   ForbiddenError,
-  NotFoundError
+  NotFoundError,
+  ConflictError
 };

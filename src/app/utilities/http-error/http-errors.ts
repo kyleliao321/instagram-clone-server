@@ -66,11 +66,21 @@ class BadRequestError extends HttpError {
   }
 }
 
+class ConflictError extends HttpError {
+  static STATUS_CODE = 409;
+
+  constructor(message?: string) {
+    super(message);
+    this.status = ConflictError.STATUS_CODE;
+  }
+}
+
 export {
   HttpError,
   UnauthorizedError,
   NoContentError,
   BadRequestError,
   ForbiddenError,
-  NotFoundError
+  NotFoundError,
+  ConflictError
 };
