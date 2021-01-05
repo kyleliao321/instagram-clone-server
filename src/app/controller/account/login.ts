@@ -27,8 +27,10 @@ export default function makeLogin(dependency: {
       },
       status: 200,
       body: {
-        jwt: token,
-        userId
+        credential: {
+          jwt: token,
+          userId
+        }
       }
     });
   };

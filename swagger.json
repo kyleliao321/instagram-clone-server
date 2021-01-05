@@ -700,12 +700,17 @@
         "Login-Success-Response-Body": {
           "type": "object",
           "properties": {
-            "jwt": {
-              "type": "string"
-            },
-            "userId": {
-              "type": "string",
-              "format": "uuid"
+            "credential": {
+              "type": "object",
+              "properties": {
+                "jwt": {
+                  "type": "string"
+                },
+                "userId": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
             }
           }
         },

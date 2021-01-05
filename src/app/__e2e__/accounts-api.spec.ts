@@ -79,9 +79,15 @@ describe('accounts-api-test', () => {
 
     // expect
     expect(res.status).toBe(200);
-    expect(keys.length).toBe(2);
-    expect(keys.includes('jwt')).toBe(true);
-    expect(keys.includes('userId')).toBe(true);
+    expect(keys.length).toBe(1);
+    expect(keys.includes('credential')).toBe(true);
+
+    const credential = res.body.credential;
+    const crednetialKeys = Object.keys(credential);
+
+    expect(crednetialKeys.length).toBe(2);
+    expect(crednetialKeys.includes('jwt')).toBe(true);
+    expect(crednetialKeys.includes('userId')).toBe(true);
   });
 
   test('POST /api/v1/accounts/login - incorrect request format', async () => {

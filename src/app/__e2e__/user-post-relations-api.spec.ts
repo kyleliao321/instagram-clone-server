@@ -20,16 +20,16 @@ describe('user-post-relations-api-test', () => {
       .set('Accept', 'application/json')
       .send({ userName: 'user_name_1', password: 'hashed_password_1' });
 
-    firstLoginUserId = firstRes.body.userId;
-    firstLoginUserToken = firstRes.body.jwt;
+    firstLoginUserId = firstRes.body.credential.userId;
+    firstLoginUserToken = firstRes.body.credential.jwt;
 
     const secondRes = await request(app)
       .post('/api/v1/accounts/login')
       .set('Accept', 'application/json')
       .send({ userName: 'user_name_2', password: 'hashed_password_2' });
 
-    secondLoginUserId = secondRes.body.userId;
-    secondLoginUserToken = secondRes.body.jwt;
+    secondLoginUserId = secondRes.body.credential.userId;
+    secondLoginUserToken = secondRes.body.credential.jwt;
   });
 
   afterAll(async () => {

@@ -428,8 +428,10 @@ export type UpdateUserProfileResponseBody = {
 };
 
 export type LoginResponseBody = {
-  jwt: string;
-  userId: string;
+  credential: {
+    jwt: string;
+    userId: string;
+  };
 };
 
 type UserProfileResponse = {

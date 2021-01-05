@@ -15,8 +15,8 @@ describe('users-api-test', () => {
       .send({ userName: 'user_name_1', password: 'hashed_password_1' })
       .set('Accept', 'application/json');
 
-    loginUserId = res.body.userId;
-    loginUserToken = res.body.jwt;
+    loginUserId = res.body.credential.userId;
+    loginUserToken = res.body.credential.jwt;
   });
 
   afterAll(async () => {
