@@ -351,7 +351,13 @@
 							"content": {
 								"application/json": {
 									"schema": {
-										"$ref": "#/components/schemas/User-Profiles"
+                    "type": "object",
+                    "properties": {
+                      "followings": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
 									}
 								}
 							}
@@ -384,9 +390,15 @@
               "description": "Success",
               "content": {
                 "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User-Profiles"
-                  }
+									"schema": {
+                    "type": "object",
+                    "properties": {
+                      "followers": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
+									}
                 }
               }
             }
@@ -415,9 +427,15 @@
               "description": "Success",
               "content": {
                 "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User-Profiles"
-                  }
+									"schema": {
+                    "type": "object",
+                    "properties": {
+                      "followings": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
+									}
                 }
               }
             }
@@ -460,9 +478,15 @@
               "description": "Success",
               "content": {
                 "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User-Profiles"
-                  }
+									"schema": {
+                    "type": "object",
+                    "properties": {
+                      "followings": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
+									}
                 }
               }
             }
@@ -496,7 +520,13 @@
 							"content": {
 								"application/json": {
 									"schema": {
-										"$ref": "#/components/schemas/Posts"
+                    "type": "object",
+                    "properties": {
+                      "likedUsers": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
 									}
 								}
 							}
@@ -528,7 +558,13 @@
 							"content": {
 								"application/json": {
 									"schema": {
-										"$ref": "#/components/schemas/User-Profiles"
+                    "type": "object",
+                    "properties": {
+                      "likedUsers": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
 									}
 								}
 							}
@@ -572,9 +608,15 @@
               "description": "Success",
               "content": {
                 "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/User-Profiles"
-                  }
+									"schema": {
+                    "type": "object",
+                    "properties": {
+                      "likedUsers": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
+									}
                 }
               }
             }
