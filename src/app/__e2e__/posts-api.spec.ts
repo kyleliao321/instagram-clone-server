@@ -68,13 +68,19 @@ describe('posts-api-test', () => {
 
     // expect
     expect(res.status).toBe(200);
-    expect(keys.length).toBe(6);
-    expect(keys.includes('id')).toBe(true);
-    expect(keys.includes('description')).toBe(true);
-    expect(keys.includes('location')).toBe(true);
-    expect(keys.includes('timestamp')).toBe(true);
-    expect(keys.includes('imageSrc')).toBe(true);
-    expect(keys.includes('postedUserId')).toBe(true);
+    expect(keys.length).toBe(1);
+    expect(keys.includes('post')).toBe(true);
+
+    const post = res.body.post;
+    const postKeys = Object.keys(post);
+
+    expect(postKeys.length).toBe(6);
+    expect(postKeys.includes('id')).toBe(true);
+    expect(postKeys.includes('description')).toBe(true);
+    expect(postKeys.includes('location')).toBe(true);
+    expect(postKeys.includes('timestamp')).toBe(true);
+    expect(postKeys.includes('imageSrc')).toBe(true);
+    expect(postKeys.includes('postedUserId')).toBe(true);
   });
 
   test('GET /api/v1/posts/:postId - post does not exist', async () => {
@@ -142,13 +148,19 @@ describe('posts-api-test', () => {
 
     // expect
     expect(res.status).toBe(201);
-    expect(keys.length).toBe(6);
-    expect(keys.includes('id')).toBe(true);
-    expect(keys.includes('description')).toBe(true);
-    expect(keys.includes('location')).toBe(true);
-    expect(keys.includes('imageSrc')).toBe(true);
-    expect(keys.includes('timestamp')).toBe(true);
-    expect(keys.includes('postedUserId')).toBe(true);
+    expect(keys.length).toBe(1);
+    expect(keys.includes('post')).toBe(true);
+
+    const post = res.body.post;
+    const postKeys = Object.keys(post);
+
+    expect(postKeys.length).toBe(6);
+    expect(postKeys.includes('id')).toBe(true);
+    expect(postKeys.includes('description')).toBe(true);
+    expect(postKeys.includes('location')).toBe(true);
+    expect(postKeys.includes('imageSrc')).toBe(true);
+    expect(postKeys.includes('timestamp')).toBe(true);
+    expect(postKeys.includes('postedUserId')).toBe(true);
   });
 
   test('POST /api/v1/posts/ - incorrect request format', async () => {

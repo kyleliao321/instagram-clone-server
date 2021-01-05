@@ -56,12 +56,14 @@ export default function makeAddNewPost(dependencies: {
       },
       status: 201,
       body: {
-        id: addedPost.getId(),
-        description: addedPost.getDescription(),
-        location: addedPost.getLocation(),
-        timestamp: addedPost.getTimeStamp(),
-        imageSrc: addedPost.getImageSrc(),
-        postedUserId: addedPost.getPostedUserId()
+        post: {
+          id: addedPost.getId(),
+          description: addedPost.getDescription(),
+          location: addedPost.getLocation(),
+          timestamp: addedPost.getTimeStamp(),
+          imageSrc: addedPost.getImageSrc(),
+          postedUserId: addedPost.getPostedUserId()
+        }
       }
     });
   };

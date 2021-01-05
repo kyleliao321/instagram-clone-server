@@ -34,15 +34,19 @@ describe('users-api-test', () => {
 
     // expect
     expect(res.status).toBe(200);
-    expect(keys.length).toBe(8);
-    expect(keys.includes('id')).toBe(true);
-    expect(keys.includes('userName')).toBe(true);
-    expect(keys.includes('alias')).toBe(true);
-    expect(keys.includes('description')).toBe(true);
-    expect(keys.includes('imageSrc')).toBe(true);
-    expect(keys.includes('postNum')).toBe(true);
-    expect(keys.includes('followerNum')).toBe(true);
-    expect(keys.includes('followingNum')).toBe(true);
+    expect(keys.length).toBe(1);
+    expect(keys.includes('user')).toBe(true);
+
+    const user = res.body.user;
+
+    expect('id' in user).toBe(true);
+    expect('userName' in user).toBe(true);
+    expect('alias' in user).toBe(true);
+    expect('description' in user).toBe(true);
+    expect('imageSrc' in user).toBe(true);
+    expect('postNum' in user).toBe(true);
+    expect('followerNum' in user).toBe(true);
+    expect('followingNum' in user).toBe(true);
   });
 
   test('GET /api/v1/users/:userId - user does not exist', async () => {

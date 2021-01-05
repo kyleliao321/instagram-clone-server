@@ -53,14 +53,16 @@ describe('get user profile controller', () => {
       },
       status: 200,
       body: {
-        id: mockUserId,
-        userName: mockUserName,
-        alias: mockAlias,
-        description: mockDescription,
-        imageSrc: mockImageSrc,
-        postNum: mockPostNum,
-        followerNum: mockFollowerNum,
-        followingNum: mockFolloingNum
+        user: {
+          id: mockUserId,
+          userName: mockUserName,
+          alias: mockAlias,
+          description: mockDescription,
+          imageSrc: mockImageSrc,
+          postNum: mockPostNum,
+          followerNum: mockFollowerNum,
+          followingNum: mockFolloingNum
+        }
       }
     });
   });

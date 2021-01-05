@@ -44,12 +44,14 @@ describe('get-post-controller', () => {
       },
       status: 200,
       body: {
-        id: mockId,
-        description: mockDes,
-        location: mockLoc,
-        timestamp: mockTis,
-        imageSrc: mockImgSrc,
-        postedUserId: mockPostedUserId
+        post: {
+          id: mockId,
+          description: mockDes,
+          location: mockLoc,
+          timestamp: mockTis,
+          imageSrc: mockImgSrc,
+          postedUserId: mockPostedUserId
+        }
       }
     });
   });

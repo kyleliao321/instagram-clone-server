@@ -118,7 +118,13 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/User-Profiles"
+                    "type": "object",
+                    "properties": {
+                      "users": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/User-Profiles"
+                      }
+                    }
                   }
                 }
               }
@@ -149,7 +155,13 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/User-Profile"
+                    "type": "object",
+                    "properties": {
+                      "user": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/User-Profile"
+                      }
+                    }
                   }
                 }
               }

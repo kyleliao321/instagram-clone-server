@@ -22,14 +22,16 @@ export default function makeGetUserProfile(dependency: {
       },
       status: 200,
       body: {
-        id: userProfile.getId(),
-        userName: userProfile.getUserName(),
-        alias: userProfile.getAlias(),
-        description: userProfile.getDescription(),
-        imageSrc: userProfile.getImageSrc(),
-        postNum: userProfile.getPostNum(),
-        followerNum: userProfile.getFollowerNum(),
-        followingNum: userProfile.getFollowingNum()
+        user: {
+          id: userProfile.getId(),
+          userName: userProfile.getUserName(),
+          alias: userProfile.getAlias(),
+          description: userProfile.getDescription(),
+          imageSrc: userProfile.getImageSrc(),
+          postNum: userProfile.getPostNum(),
+          followerNum: userProfile.getFollowerNum(),
+          followingNum: userProfile.getFollowingNum()
+        }
       }
     });
   };

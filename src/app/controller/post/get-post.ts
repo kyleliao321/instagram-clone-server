@@ -22,12 +22,14 @@ export default function makeGetPost(dependencies: {
       },
       status: 200,
       body: {
-        id: queryPost.getId(),
-        description: queryPost.getDescription(),
-        location: queryPost.getLocation(),
-        timestamp: queryPost.getTimeStamp(),
-        imageSrc: queryPost.getImageSrc(),
-        postedUserId: queryPost.getPostedUserId()
+        post: {
+          id: queryPost.getId(),
+          description: queryPost.getDescription(),
+          location: queryPost.getLocation(),
+          timestamp: queryPost.getTimeStamp(),
+          imageSrc: queryPost.getImageSrc(),
+          postedUserId: queryPost.getPostedUserId()
+        }
       }
     });
   };

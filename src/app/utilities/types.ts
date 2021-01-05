@@ -432,7 +432,7 @@ export type LoginResponseBody = {
   userId: string;
 };
 
-export type GetUserProfileReponseBody = {
+type UserProfileResponse = {
   id: string;
   userName: string;
   alias: string;
@@ -443,27 +443,31 @@ export type GetUserProfileReponseBody = {
   followingNum: number;
 };
 
+export type GetUserProfileReponseBody = {
+  user: UserProfileResponse;
+};
+
 export type SearchUserProfilesResponseBody = {
-  users: GetUserProfileReponseBody[];
+  users: UserProfileResponse[];
 };
 
 export type FollowUserResponseBody = {
-  followings: GetUserProfileReponseBody[];
+  followings: UserProfileResponse[];
 };
 
 export type CancelFollowingResponseBody = {
-  followings: GetUserProfileReponseBody[];
+  followings: UserProfileResponse[];
 };
 
 export type GetFollowersResponseBody = {
-  followers: GetUserProfileReponseBody[];
+  followers: UserProfileResponse[];
 };
 
 export type GetFollowingsResponseBody = {
-  followings: GetUserProfileReponseBody[];
+  followings: UserProfileResponse[];
 };
 
-export type AddNewPostResponseBody = {
+type PostResponse = {
   id: string;
   description: string;
   location: string | null;
@@ -472,22 +476,28 @@ export type AddNewPostResponseBody = {
   postedUserId: string;
 };
 
-export type GetPostResponseBody = AddNewPostResponseBody;
+export type AddNewPostResponseBody = {
+  post: PostResponse;
+};
+
+export type GetPostResponseBody = {
+  post: PostResponse;
+};
 
 export type GetPostsResponseBody = {
-  posts: GetPostResponseBody[];
+  posts: PostResponse[];
 };
 
 export type LikePostResponseBody = {
-  likedUsers: GetUserProfileReponseBody[];
+  likedUsers: UserProfileResponse[];
 };
 
 export type DislikePostResponseBody = {
-  likedUsers: GetUserProfileReponseBody[];
+  likedUsers: UserProfileResponse[];
 };
 
 export type GetLikedUsersResponseBody = {
-  likedUsers: GetUserProfileReponseBody[];
+  likedUsers: UserProfileResponse[];
 };
 
 export type GenericHttpResponse = {

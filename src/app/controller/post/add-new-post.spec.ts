@@ -141,12 +141,14 @@ describe('add-new-post-controller', () => {
     });
     expect(result.status).toBe(201);
     expect(result.body).toStrictEqual({
-      id: mockId,
-      description: mockDes,
-      location: mockLoc,
-      timestamp: mockTis,
-      imageSrc: mockImgSrc,
-      postedUserId: mokcPostedUserId
+      post: {
+        id: mockId,
+        description: mockDes,
+        location: mockLoc,
+        timestamp: mockTis,
+        imageSrc: mockImgSrc,
+        postedUserId: mokcPostedUserId
+      }
     });
 
     expect(getUserProfileByIdService).toBeCalledTimes(1);
@@ -230,12 +232,14 @@ describe('add-new-post-controller', () => {
     });
     expect(result.status).toBe(201);
     expect(result.body).toStrictEqual({
-      id: mockId,
-      description: null,
-      location: mockLoc,
-      timestamp: mockTis,
-      imageSrc: mockImgSrc,
-      postedUserId: mokcPostedUserId
+      post: {
+        id: mockId,
+        description: null,
+        location: mockLoc,
+        timestamp: mockTis,
+        imageSrc: mockImgSrc,
+        postedUserId: mokcPostedUserId
+      }
     });
 
     expect(getUserProfileByIdService).toBeCalledTimes(1);
@@ -319,12 +323,14 @@ describe('add-new-post-controller', () => {
     });
     expect(result.status).toBe(201);
     expect(result.body).toStrictEqual({
-      id: mockId,
-      description: mockDes,
-      location: null,
-      timestamp: mockTis,
-      imageSrc: mockImgSrc,
-      postedUserId: mokcPostedUserId
+      post: {
+        id: mockId,
+        description: mockDes,
+        location: null,
+        timestamp: mockTis,
+        imageSrc: mockImgSrc,
+        postedUserId: mokcPostedUserId
+      }
     });
 
     expect(getUserProfileByIdService).toBeCalledTimes(1);
