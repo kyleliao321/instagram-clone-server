@@ -239,7 +239,13 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/components/schemas/Post"
+                    "type": "object",
+                    "properties": {
+                      "post": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Post"
+                      }
+                    }
                   }
                 }
               }
@@ -273,7 +279,13 @@
 							"content": {
 								"application/json": {
 									"schema": {
-										"$ref": "#/components/schemas/Post"
+                    "type": "object",
+                    "properties": {
+                      "post": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Post"
+                      }
+                    }
 									}
 								}
 							}
