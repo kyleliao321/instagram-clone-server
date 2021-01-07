@@ -8,8 +8,16 @@ import postRouter from './routers/post-router';
 import relationRouter from './routers/relation-router';
 import likeRouter from './routers/like-router';
 import { logger } from './infrastructure';
+import { join } from 'path';
 
 const app = express();
+
+const imageDir = join(
+  process.cwd(),
+  'public',
+  'images',
+  process.env.NODE_ENV || 'development'
+);
 
 const swaggerDoc = require('../../swagger.json');
 
@@ -25,6 +33,8 @@ app.use(
     }
   )
 );
+
+app.use('/static', express.static(imageDir));
 
 app.use('/api/v1/accounts', accountRouter);
 
