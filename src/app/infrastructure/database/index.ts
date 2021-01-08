@@ -11,6 +11,8 @@ const config = ((env: string): string => {
     return configFile.development;
   } else if (env === 'production') {
     return configFile.production;
+  } else if (env === 'demo') {
+    return configFile.demo;
   }
 
   throw new Error(`Knexfile does not support ${env} environment.`);

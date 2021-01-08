@@ -1,5 +1,48 @@
 # Instagram Clone - Server
 
+`Instagram-Clone-Server` is a clone server that used for [Instagram-Clone-Android-Application](https://github.com/kyleliao321/instagram-clone-clean-architecture), which will make network request to it when setup together. This repository won't get into the detail about how to connect two applications, it will only show how to run the server as demo and setup development environment.
+
+## Table of contents
+- [Demo](#demo)
+- [Development](#development)
+- [API document](#api-document)
+- [Test](#test)
+
+## Demo
+When starts server as demo, the application will populate database with fake data. At the same time, it will create a root user for you to make request. 
+
+### 1. Create .env file
+- Create a new file called `.env` in root directory.
+- Pass the following text into the file
+```
+DEMO_DB_HOST=demo-db
+DEMO_DB_USER=postgres
+DEMO_DB_PASSWORD=password
+DEMO_DB_NAME=instagram_clone_server_demo
+
+DEMO_ROOT_USER_NAME=root
+DEMO_ROOT_USER_PASSWORD=root
+```
+notes: `DEMO_ROOT_USER_NAME` and `DEMO_ROOT_USER_PASSWORD` are optional, if you don't provide it, the application will just use `root` as username and password.
+
+### 2. Start demo server
+```bash
+docker-compose up
+## WARNING: it might take a few seconds to populate the database
+```
+
+### 3. Usage
+When services started successfully, the server will listen on `http://localhost:8080`. To make a network request, please check on [API Document](#api-document). 
+
+### 4. Teardown demo server
+```bash
+## stop and remove services
+docker-compose down
+
+## remove created volumes
+docker volume prune
+```
+
 ## Developement
 The clone application uses docker to help users setup developement environment. The default docker-compose file will start three services - server, developement-database and test-database. The server is running with nodemon to detect updates automatically. The two databases have its own purpose to prevent data-contamination. The developement-database is used for development, it will not automatically clean-up data. The test-database is used for integration and e2e tests, it will always clean-up data after testing. Follow the instruction below to learn how to setup services and start them:
 
@@ -22,16 +65,13 @@ TEST_DB_NAME=instagram_clone_server_test
 ### 2. Setup development environment
 ```bash
 ## setup containers
-docker-compose run --rm app install npm
-
-## build containers
-docker-compose --env-file .env up --no-start
+docker-compose -f docker-compose-dev.yml --no-start
 ```
 
 ### 3. Usage
 ```bash
 ## start services
-docker-compose start
+docker-compose -f docker-compose-dev.yml start
 ## After starting the services, application will run in background with developement mode.
 ## With nodemon, any changes that happend inside src directory will trigger it to rebuild and re-serve.
 ## By default, the application is listsening on port 8080. 
@@ -40,12 +80,16 @@ docker-compose start
 
 
 ## stop services
-docker-compose stop
+docker-compose -f docker-compose-dev.yml stop
 ```
 
 ### 4. Tearn down development envrionment
 ```bash
-docker-compose down
+## remove services
+docker-compose -f docker-compose-dev.yml down
+
+## remove created volumes
+docker volume prune
 ```
 
 ## API document

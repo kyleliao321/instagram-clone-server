@@ -7,8 +7,7 @@ module.exports = {
       host: process.env.TEST_DB_HOST,
       user: process.env.TEST_DB_USER,
       password: process.env.TEST_DB_PASSWORD,
-      database: process.env.TEST_DB_NAME,
-      port: process.env.TEST_DB_PORT
+      database: process.env.TEST_DB_NAME
     },
     migrations: {
       directory: __dirname + '/db/migrations'
@@ -30,6 +29,21 @@ module.exports = {
     },
     seeds: {
       directory: __dirname + '/db/seeds/development'
+    }
+  },
+  demo: {
+    client: 'pg',
+    connection: {
+      host: process.env.DEMO_DB_HOST,
+      user: process.env.DEMO_DB_USER,
+      password: process.env.DEMO_DB_PASSWORD,
+      database: process.env.DEMO_DB_NAME
+    },
+    migrations: {
+      directory: __dirname + '/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/db/seeds/demo'
     }
   },
   production: {

@@ -16,27 +16,27 @@ export default function makeBuildImageHandler(dependencies: {
 
     /**
      * Valid file should exist in `/public/images` directory and be jpeg format.
-     * @param filName Name of image file.
+     * @param fileName Name of image file.
      */
-    function isValid(filName: string): boolean {
-      return isFileExist(filName) && isJpegFile(filName);
+    function isValid(fileName: string): boolean {
+      return isFileExist(fileName) && isJpegFile(fileName);
     }
 
     /**
      * Examine whether the given file name exists in `/public/images` directory or not.
-     * @param filName Name of image file.
+     * @param fileName Name of image file.
      */
-    function isFileExist(filName: string): boolean {
-      const fullPath = join(process.cwd(), ...defaultPaths, filName);
+    function isFileExist(fileName: string): boolean {
+      const fullPath = join(process.cwd(), ...defaultPaths, fileName);
       return fse.pathExistsSync(fullPath);
     }
 
     /**
      * Examine whether the given file is jpeg format or not.
-     * @param filName Name of image file.
+     * @param fileName Name of image file.
      */
-    function isJpegFile(filName: string): boolean {
-      const stringArray = filName.split('.');
+    function isJpegFile(fileName: string): boolean {
+      const stringArray = fileName.split('.');
 
       if (stringArray.length <= 1) {
         return false;

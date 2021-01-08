@@ -6,6 +6,8 @@ async function initializeDatabase(): Promise<void> {
 
   await db.migrate.latest();
 
+  await db.seed.run();
+
   return db
     .raw('SELECT NOW()')
     .then(() => {

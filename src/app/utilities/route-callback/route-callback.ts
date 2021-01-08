@@ -15,7 +15,7 @@ export default function makeRouteCallback(controller: GenericController) {
       })
       .catch((e) => {
         logger.error(
-          `Exception occurs while processong request ${req.method} ${req.originalUrl}:
+          `Exception occurs while processing request ${req.method} ${req.originalUrl}:
           ${e.stack}`
         );
         if (e instanceof HttpError) {
