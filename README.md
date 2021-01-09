@@ -48,8 +48,8 @@ docker-compose down
 docker volume prune
 ```
 
-## Developement
-To prevent any dependency withing application has conflicts with host machine, the project use docker to setup development environment, making it isolated. Follow the instruction below to setup your development envrionment:
+## Development
+To prevent any dependency within application has conflicts with host machine, the project use docker to setup development environment, making it isolated. Follow the instruction below to setup your development envrionment:
 
 ### 1. Prerequisite
 - Install docker and docker-compose on your host machine.
@@ -77,9 +77,9 @@ docker-compose -f docker-compose-dev.yml up -d
 ```
 
 ### 4. Usage
-Now, the application should run in created docker container. It used nodemon to detect any changes, so it will automatically rebuild the project when needed. You can check on the logs with `docker logs instagram-clone-server-app`, or just attaching shell with the process which container is running on to see logs in real time: `docker attach instagram-clone-server-app`.
+Now, the application should run in created docker container. It used nodemon to detect any changes, so it will automatically rebuild the project when needed. You can check on the logs with `docker logs instagram-clone-server-app`, or just attaching shell with the process which container is running on, to see logs in real time: `docker attach instagram-clone-server-app`.
 
-Although docker-compose has mouted the entire project into the container, it is recommended that not directly working on your local machine to make sure development environment is consistent. You have several way to start development with container envrionemnt:
+Although docker-compose has mouted the entire project into the container, it is recommended that not directly working on your local machine, to make sure development environment is consistent. You have several way to start development with container envrionemnt:
 
 1. Run `docker exec -it instagram-clone-server-app sh` in shell to enter the shell of working directory. Inside it, you can run all the pre-defined npm scripts, such as `npm run lint` or [testings](#test).
 2. Install [Remote-Container extension](https://code.visualstudio.com/docs/remote/containers) in Visual Studio Code. Then, Prsee `Ctrl + Shift + p` to open Command Palette, and run `Remote-Containers: Attach to Running Container`, select `instagram-clone-server-app`. It will launch the container into VS Code.
