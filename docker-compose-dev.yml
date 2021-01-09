@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   app:
+    container_name: instagram-clone-server-app
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,9 +9,12 @@ services:
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
+    networks: 
+      - app-network
     command: npm run dev
     ports:
       - "8080:8080"
+    env_file: .env
     environment:
       - DEV_DB_HOST=${DEV_DB_HOST}
       - DEV_DB_USER=${DEV_DB_USER}
@@ -20,20 +24,31 @@ services:
       - "dev-db"
       - "test-db"
   dev-db:
+    container_name: instagram-clone-server-dev-db
     image: postgres
     ports:
       - "5432:5432"
+    networks: 
+      - app-network
+    env_file: .env
     environment:
       - POSTGRES_USER=${DEV_DB_USER}
       - POSTGRES_PASSWORD=${DEV_DB_PASSWORD}
       - POSTGRES_DB=${DEV_DB_NAME}
   test-db:
+    container_name: instagram-clone-server-test-db
     image: postgres
     ports:
       - "5433:5432"
+    networks: 
+      - app-network
+    env_file: .env
     environment: 
       - POSTGRES_USER=${TEST_DB_USER}
       - POSTGRES_PASSWORD=${TEST_DB_PASSWORD}
       - POSTGRES_DB=${TEST_DB_NAME}
+networks:
+  app-network:
+    driver: bridge
 volumes:
   node_modules:

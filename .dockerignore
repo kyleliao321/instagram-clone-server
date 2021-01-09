@@ -4,3 +4,4 @@ logs
 public
 dist
 *.md
+.env
