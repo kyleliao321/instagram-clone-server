@@ -76,8 +76,8 @@ exports.seed = async function (knex: Knex): Promise<void> {
   const fakeRelationsGroupById = fakeUsers.map((u) => {
     return u.followings.map((f) => {
       return {
-        follower_id: f,
-        following_id: u.id
+        follower_id: u.id,
+        following_id: f
       };
     });
   });
