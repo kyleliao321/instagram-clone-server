@@ -1,6 +1,7 @@
 import makeBuildUserDao from '../user-dao';
 import { db } from '../../../infrastructure';
 import { NewUserProfile, UpdatedUserProfile } from '../../../utilities/types';
+import { ConflictError } from '../../../utilities/http-error';
 
 describe('user-dao', () => {
   beforeAll(async () => {
@@ -264,5 +265,57 @@ describe('user-dao', () => {
 
     // expect
     expect(result.length).toBe(0);
+  });
+
+  test('should throw http conflict error when updated user profile username is already existed in database', async () => {
+    // given
+    const shouldNotBeCalled = jest.fn();
+    const duplicatedUserName = 'duplicatedUserName';
+
+    const exitedUserProfile: NewUserProfile = {
+      getId: jest.fn(() => '1229d5f3-3e5a-4a21-a2ed-f3149833222c'),
+      getUserName: jest.fn(() => duplicatedUserName),
+      getAlias: jest.fn(() => 'alias'),
+      getDescription: jest.fn(() => 'Des'),
+      getEncodedImage: jest.fn(),
+      getImageSrc: jest.fn(() => Promise.resolve('image'))
+    };
+
+    const targetUserProfile: NewUserProfile = {
+      getId: jest.fn(() => '2c5ad7bc-4c81-4e5a-8c78-499a407b000f'),
+      getUserName: jest.fn(() => 'mockUserName'),
+      getAlias: jest.fn(() => 'alias'),
+      getDescription: jest.fn(() => 'Des'),
+      getEncodedImage: jest.fn(),
+      getImageSrc: jest.fn(() => Promise.resolve('image'))
+    };
+
+    const updatedUserProfile: UpdatedUserProfile = {
+      getId: jest.fn(() => '2c5ad7bc-4c81-4e5a-8c78-499a407b000f'),
+      getUserName: jest.fn(() => duplicatedUserName),
+      getAlias: jest.fn(() => 'alias'),
+      getDescription: jest.fn(() => 'Des'),
+      getEncodedImage: jest.fn(),
+      getPostNum: jest.fn(() => 0),
+      getFollowerNum: jest.fn(() => 0),
+      getFollowingNum: jest.fn(() => 0),
+      getImageSrc: jest.fn(() => Promise.resolve('image'))
+    };
+
+    const buildUserDao = makeBuildUserDao({ db });
+    const userDao = buildUserDao();
+
+    // When
+    await userDao.insert(exitedUserProfile);
+    await userDao.insert(targetUserProfile);
+
+    try {
+      await userDao.update(updatedUserProfile);
+      shouldNotBeCalled();
+    } catch (e) {
+      expect(e).toBeInstanceOf(ConflictError);
+    } finally {
+      expect(shouldNotBeCalled).not.toBeCalled();
+    }
   });
 });

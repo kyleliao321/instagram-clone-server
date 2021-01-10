@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import { NotFoundError } from '../../utilities/http-error';
+import { ConflictError, NotFoundError } from '../../utilities/http-error';
 import {
   UserDao,
   NewUserProfile,
@@ -33,34 +33,41 @@ export default function makeBuildUserDao(dependencies: { db: Knex }) {
     ): Promise<string> {
       const updatedImageSrc = await updatedUserProfile.getImageSrc();
 
-      if (updatedImageSrc) {
-        await dependencies
-          .db('users_table')
-          .where('user_id', updatedUserProfile.getId())
-          .update({
-            user_name: updatedUserProfile.getUserName(),
-            alias: updatedUserProfile.getAlias(),
-            description: updatedUserProfile.getDescription(),
-            image_src: updatedImageSrc,
-            post_num: updatedUserProfile.getPostNum(),
-            follower_num: updatedUserProfile.getFollowerNum(),
-            following_num: updatedUserProfile.getFollowingNum()
-          });
-      } else {
-        await dependencies
-          .db('users_table')
-          .where('user_id', updatedUserProfile.getId())
-          .update({
-            user_name: updatedUserProfile.getUserName(),
-            alias: updatedUserProfile.getAlias(),
-            description: updatedUserProfile.getDescription(),
-            post_num: updatedUserProfile.getPostNum(),
-            follower_num: updatedUserProfile.getFollowerNum(),
-            following_num: updatedUserProfile.getFollowingNum()
-          });
-      }
+      try {
+        if (updatedImageSrc) {
+          await dependencies
+            .db('users_table')
+            .where('user_id', updatedUserProfile.getId())
+            .update({
+              user_name: updatedUserProfile.getUserName(),
+              alias: updatedUserProfile.getAlias(),
+              description: updatedUserProfile.getDescription(),
+              image_src: updatedImageSrc,
+              post_num: updatedUserProfile.getPostNum(),
+              follower_num: updatedUserProfile.getFollowerNum(),
+              following_num: updatedUserProfile.getFollowingNum()
+            });
+        } else {
+          await dependencies
+            .db('users_table')
+            .where('user_id', updatedUserProfile.getId())
+            .update({
+              user_name: updatedUserProfile.getUserName(),
+              alias: updatedUserProfile.getAlias(),
+              description: updatedUserProfile.getDescription(),
+              post_num: updatedUserProfile.getPostNum(),
+              follower_num: updatedUserProfile.getFollowerNum(),
+              following_num: updatedUserProfile.getFollowingNum()
+            });
+        }
 
-      return updatedUserProfile.getId();
+        return updatedUserProfile.getId();
+      } catch (e) {
+        if (e instanceof Error && e.message.includes('duplicate key value')) {
+          throw new ConflictError('username already exists');
+        }
+        throw e;
+      }
     }
 
     async function getOne(userId: string): Promise<UserProfile> {

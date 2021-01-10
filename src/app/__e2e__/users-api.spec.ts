@@ -149,4 +149,36 @@ describe('users-api-test', () => {
     // expect
     expect(res.status).toBe(400);
   });
+
+  test('PUT /api/v1/users/:userId - duplicated username', async () => {
+    // given
+    const id = loginUserId;
+    const userName = 'newUserName';
+    const alias = 'newAlias';
+    const description = 'newDes';
+    const postNum = 1;
+    const followerNum = 1;
+    const followingNum = 1;
+
+    const duplicatedUserName = 'user_name_2';
+
+    const url = `/api/v1/users/${loginUserId}`;
+
+    // when
+    const res = await request(app)
+      .put(url)
+      .set('Authorization', `Bearer ${loginUserToken}`)
+      .set('Accept', 'application/json')
+      .set('Content-Type', 'multipart/form-data')
+      .field('id', id)
+      .field('userName', duplicatedUserName)
+      .field('alias', alias)
+      .field('description', description)
+      .field('postNum', postNum)
+      .field('followerNum', followerNum)
+      .field('followingNum', followingNum);
+
+    // expect
+    expect(res.status).toBe(409);
+  });
 });
