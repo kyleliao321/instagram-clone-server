@@ -55,7 +55,8 @@ export default function makeBuildPostDao(dependencies: { db: Knex }) {
     async function filterByPostedUserId(userId: string): Promise<Post[]> {
       const result = await dependencies
         .db('posts_table')
-        .where('posted_user', userId);
+        .where('posted_user', userId)
+        .orderBy('created_at', 'desc');
 
       return result.map((post) => {
         return Object.freeze({
