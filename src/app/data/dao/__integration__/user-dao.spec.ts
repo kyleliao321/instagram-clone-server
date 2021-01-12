@@ -1,5 +1,5 @@
 import makeBuildUserDao from '../user-dao';
-import { db } from '../../../infrastructure';
+import db from '../../../../db';
 import { NewUserProfile, UpdatedUserProfile } from '../../../utilities/types';
 import { ConflictError } from '../../../utilities/http-error';
 

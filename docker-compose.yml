@@ -4,12 +4,11 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    image: nodejs
-    volumes:
-      - .:/home/node/app
-      - node_modules:/home/node/app/node_modules
+      target: demo
+    image: ig-clone-demo
     ports: 
       - "8080:8080"
+    command: npm run serve
     env_file: .env
     environment: 
       - NODE_ENV=demo
@@ -29,6 +28,4 @@ services:
       - POSTGRES_USER=${DEMO_DB_USER}
       - POSTGRES_PASSWORD=${DEMO_DB_PASSWORD}
       - POSTGRES_DB=${DEMO_DB_NAME}
-volumes: 
-  node_modules:
   

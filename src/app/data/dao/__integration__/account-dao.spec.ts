@@ -8,7 +8,7 @@ import {
   UpdatedAccount
 } from '../../../utilities/types';
 import makeBuildAccountDao from '../account-dao';
-import { db } from '../../../infrastructure';
+import db from '../../../../db';
 
 describe('accounts-dao', () => {
   beforeAll(async () => {

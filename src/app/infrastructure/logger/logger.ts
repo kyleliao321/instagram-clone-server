@@ -13,10 +13,7 @@ export default function makeLogger(): Logger {
     )
   });
 
-  if (
-    process.env.NODE_ENV !== 'production' &&
-    process.env.NODE_ENV !== 'test'
-  ) {
+  if (process.env.NODE_ENV !== 'test') {
     logger.add(new transports.Console());
   }
 

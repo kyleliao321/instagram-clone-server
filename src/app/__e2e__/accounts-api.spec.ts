@@ -1,5 +1,5 @@
 import app from '..';
-import db from '../infrastructure/database';
+import db from '../../db';
 import request from 'supertest';
 
 describe('accounts-api-test', () => {

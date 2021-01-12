@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../';
-import db from '../../app/infrastructure/database';
+import db from '../../db';
 
 describe('users-api-test', () => {
   let loginUserId: string;

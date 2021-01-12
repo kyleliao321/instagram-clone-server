@@ -1,5 +1,6 @@
 import app from './app';
-import { logger, db } from './app/infrastructure';
+import db from './db';
+import { logger } from './app/infrastructure';
 
 async function initializeDatabase(): Promise<void> {
   logger.info('Settuping database...');
@@ -17,7 +18,9 @@ async function initializeDatabase(): Promise<void> {
       if (e instanceof Error) {
         logger.error(`Exception occurs while setting up database: ${e.stack}`);
       } else {
-        logger.error(`Exception occurs while setting up database: ${e.stack}`);
+        logger.error(
+          `Exception occurs while setting up database: ${JSON.parse(e)}`
+        );
       }
       process.exit();
     });

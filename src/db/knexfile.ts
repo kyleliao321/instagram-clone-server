@@ -1,5 +1,3 @@
-require('ts-node/register');
-
 module.exports = {
   test: {
     client: 'pg',
@@ -10,10 +8,10 @@ module.exports = {
       database: process.env.TEST_DB_NAME
     },
     migrations: {
-      directory: __dirname + '/db/migrations'
+      directory: __dirname + '/migrations'
     },
     seeds: {
-      directory: __dirname + '/db/seeds/test'
+      directory: __dirname + '/seeds/test'
     }
   },
   development: {
@@ -25,10 +23,10 @@ module.exports = {
       database: process.env.DEV_DB_NAME
     },
     migrations: {
-      directory: __dirname + '/db/migrations'
+      directory: __dirname + '/migrations'
     },
     seeds: {
-      directory: __dirname + '/db/seeds/development'
+      directory: __dirname + '/seeds/development'
     }
   },
   demo: {
@@ -40,10 +38,10 @@ module.exports = {
       database: process.env.DEMO_DB_NAME
     },
     migrations: {
-      directory: __dirname + '/db/migrations'
+      directory: __dirname + '/migrations'
     },
     seeds: {
-      directory: __dirname + '/db/seeds/demo'
+      directory: __dirname + '/seeds/demo'
     }
   },
   production: {
@@ -55,10 +53,10 @@ module.exports = {
       database: process.env.DB_NAME
     },
     migrations: {
-      directory: __dirname + '/db/migrations'
+      directory: __dirname + '/migrations'
     },
     seeds: {
-      directory: __dirname + '/db/seeds/production'
+      directory: __dirname + '/seeds/production'
     }
   }
 };

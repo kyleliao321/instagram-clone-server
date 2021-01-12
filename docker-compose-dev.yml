@@ -5,7 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: nodejs
+      target: build
+    image: clone-ig-dev
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules

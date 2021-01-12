@@ -3,7 +3,7 @@ import knex from 'knex';
 const env = process.env.NODE_ENV || 'development';
 
 const config = ((env: string): string => {
-  const configFile = require('../../../../knexfile');
+  const configFile = require('./knexfile');
 
   if (env === 'test') {
     return configFile.test;

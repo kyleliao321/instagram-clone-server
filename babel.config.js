@@ -12,9 +12,7 @@ module.exports = api => {
       "@babel/plugin-transform-runtime"
     ],
     "ignore": isTest ? [] : [
-      "src/**/*.spec.ts",
-      "src/db/migrations",
-      "src/db/seeds"
+      "src/**/*.spec.ts"
     ]
   }
 }

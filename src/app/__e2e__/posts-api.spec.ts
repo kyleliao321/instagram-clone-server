@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../';
-import db from '../infrastructure/database';
+import db from '../../db';
 import { join } from 'path';
 import fse from 'fs-extra';
 

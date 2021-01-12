@@ -1,6 +1,6 @@
 import makeBuildRelationDao from '../relation-dao';
 import makeBuildUserDao from '../user-dao';
-import { db } from '../../../infrastructure';
+import db from '../../../../db';
 import { NewUserProfile } from '../../../utilities/types';
 
 describe('relation-dao', () => {
