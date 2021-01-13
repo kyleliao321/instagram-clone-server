@@ -17,12 +17,14 @@ import makeGetPostListService from './post/get-post-list-service';
 import makeLikePostService from './like/like-post-service';
 import makeDislikePostService from './like/dislike-post-service';
 import makeGetLikedUserListService from './like/get-liked-user-list-service';
+import makeGetFeedService from './feed/get-feeds';
 import {
   accountRepository,
   userRepository,
   relationRepository,
   postRepository,
-  likeSystemRepository
+  likeSystemRepository,
+  feedsRepository
 } from '../data';
 import { authHandler } from '../infrastructure';
 import {
@@ -33,7 +35,8 @@ import {
   buildQueryUserProfile,
   buildUpdatedUserProfile,
   buildNewPost,
-  buildQueryPost
+  buildQueryPost,
+  buildGetFeedQuery
 } from '../models';
 
 const addNewAccountService = makeAddNewAccountService({
@@ -132,6 +135,12 @@ const getLikedUserListService = makeGetLikedUserListService({
   likeSystemRepository
 });
 
+const getFeedService = makeGetFeedService({
+  buildGetFeedQuery,
+  buildQueryPost,
+  feedsRepository
+});
+
 export {
   addNewAccountService,
   updateAccountService,
@@ -151,5 +160,6 @@ export {
   getPostListService,
   likePostService,
   dislikePostService,
-  getLikedUserListService
+  getLikedUserListService,
+  getFeedService
 };

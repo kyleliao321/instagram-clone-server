@@ -99,6 +99,17 @@ export type QueryPost = {
 
 export type BuildQueryPost = (queryPostInfo: Post) => QueryPost;
 
+export type GetFeedQuery = {
+  userId: () => string;
+  before: () => string | null;
+  after: () => string | null;
+  pageSize: () => number;
+};
+
+export type BuildGetFeedQuery = (
+  getFeedQueryInfo: GetFeedQueryInfo
+) => GetFeedQuery;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  Data Model  ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -201,6 +212,10 @@ export type UpdateAccountService = (
   updateAccountServiceInfo: UpdateAccountServiceInfo
 ) => Promise<string>;
 
+export type GetFeedService = (
+  getFeedInfo: GetFeedQueryInfo
+) => Promise<QueryPost[]>;
+
 /////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// Services info ////////////////////////.////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -288,6 +303,13 @@ export type LikePostServiceInfo = {
 export type DislikePostServiceInfo = {
   userId: string;
   postId: string;
+};
+
+export type GetFeedQueryInfo = {
+  userId: string;
+  before?: string;
+  after?: string;
+  pageSize?: number;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -381,6 +403,12 @@ export type LikeSystemRepository = {
   dislikePost: (userId: string, postId: string) => Promise<UserProfile[]>;
 };
 
+export type FeedRepository = {
+  getLatestFeeds: (getFeedQuery: GetFeedQuery) => Promise<Post[]>;
+  getNextPageFeeds: (getFeedQuery: GetFeedQuery) => Promise<Post[]>;
+  getPreviousPageFeeds: (getFeedQuery: GetFeedQuery) => Promise<Post[]>;
+};
+
 /////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////// DAOs ///////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
@@ -415,6 +443,12 @@ export type LikeSystemDao = {
   insert: (userId: string, postId: string) => Promise<UserProfile[]>;
   remove: (userId: string, postId: string) => Promise<UserProfile[]>;
   filterByPostId: (postId: string) => Promise<UserProfile[]>;
+};
+
+export type FeedsDao = {
+  getLatest: (query: GetFeedQuery) => Promise<Post[]>;
+  getNextPage: (query: GetFeedQuery) => Promise<Post[]>;
+  getPreviousPage: (query: GetFeedQuery) => Promise<Post[]>;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -500,6 +534,10 @@ export type DislikePostResponseBody = {
 
 export type GetLikedUsersResponseBody = {
   likedUsers: UserProfileResponse[];
+};
+
+export type GetFeedsResponseBody = {
+  feeds: PostResponse[];
 };
 
 export type GenericHttpResponse = {

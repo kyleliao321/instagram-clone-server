@@ -21,7 +21,8 @@ import {
   LikePostBodySchema,
   DislikePostParamSchema,
   DislikePostBodySchema,
-  GetLikedUsersQuerySchema
+  GetLikedUsersQuerySchema,
+  GetPostFeedsQuerySchema
 } from './schemas';
 
 export {
@@ -47,5 +48,6 @@ export {
   LikePostBodySchema,
   DislikePostParamSchema,
   DislikePostBodySchema,
-  GetLikedUsersQuerySchema
+  GetLikedUsersQuerySchema,
+  GetPostFeedsQuerySchema
 };

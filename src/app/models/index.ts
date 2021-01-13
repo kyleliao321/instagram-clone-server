@@ -6,6 +6,7 @@ import makeBuildQueryUserProfile from './user/query-user-profile';
 import makeBuildUpdatedUserProfile from './user/updated-user-profile';
 import makeBuildNewPost from './post/new-post';
 import makeBuildQueryPost from './post/query-post';
+import makeBuildGetFeeqQuery from './feed/get-feed-query';
 import { idHandler, hashHandler, imageHandler } from '../infrastructure';
 
 const buildNewAccount = makeBuildNewAccount({ idHandler, hashHandler });
@@ -41,6 +42,10 @@ const buildQueryPost = makeBuildQueryPost({
   imageHandler
 });
 
+const buildGetFeedQuery = makeBuildGetFeeqQuery({
+  defaultPageSize: parseInt(process.env.DEFAULT_PAGE_SIZE || '20')
+});
+
 export {
   buildNewAccount,
   buildUpdatedAccount,
@@ -49,5 +54,6 @@ export {
   buildQueryUserProfile,
   buildUpdatedUserProfile,
   buildNewPost,
-  buildQueryPost
+  buildQueryPost,
+  buildGetFeedQuery
 };

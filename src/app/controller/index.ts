@@ -17,7 +17,8 @@ import {
   getPostListService,
   likePostService,
   dislikePostService,
-  getLikedUserListService
+  getLikedUserListService,
+  getFeedService
 } from '../services';
 import makeRegister from './account/register';
 import makeLogin from './account/login';
@@ -34,6 +35,7 @@ import makeGetPosts from './post/get-posts';
 import makeLikePost from './like/like-post';
 import makeDislikePost from './like/dislike-post';
 import makeGetLikedUsers from './like/get-liked-users';
+import makeGetFeeds from './feeds/get-feeds';
 
 const register = makeRegister({
   addNewAccountService,
@@ -95,6 +97,8 @@ const dislikePost = makeDislikePost({
 
 const getLikedUsers = makeGetLikedUsers({ getLikedUserListService });
 
+const getFeeds = makeGetFeeds({ getFeedService });
+
 export {
   register,
   login,
@@ -110,5 +114,6 @@ export {
   getPosts,
   likePost,
   dislikePost,
-  getLikedUsers
+  getLikedUsers,
+  getFeeds
 };

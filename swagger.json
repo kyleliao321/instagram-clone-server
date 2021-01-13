@@ -34,7 +34,11 @@
 			{
 				"name": "Relations",
 				"description": "User following relation management"
-			}
+      },
+      {
+        "name": "Feeds",
+        "description": "User's followings users' latest posts"
+      }
     ],
     "paths": {
       "/api/v1/accounts/register": {
@@ -622,6 +626,68 @@
             }
           }
         }
+      },
+      "/api/v1/feeds/": {
+        "get": {
+          "tags": [
+            "Feeds"
+          ],
+          "summary": "get following users' latest posts",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            {
+              "name": "before",
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "after",
+              "in": "query",
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "pageSize",
+              "in": "query",
+              "schema": {
+                "type": "string",
+                "format": "int64"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "feeds": {
+                        "type": "array",
+                        "$ref": "#/components/schemas/Posts"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
       }
     },
     "components": {
@@ -820,9 +886,8 @@
 						"timestamp": {
 							"type": "string"
 						},
-						"encodedImage": {
-							"type": "string",
-							"format": "byte"
+						"imageSrc": {
+							"type": "string"
 						},
 						"postedUserId": {
 							"type": "string",
@@ -835,7 +900,7 @@
 					"items": {
 						"$ref": "#/components/schemas/Post"
 					}
-				}
+        }
       },
       "securitySchemes": {
         "bearerAuth": {

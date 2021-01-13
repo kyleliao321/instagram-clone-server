@@ -118,3 +118,10 @@ export const DislikePostBodySchema = Joi.object().keys({
 export const GetLikedUsersQuerySchema = Joi.object().keys({
   postId: Joi.string().required()
 });
+
+export const GetPostFeedsQuerySchema = Joi.object().keys({
+  userId: Joi.string().required(),
+  before: Joi.string(),
+  after: Joi.string(),
+  pageSize: Joi.string()
+});
