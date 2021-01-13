@@ -238,13 +238,13 @@ describe('feeds-api-test', () => {
     const feeds = res.body.feeds;
 
     expect(feeds.length).toBe(10);
-    feeds.forEach((p, index) => {
+    feeds.forEach((f, index) => {
       const targetPost = fakePosts[index];
-      expect(p.id).toBe(targetPost.id);
-      expect(p.description).toBe(targetPost.description);
-      expect(p.timestamp).toBe(targetPost.timestamp);
-      expect(p.imageSrc).toBe(targetPost.imageSrc);
-      expect(p.postedUserId).toBe(targetPost.postedUserId);
+      expect(f.postId).toBe(targetPost.id);
+      expect(f.description).toBe(targetPost.description);
+      expect(f.timestamp).toBe(targetPost.timestamp);
+      expect(f.postImage).toBe(targetPost.imageSrc);
+      expect(f.userId).toBe(targetPost.postedUserId);
     });
   });
 
@@ -275,13 +275,13 @@ describe('feeds-api-test', () => {
     const feeds = res.body.feeds;
 
     expect(feeds.length).toBe(10);
-    feeds.forEach((p, index) => {
+    feeds.forEach((f, index) => {
       const targetPost = fakePosts[index + breakPoint];
-      expect(p.id).toBe(targetPost.id);
-      expect(p.description).toBe(targetPost.description);
-      expect(p.timestamp).toBe(targetPost.timestamp);
-      expect(p.imageSrc).toBe(targetPost.imageSrc);
-      expect(p.postedUserId).toBe(targetPost.postedUserId);
+      expect(f.postId).toBe(targetPost.id);
+      expect(f.description).toBe(targetPost.description);
+      expect(f.timestamp).toBe(targetPost.timestamp);
+      expect(f.postImage).toBe(targetPost.imageSrc);
+      expect(f.userId).toBe(targetPost.postedUserId);
     });
   });
 
@@ -312,13 +312,13 @@ describe('feeds-api-test', () => {
     const feeds = res.body.feeds;
 
     expect(feeds.length).toBe(10);
-    feeds.forEach((p, index) => {
+    feeds.forEach((f, index) => {
       const targetPost = fakePosts[breakPoint - pageSize + index - 1];
-      expect(p.id).toBe(targetPost.id);
-      expect(p.description).toBe(targetPost.description);
-      expect(p.timestamp).toBe(targetPost.timestamp);
-      expect(p.imageSrc).toBe(targetPost.imageSrc);
-      expect(p.postedUserId).toBe(targetPost.postedUserId);
+      expect(f.postId).toBe(targetPost.id);
+      expect(f.description).toBe(targetPost.description);
+      expect(f.timestamp).toBe(targetPost.timestamp);
+      expect(f.postImage).toBe(targetPost.imageSrc);
+      expect(f.userId).toBe(targetPost.postedUserId);
     });
   });
 

@@ -5,7 +5,7 @@ import {
   GetFeedService,
   GetFeedsResponseBody,
   HttpResponse,
-  QueryPost
+  QueryFeed
 } from '../../utilities/types';
 
 export default function makeGetFeeds(dependencies: {
@@ -43,15 +43,17 @@ export default function makeGetFeeds(dependencies: {
       },
       status: 200,
       body: {
-        feeds: feeds.map((post: QueryPost) => {
-          return {
-            id: post.getId(),
-            description: post.getDescription(),
-            location: post.getLocation(),
-            timestamp: post.getTimeStamp(),
-            imageSrc: post.getImageSrc(),
-            postedUserId: post.getPostedUserId()
-          };
+        feeds: feeds.map((feed: QueryFeed) => {
+          return Object.freeze({
+            userId: feed.userId(),
+            userName: feed.userName(),
+            userImage: feed.userImage(),
+            postId: feed.postId(),
+            location: feed.location(),
+            timestamp: feed.timestamp(),
+            description: feed.description(),
+            postImage: feed.postImage()
+          });
         })
       }
     };

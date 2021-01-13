@@ -36,7 +36,8 @@ import {
   buildUpdatedUserProfile,
   buildNewPost,
   buildQueryPost,
-  buildGetFeedQuery
+  buildGetFeedQuery,
+  buildQueryFeed
 } from '../models';
 
 const addNewAccountService = makeAddNewAccountService({
@@ -137,7 +138,7 @@ const getLikedUserListService = makeGetLikedUserListService({
 
 const getFeedService = makeGetFeedService({
   buildGetFeedQuery,
-  buildQueryPost,
+  buildQueryFeed,
   feedsRepository
 });
 

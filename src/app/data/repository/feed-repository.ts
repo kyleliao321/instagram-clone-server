@@ -1,8 +1,8 @@
 import {
+  Feed,
   FeedRepository,
   FeedsDao,
-  GetFeedQuery,
-  Post
+  GetFeedQuery
 } from '../../utilities/types';
 
 export default function buildMakeFeedRepository(dependencies: {
@@ -15,19 +15,19 @@ export default function buildMakeFeedRepository(dependencies: {
       getPreviousPageFeeds
     });
 
-    async function getLatestFeeds(getFeedQuery: GetFeedQuery): Promise<Post[]> {
+    async function getLatestFeeds(getFeedQuery: GetFeedQuery): Promise<Feed[]> {
       return await dependencies.feedsDao.getLatest(getFeedQuery);
     }
 
     async function getNextPageFeeds(
       getFeedQuery: GetFeedQuery
-    ): Promise<Post[]> {
+    ): Promise<Feed[]> {
       return await dependencies.feedsDao.getNextPage(getFeedQuery);
     }
 
     async function getPreviousPageFeeds(
       getFeedQuery: GetFeedQuery
-    ): Promise<Post[]> {
+    ): Promise<Feed[]> {
       return await dependencies.feedsDao.getPreviousPage(getFeedQuery);
     }
   };

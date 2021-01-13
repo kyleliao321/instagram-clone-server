@@ -676,7 +676,7 @@
                     "properties": {
                       "feeds": {
                         "type": "array",
-                        "$ref": "#/components/schemas/Posts"
+                        "$ref": "#/components/schemas/Feeds"
                       }
                     }
                   }
@@ -900,6 +900,43 @@
 					"items": {
 						"$ref": "#/components/schemas/Post"
 					}
+        },
+        "Feed": {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "userName": {
+              "type": "string"
+            },
+            "userImage": {
+              "type": "string"
+            },
+            "postId": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "location": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string"
+            },
+            "postImage": {
+              "type": "string"
+            }
+          }
+        },
+        "Feeds": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Feed"
+          }
         }
       },
       "securitySchemes": {

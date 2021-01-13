@@ -1,21 +1,21 @@
 import {
   BuildGetFeedQuery,
-  BuildQueryPost,
   GetFeedQueryInfo,
-  Post,
   FeedRepository,
-  GetFeedService
+  GetFeedService,
+  BuildQueryFeed,
+  Feed
 } from '../../utilities/types';
 
 export default function makeGetFeedService(dependencies: {
   buildGetFeedQuery: BuildGetFeedQuery;
-  buildQueryPost: BuildQueryPost;
+  buildQueryFeed: BuildQueryFeed;
   feedsRepository: FeedRepository;
 }): GetFeedService {
   return async function getFeedService(getFeedInfo: GetFeedQueryInfo) {
     const getFeedQuery = dependencies.buildGetFeedQuery(getFeedInfo);
 
-    let feeds: Post[];
+    let feeds: Feed[];
 
     if (getFeedQuery.before() === null && getFeedQuery.after() === null) {
       feeds = await dependencies.feedsRepository.getLatestFeeds(getFeedQuery);
@@ -27,6 +27,6 @@ export default function makeGetFeedService(dependencies: {
       feeds = await dependencies.feedsRepository.getNextPageFeeds(getFeedQuery);
     }
 
-    return feeds.map((p: Post) => dependencies.buildQueryPost(p));
+    return feeds.map((f: Feed) => dependencies.buildQueryFeed(f));
   };
 }

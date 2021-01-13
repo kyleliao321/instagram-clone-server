@@ -1,5 +1,6 @@
 import db from '../../../../db';
 import {
+  Feed,
   FeedsDao,
   GetFeedQuery,
   Post,
@@ -164,13 +165,13 @@ describe('feeds-dao-test', () => {
 
     // expect
     expect(result.length === pageSize).toBe(true);
-    result.forEach((f: Post, index: number) => {
+    result.forEach((f: Feed, index: number) => {
       const targetPost = fakePosts[index];
-      expect(f.id).toBe(targetPost.id);
+      expect(f.postId).toBe(targetPost.id);
       expect(f.description).toBe(targetPost.description);
       expect(f.timestamp).toBe(targetPost.timestamp);
-      expect(f.imageSrc).toBe(targetPost.imageSrc);
-      expect(f.postedUserId).toBe(targetPost.postedUserId);
+      expect(f.postImage).toBe(targetPost.imageSrc);
+      expect(f.userId).toBe(targetPost.postedUserId);
     });
   });
 
@@ -198,13 +199,13 @@ describe('feeds-dao-test', () => {
 
     // expect
     expect(secondResult.length === pageSize).toBe(true);
-    secondResult.forEach((f: Post, index: number) => {
+    secondResult.forEach((f: Feed, index: number) => {
       const targetPost = fakePosts[index + pageSize];
-      expect(f.id).toBe(targetPost.id);
+      expect(f.postId).toBe(targetPost.id);
       expect(f.description).toBe(targetPost.description);
       expect(f.timestamp).toBe(targetPost.timestamp);
-      expect(f.imageSrc).toBe(targetPost.imageSrc);
-      expect(f.postedUserId).toBe(targetPost.postedUserId);
+      expect(f.postImage).toBe(targetPost.imageSrc);
+      expect(f.userId).toBe(targetPost.postedUserId);
     });
   });
 
@@ -251,13 +252,13 @@ describe('feeds-dao-test', () => {
 
     // expect
     expect(result.length === pageSize).toBe(true);
-    result.forEach((f: Post, index: number) => {
+    result.forEach((f: Feed, index: number) => {
       const targetPost = fakePosts[breakPoint - pageSize + index - 1];
-      expect(f.id).toBe(targetPost.id);
+      expect(f.postId).toBe(targetPost.id);
       expect(f.description).toBe(targetPost.description);
       expect(f.timestamp).toBe(targetPost.timestamp);
-      expect(f.imageSrc).toBe(targetPost.imageSrc);
-      expect(f.postedUserId).toBe(targetPost.postedUserId);
+      expect(f.postImage).toBe(targetPost.imageSrc);
+      expect(f.userId).toBe(targetPost.postedUserId);
     });
   });
 
