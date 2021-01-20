@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
@@ -12,6 +13,8 @@ import { logger } from './infrastructure';
 import { join } from 'path';
 
 const app = express();
+
+app.use(cors());
 
 const imageDir = join(
   process.cwd(),

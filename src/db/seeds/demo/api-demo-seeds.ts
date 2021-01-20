@@ -11,7 +11,8 @@ import {
   UsersTable
 } from '../../constants';
 
-const imageSrcDirPath = path.join(process.cwd(), 'assets', 'demo');
+const postImageSrcDirPath = path.join(process.cwd(), 'assets', 'demo', 'post');
+const userImageSrcDirPath = path.join(process.cwd(), 'assets', 'demo', 'user');
 const imageDesDirPath = path.join(process.cwd(), 'public', 'images', 'demo');
 
 exports.seed = async function (knex: Knex): Promise<void> {
@@ -23,7 +24,8 @@ exports.seed = async function (knex: Knex): Promise<void> {
   await knex(AccountsTable.name).del();
 
   // SEEDS IMAGE INTO PUBLIC FOLDER
-  seedImage();
+  seedPostImages();
+  seedUserImages();
 
   // CREATE FAKE USERS ACCOUNTS AND RPOFILES
   const fakeUserMap = makeFakeUsers(50);
@@ -43,6 +45,7 @@ exports.seed = async function (knex: Knex): Promise<void> {
       user_name: u.userName,
       alias: u.name,
       description: u.description,
+      image_src: u.imageSrc,
       post_num: u.posts.length,
       follower_num: u.followers.length,
       following_num: u.followings.length
@@ -108,11 +111,21 @@ exports.seed = async function (knex: Knex): Promise<void> {
 /////////////////////////////////// MAKE FAKE DATA ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 
-function seedImage() {
-  const assets = getDemoImages();
+function seedPostImages() {
+  const assets = getPostDemoImages();
 
   assets.forEach((f) => {
-    const src = path.join(imageSrcDirPath, f);
+    const src = path.join(postImageSrcDirPath, f);
+    const des = path.join(imageDesDirPath, f);
+    fse.copySync(src, des);
+  });
+}
+
+function seedUserImages() {
+  const assets = getUserDemoImages();
+
+  assets.forEach((f) => {
+    const src = path.join(userImageSrcDirPath, f);
     const des = path.join(imageDesDirPath, f);
     fse.copySync(src, des);
   });
@@ -123,7 +136,7 @@ function makeFakePosts(num: number): FakePost[] {
   const actualNum = num > 5 ? 5 : num;
 
   // get demo images names
-  const demoImagesNames = getDemoImages();
+  const demoImagesNames = getPostDemoImages();
 
   const fakePostSchema = {
     id: '{{random.uuid}}',
@@ -147,6 +160,8 @@ function makeFakePosts(num: number): FakePost[] {
 }
 
 function makeFakeUsers(num: number): Map<string, FakeUser> {
+  const demoImageNames = getUserDemoImages();
+
   const fakeUserSchema = {
     id: '{{random.uuid}}',
     userName: '{{internet.userName}}',
@@ -160,8 +175,11 @@ function makeFakeUsers(num: number): Map<string, FakeUser> {
   for (let i = 0; i < num; i++) {
     const fakeUser = JSON.parse(faker.fake(JSON.stringify(fakeUserSchema)));
     const randomPostNum = getRandomInt(0, 5);
+    const randomIndex = getRandomInt(0, demoImageNames.length - 1);
+    const randomDemoImage = demoImageNames[randomIndex];
     result.set(fakeUser.id, {
       ...fakeUser,
+      imageSrc: randomDemoImage,
       followers: [],
       followings: [],
       posts: makeFakePosts(randomPostNum)
@@ -175,6 +193,7 @@ function makeFakeUsers(num: number): Map<string, FakeUser> {
     password: process.env.DEMO_ROOT_USER_PASSWORD || 'root',
     name: process.env.DEMO_ROOT_USER_NAME || 'root',
     description: 'root',
+    imageSrc: demoImageNames[0],
     followers: [],
     followings: [],
     posts: []
@@ -188,8 +207,22 @@ function makeFakeUsers(num: number): Map<string, FakeUser> {
 ///////////////////////////// HELPER FUNCTIONS ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////
 
-function getDemoImages(): string[] {
-  return fse.readdirSync(imageSrcDirPath).filter((f) => {
+function getPostDemoImages(): string[] {
+  return fse.readdirSync(postImageSrcDirPath).filter((f) => {
+    const nameStringArray = f.split('.');
+
+    if (nameStringArray.length <= 1) {
+      return false;
+    }
+
+    const format = nameStringArray[nameStringArray.length - 1];
+
+    return format === 'jpeg' || format === 'jpg';
+  });
+}
+
+function getUserDemoImages(): string[] {
+  return fse.readdirSync(userImageSrcDirPath).filter((f) => {
     const nameStringArray = f.split('.');
 
     if (nameStringArray.length <= 1) {
@@ -277,6 +310,7 @@ type FakeUser = {
   name: string;
   password: string;
   description: string;
+  imageSrc: string;
   followers: string[];
   followings: string[];
   posts: FakePost[];
